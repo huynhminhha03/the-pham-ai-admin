@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   Layout,
    //Breadcrumb items
    Breadcrumb,
-   
+
   Login,
   Account,
   ForgetPassword,
