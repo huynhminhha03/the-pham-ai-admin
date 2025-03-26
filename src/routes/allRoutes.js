@@ -91,6 +91,7 @@ import PagesBlank from "../pages/Extra Pages/pages-blank";
 import Pages404 from "../pages/Extra Pages/pages-404";
 import Pages500 from "../pages/Extra Pages/pages-500";
 import User from "pages/User/User"
+import Conversation from "pages/Conversation/Conversation"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -98,6 +99,7 @@ const userRoutes = [
   // //calendar
   { path: "/calendar", component: Calendar },
   { path: "/user", component: User },
+  { path: "/conversation", component: Conversation },
 
   // // //profile
   { path: "/profile", component: UserProfile },
