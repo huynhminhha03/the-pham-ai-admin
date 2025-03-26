@@ -80,10 +80,10 @@ const SidebarContent = props => {
           }
         }
       }
-      scrollElement(item);
+      scrollElement(item)
       return false
     }
-    scrollElement(item);
+    scrollElement(item)
     return false
   }
 
@@ -96,11 +96,19 @@ const SidebarContent = props => {
             <li>
               <Link to="/dashboard" className="waves-effect">
                 <i className="mdi mdi-view-dashboard"></i>
-                <span className="badge rounded-pill bg-primary float-end">2</span>
+                <span className="badge rounded-pill bg-primary float-end">
+                  2
+                </span>
                 <span>{props.t("Dashboard")}</span>
               </Link>
             </li>
 
+            <li>
+              <Link to="/user" className=" waves-effect">
+                <i className="mdi mdi-account"></i>
+                <span>{props.t("User")}</span>
+              </Link>
+            </li>
             <li>
               <Link to="/calendar" className=" waves-effect">
                 <i className="mdi mdi-calendar-check"></i>
@@ -167,13 +175,17 @@ const SidebarContent = props => {
                   <Link to="/ui-pagination">{props.t("Pagination")}</Link>
                 </li>
                 <li>
-                  <Link to="/ui-popover-tooltip">{props.t("Popover & Tooltips")}</Link>
+                  <Link to="/ui-popover-tooltip">
+                    {props.t("Popover & Tooltips")}
+                  </Link>
                 </li>
                 <li>
                   <Link to="/ui-rangeslider">{props.t("Range Slider")}</Link>
                 </li>
                 <li>
-                  <Link to="/ui-session-timeout">{props.t("Session Timeout")}</Link>
+                  <Link to="/ui-session-timeout">
+                    {props.t("Session Timeout")}
+                  </Link>
                 </li>
                 <li>
                   <Link to="/ui-progressbars">{props.t("Progress Bars")}</Link>
@@ -182,7 +194,9 @@ const SidebarContent = props => {
                   <Link to="/ui-sweet-alert">{props.t("Sweet-Alert")}</Link>
                 </li>
                 <li>
-                  <Link to="/ui-tabs-accordions">{props.t("Tabs & Accordions")}</Link>
+                  <Link to="/ui-tabs-accordions">
+                    {props.t("Tabs & Accordions")}
+                  </Link>
                 </li>
                 <li>
                   <Link to="/ui-typography">{props.t("Typography")}</Link>
@@ -196,7 +210,9 @@ const SidebarContent = props => {
             <li>
               <Link to="/#" className="waves-effect">
                 <i className="mdi mdi-clipboard-outline"></i>
-                <span className="badge rounded-pill bg-success float-end">6</span>
+                <span className="badge rounded-pill bg-success float-end">
+                  6
+                </span>
                 <span>{props.t("Forms")}</span>
               </Link>
               <ul className="sub-menu" aria-expanded="false">
@@ -204,7 +220,9 @@ const SidebarContent = props => {
                   <Link to="/form-elements">{props.t("Form Elements")}</Link>
                 </li>
                 <li>
-                  <Link to="/form-validation">{props.t("Form Validation")}</Link>
+                  <Link to="/form-validation">
+                    {props.t("Form Validation")}
+                  </Link>
                 </li>
                 <li>
                   <Link to="/form-advanced">{props.t("Form Advanced")}</Link>
@@ -229,9 +247,7 @@ const SidebarContent = props => {
 
               <ul className="sub-menu" aria-expanded="false">
                 <li>
-                  <Link to="apex-charts">
-                    {props.t("Apex charts")}
-                  </Link>
+                  <Link to="apex-charts">{props.t("Apex charts")}</Link>
                 </li>
                 <li>
                   <Link to="charts-chartist" className="dropdown-item">
@@ -315,7 +331,9 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/#" className="waves-effect">
-                <span className="badge rounded-pill bg-danger float-end">2</span>
+                <span className="badge rounded-pill bg-danger float-end">
+                  2
+                </span>
                 <i className="mdi mdi-google-maps"></i>
                 <span>{props.t("Maps")}</span>
               </Link>
@@ -383,7 +401,7 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
-            <li>
+            {/* <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-share-variant"></i>
                 <span>{props.t("Multi Level")}</span>
@@ -406,7 +424,7 @@ const SidebarContent = props => {
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </SimpleBar>

@@ -21,6 +21,7 @@ import logoDark from "../../assets/images/logo-dark.png"
 const Login = props => {
   // handleValidSubmit
   const handleValidSubmit = (event, values) => {
+    console.log(values);
     props.loginUser(values, props.history)
   }
 
@@ -58,7 +59,7 @@ const Login = props => {
                         <AvField
                           name="email"
                           label="Email"
-                          value="admin@themesbrand.com"
+                          value="admin@example.com"
                           className="form-control"
                           placeholder="Enter email"
                           type="email"
@@ -70,7 +71,7 @@ const Login = props => {
                         <AvField
                           name="password"
                           label="Password"
-                          value="123456"
+                          value="admin123"
                           type="password"
                           required
                           placeholder="Enter Password"
@@ -94,7 +95,7 @@ const Login = props => {
                           </div>
                         </div>
                         <div className="col-6 text-end">
-                          <button className="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
+                          <button className="btn btn-primary w-md waves-effect waves-light" type="submit" >Log In</button>
                         </div>
                       </div>
                       <div className="form-group mb-0 row">

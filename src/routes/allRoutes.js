@@ -90,12 +90,14 @@ import PagesDirectory from "../pages/Extra Pages/pages-directory";
 import PagesBlank from "../pages/Extra Pages/pages-blank";
 import Pages404 from "../pages/Extra Pages/pages-404";
 import Pages500 from "../pages/Extra Pages/pages-500";
+import User from "pages/User/User"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
 
   // //calendar
   { path: "/calendar", component: Calendar },
+  { path: "/user", component: User },
 
   // // //profile
   { path: "/profile", component: UserProfile },

@@ -7,7 +7,7 @@ import { apiError, loginSuccess, logoutUserSuccess } from "./actions"
 //Include Both Helper File with needed methods
 import { getFirebaseBackend } from "../../../helpers/firebase_helper"
 import {
-  postFakeLogin,
+  postLogin,
   postJwtLogin,
 } from "../../../helpers/fakebackend_helper"
 
@@ -30,10 +30,11 @@ function* loginUser({ payload: { user, history } }) {
       localStorage.setItem("authUser", JSON.stringify(response))
       yield put(loginSuccess(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
-      const response = yield call(postFakeLogin, {
+      const response = yield call(postLogin, {
         email: user.email,
         password: user.password,
       })
+      console.log(response)
       localStorage.setItem("authUser", JSON.stringify(response))
       yield put(loginSuccess(response))
     }

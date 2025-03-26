@@ -1,17 +1,15 @@
 import axios from "axios"
-import accessToken from "./jwt-token-access/accessToken"
 
-//pass new generated access token here
-const token = accessToken
 
 //apply base url for axios
-const API_URL = ""
+const API_URL = "http://localhost:8000/api"
 
 const axiosApi = axios.create({
   baseURL: API_URL,
 })
 
-axiosApi.defaults.headers.common["Authorization"] = token
+
+axiosApi.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("authUser")
 
 axiosApi.interceptors.response.use(
   response => response,
