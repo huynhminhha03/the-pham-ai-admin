@@ -279,7 +279,7 @@ const FormAdvanced = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Form Advanced | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Form Advanced | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

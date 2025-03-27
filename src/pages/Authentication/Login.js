@@ -15,7 +15,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation"
 import { loginUser, apiError } from "../../store/actions"
 
 // import images
-import logoLightPng from "../../assets/images/logo-light.png"
+import logoLightjng from "../../assets/images/logo-light.png"
 import logoDark from "../../assets/images/logo-dark.png"
 
 const Login = props => {
@@ -28,7 +28,7 @@ const Login = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Login | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Login | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
       <div className="account-pages my-5 pt-sm-5">
         <Container>
@@ -38,8 +38,8 @@ const Login = props => {
                 <CardBody className="pt-0">
                   <h3 className="text-center mt-5 mb-4">
                     <Link to="/" className="d-block auth-logo">
-                      <img src={logoDark} alt="" height="30" className="auth-logo-dark" />
-                      <img src={logoLightPng} alt="" height="30" className="auth-logo-light" />
+                      <img src={logoDark} alt="" height="100" className="auth-logo-dark" />
+                      <img src={logoLightjng} alt="" height="100" className="auth-logo-light" />
                     </Link>
                   </h3>
                   <div className="p-3">

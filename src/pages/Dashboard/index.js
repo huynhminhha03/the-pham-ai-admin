@@ -24,7 +24,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 const Dashboard = (props) => {
 
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Thepham AI", link: "#" },
     { title: "Dashboard", link: "#" }
   ]
 
@@ -43,7 +43,7 @@ const Dashboard = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Dashboard | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Dashboard | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       {/*mimi widgets */}

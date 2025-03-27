@@ -33,7 +33,7 @@ const UiPopoverTooltips = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Popover & Tooltips | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Popover & Tooltips | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
             <Row>

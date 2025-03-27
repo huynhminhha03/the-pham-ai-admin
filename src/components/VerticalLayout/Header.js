@@ -16,7 +16,7 @@ import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu"
 
 // import megamenuImg from "../../assets/images/megamenu-img.png"
 import logo from "../../assets/images/logo-sm.png"
-import logoLightPng from "../../assets/images/logo-light.png"
+import logoLightjng from "../../assets/images/logo-light.png"
 import logoDark from "../../assets/images/logo-dark.png"
 
 //i18n
@@ -87,7 +87,7 @@ const Header = props => {
                   <img src={logo} alt="" height="22" />
                 </span>
                 <span className="logo-lg">
-                  <img src={logoLightPng} alt="" height="19" />
+                  <img src={logoLightjng} alt="" height="80" />
                 </span>
               </Link>
             </div>

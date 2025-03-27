@@ -88,7 +88,7 @@ class UiSessionTimeout extends Component {
       <React.Fragment>
 
         <MetaTags>
-          <title>Session Timeout | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+          <title>Session Timeout | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
         </MetaTags>
 
         {this.state.timeralert}

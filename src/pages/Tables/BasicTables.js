@@ -29,7 +29,7 @@ const BasicTable = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Basic Tables | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Basic Tables | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

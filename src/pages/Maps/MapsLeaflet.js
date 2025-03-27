@@ -31,7 +31,7 @@ const MapsLeaflet = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Leaflet Maps | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Leaflet Maps | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

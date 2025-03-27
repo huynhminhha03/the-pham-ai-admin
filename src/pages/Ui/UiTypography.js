@@ -28,7 +28,7 @@ const UiTypography = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Typography | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Typography | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

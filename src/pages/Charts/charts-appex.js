@@ -35,7 +35,7 @@ const ChartsAppex = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Apex Charts | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Apex Charts | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
 

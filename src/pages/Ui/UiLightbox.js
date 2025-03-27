@@ -61,7 +61,7 @@ const UiLightbox = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Lightbox | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Lightbox | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
 

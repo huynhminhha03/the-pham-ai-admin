@@ -32,7 +32,7 @@ const UiPagination = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Pagination | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Pagination | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
             <Row>

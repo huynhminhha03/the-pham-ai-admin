@@ -45,7 +45,7 @@ const UiCards = props => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Cards | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Cards | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
 

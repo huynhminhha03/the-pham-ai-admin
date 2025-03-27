@@ -7,7 +7,7 @@ import user from "../../assets/images/users/user-6.jpg";
 import MetaTags from 'react-meta-tags';
 
 // import images
-import logoLightPng from "../../assets/images/logo-light.png"
+import logoLightjng from "../../assets/images/logo-light.png"
 import logoDark from "../../assets/images/logo-dark.png"
 
 class LockScreen extends Component {
@@ -16,7 +16,7 @@ class LockScreen extends Component {
         return (
             <React.Fragment>
                 <MetaTags>
-                    <title>Loak Screen | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                    <title>Loak Screen | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
                 </MetaTags>
                 <div className="account-pages my-5 pt-sm-5">
                     <Container>
@@ -27,7 +27,7 @@ class LockScreen extends Component {
                                         <h3 className="text-center mt-5 mb-4">
                                             <Link to="/" className="d-block auth-logo">
                                                 <img src={logoDark} alt="" height="30" className="auth-logo-dark" />
-                                                <img src={logoLightPng} alt="" height="30" className="auth-logo-light" />
+                                                <img src={logoLightjng} alt="" height="30" className="auth-logo-light" />
                                             </Link>
                                         </h3>
                                         <div className="p-3">

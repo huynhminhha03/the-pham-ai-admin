@@ -25,7 +25,7 @@ const IconDripicons = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Dripicons | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Dripicons | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

@@ -28,7 +28,7 @@ const IconTypicons = (props) => {
     return (
         <React.Fragment>
             <MetaTags>
-                <title>Typicons Icons | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Typicons Icons | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
 

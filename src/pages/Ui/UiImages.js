@@ -42,7 +42,7 @@ const UiImages = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Images | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Images | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

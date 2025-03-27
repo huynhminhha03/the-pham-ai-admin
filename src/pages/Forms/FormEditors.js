@@ -36,7 +36,7 @@ const FormEditors = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Form Editors | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Form Editors | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

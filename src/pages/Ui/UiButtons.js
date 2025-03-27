@@ -37,7 +37,7 @@ const UiButtons = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Buttons | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Buttons | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
 

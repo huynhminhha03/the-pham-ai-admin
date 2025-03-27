@@ -68,7 +68,7 @@ const UserProfile = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Profile | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Profile | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
 

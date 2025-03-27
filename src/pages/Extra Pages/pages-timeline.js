@@ -34,7 +34,7 @@ const PagesTimeline = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Timeline | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Timeline | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
             <Row>

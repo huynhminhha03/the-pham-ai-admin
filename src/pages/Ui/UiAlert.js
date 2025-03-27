@@ -31,7 +31,7 @@ const UiAlert = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Alerts | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Alerts | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

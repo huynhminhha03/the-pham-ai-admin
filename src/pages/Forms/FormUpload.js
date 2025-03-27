@@ -57,7 +57,7 @@ const FormUpload = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Form File Upload | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Form File Upload | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

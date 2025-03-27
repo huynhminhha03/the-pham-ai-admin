@@ -31,7 +31,7 @@ const SparklineChart = (props) => {
     <React.Fragment>
       
         <MetaTags>
-          <title>Sparkline Charts | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+          <title>Sparkline Charts | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
         </MetaTags>
        
 

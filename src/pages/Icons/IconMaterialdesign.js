@@ -23486,7 +23486,7 @@ const IconMaterialdesign = props => {
     <React.Fragment>
       
       <MetaTags>
-          <title>Material Design | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+          <title>Material Design | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
         </MetaTags>
         
           <Row className="icons-demo-content">

@@ -30,7 +30,7 @@ const EmailInbox = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Inbox | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Inbox | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

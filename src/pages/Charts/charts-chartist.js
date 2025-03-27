@@ -41,7 +41,7 @@ const ChartsChartist = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Chartist Chart | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Chartist Chart | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
             </MetaTags>
 
             <Row>

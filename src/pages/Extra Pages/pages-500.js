@@ -9,7 +9,7 @@ class Pages500 extends Component {
         return (
             <React.Fragment>
                 <MetaTags>
-                    <title>Error 500 | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+                    <title>Error 500 | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
                 </MetaTags>
                 <div className="account-pages my-5 pt-sm-5">
                     <Container>

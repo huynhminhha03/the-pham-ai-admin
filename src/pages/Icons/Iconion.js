@@ -31,7 +31,7 @@ const IconIon = props => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Ion Icons | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Ion Icons | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>

@@ -2,7 +2,7 @@ import axios from "axios"
 
 
 //apply base url for axios
-const API_URL = "http://localhost:8000/api"
+const API_URL = "http://localhost:8086/api/user"
 
 const axiosApi = axios.create({
   baseURL: API_URL,

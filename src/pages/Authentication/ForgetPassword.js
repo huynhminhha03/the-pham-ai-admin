@@ -14,7 +14,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation"
 import { userForgetPassword } from "../../store/actions"
 
 // import images
-import logoLightPng from "../../assets/images/logo-light.png"
+import logoLightjng from "../../assets/images/logo-light.png"
 import logoDark from "../../assets/images/logo-dark.png"
 
 const ForgetPasswordPage = props => {
@@ -25,7 +25,7 @@ const ForgetPasswordPage = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Forget Password | Lexa - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Forget Password | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
       <div className="account-pages my-5 pt-sm-5">
         <Container>
@@ -36,7 +36,7 @@ const ForgetPasswordPage = props => {
                   <h3 className="text-center mt-5 mb-4">
                     <Link to="/" className="d-block auth-logo">
                       <img src={logoDark} alt="" height="30" className="auth-logo-dark" />
-                      <img src={logoLightPng} alt="" height="30" className="auth-logo-light" />
+                      <img src={logoLightjng} alt="" height="30" className="auth-logo-light" />
                     </Link>
                   </h3>
                   <div className="p-3">
