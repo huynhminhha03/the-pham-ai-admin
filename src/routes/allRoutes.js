@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
 
 // Profile
@@ -92,17 +92,34 @@ import Pages404 from "../pages/Extra Pages/pages-404";
 import Pages500 from "../pages/Extra Pages/pages-500";
 import User from "pages/User/User"
 import Conversation from "pages/Conversation/Conversation"
+import Category from "pages/Category/Category"
+import Recommend from "pages/Recommend/Recommend"
+import Notification from "pages/Notification/Notification"
+import SystemManagement from "pages/SystemManagement/SystemManagement"
+
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
 
-  // //calendar
+  //calendar
   { path: "/calendar", component: Calendar },
+  //user
   { path: "/user", component: User },
+  //conversation
   { path: "/conversation", component: Conversation },
+  //category
+  { path: "/category", component: Category },
+  //recommend
+  { path: "/recommend", component: Recommend },
+  //notification
+  {path:"/notification", component: Notification},
+  //System Management
+  {path:"/SystemManagement", component: SystemManagement},
 
-  // // //profile
+  // // profile
   { path: "/profile", component: UserProfile },
+  
+
 
   // //Email
   { path: "/email-inbox", component: EmailInbox },

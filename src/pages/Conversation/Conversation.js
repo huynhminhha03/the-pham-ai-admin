@@ -527,14 +527,13 @@ const Conversation = props => {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (response.data && Array.isArray(response.data.conversations)) {
-            setConversations(response.data.conversations); // Lấy danh sách từ response.data.users
+            setConversations(response.data.conversations); // Lấy danh sách từ response.data.conversations
           } else {
             console.error("API không trả về danh sách hợp lệ:", response.data);
             setConversations([]); // Gán mảng rỗng để tránh lỗi hiển thị
           }
         } catch (error) {
           console.error("Error fetching data:", error);
-           // Đảm bảo `users` luôn là mảng
         }
       };
     
@@ -568,7 +567,7 @@ const Conversation = props => {
         <Col className="col-12">
           <Card>
             <CardBody>
-              <MDBDataTable responsive striped bordered data={data} />
+              <MDBDataTable responsive striped bordered data={data} paging={true} entries={10} />
             </CardBody>
           </Card>
         </Col>

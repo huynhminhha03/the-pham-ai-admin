@@ -116,6 +116,30 @@ const SidebarContent = props => {
               </Link>
             </li>
             <li>
+              <Link to="/category" className=" waves-effect">
+                <i className="mdi mdi-chat"></i>
+                <span>{props.t("Category")}</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/systemManagement" className=" waves-effect">
+                <i className="mdi mdi-chat"></i>
+                <span>{props.t("SystemManagement")}</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/Recommend" className=" waves-effect">
+                <i className="mdi mdi-chat"></i>
+                <span>{props.t("Recommend")}</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/Notification" className=" waves-effect">
+                <i className="mdi mdi-chat"></i>
+                <span>{props.t("Notification")}</span>
+              </Link>
+            </li>
+            <li>
               <Link to="/calendar" className=" waves-effect">
                 <i className="mdi mdi-calendar-check"></i>
                 <span>{props.t("Calendar")}</span>
