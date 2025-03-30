@@ -91,12 +91,19 @@ import PagesBlank from "../pages/Extra Pages/pages-blank";
 import Pages404 from "../pages/Extra Pages/pages-404";
 import Pages500 from "../pages/Extra Pages/pages-500";
 import User from "pages/User/User"
+
 import Conversation from "pages/Conversation/Conversation"
 import Category from "pages/Category/Category"
 import Recommend from "pages/Recommend/Recommend"
 import Notification from "pages/Notification/Notification"
 import SystemManagement from "pages/SystemManagement/SystemManagement"
-
+import EditUser from "pages/User/EditUser"
+import EditCategory from "pages/Category/EditCategory"
+import Book from "pages/Book/Book"
+import EditBook from "pages/Book/EditBook"
+import Banner from "pages/Banner/Banner"
+import EditBanner from "pages/Banner/EditBanner"
+import EditRecommend from "pages/Recommend/EditRecommend"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -105,17 +112,26 @@ const userRoutes = [
   { path: "/calendar", component: Calendar },
   //user
   { path: "/user", component: User },
+  //Edit user
+  { path: "/edit-user/:id", component: EditUser },
   //conversation
   { path: "/conversation", component: Conversation },
   //category
   { path: "/category", component: Category },
+  { path: "/edit-category", component: EditCategory },
   //recommend
   { path: "/recommend", component: Recommend },
+  { path: "/edit-recommend", component: EditRecommend },
   //notification
   {path:"/notification", component: Notification},
+  //Book
+  {path:"/book", component: Book},
+  { path: "/edit-book", component: EditBook },
   //System Management
   {path:"/SystemManagement", component: SystemManagement},
-
+  //Banner
+  {path:"/banner", component: Banner},
+  {path:"/edit-banner", component: EditBanner},
   // // profile
   { path: "/profile", component: UserProfile },
   

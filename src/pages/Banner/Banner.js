@@ -10,16 +10,16 @@ import actions from "redux-form/lib/actions";
 
 
 
-const User = props => {
+const Banner = props => {
   const breadcrumbItems = [
     { title: "Thepham AI", link: "#" },
-    { title: "User", link: "#" },
+    { title: "Banner", link: "#" },
   ]
   const history = useHistory();
   useEffect(() => {
-    props.setBreadcrumbItems("User", breadcrumbItems)
+    props.setBreadcrumbItems("Banner", breadcrumbItems)
   }, [])
-  const [users, setUsers] = useState([]);
+  const [banners, setBanners] = useState([]);
 
     const token = JSON.parse(localStorage.getItem("authUser"))?.token;
     if (!token) {
@@ -27,16 +27,16 @@ const User = props => {
       return;
     }
     useEffect(() => {
-      const fetchUsers = async () => {
+      const fetchBanners = async () => {
         try {
-          const response = await axios.get("http://localhost:8086/api/admin/user/all", {
+          const response = await axios.get("http://localhost:8086/api/admin/banners/all", {
             headers: { Authorization: `Bearer ${token}` },
           });
-          if (response.data && Array.isArray(response.data.users)) {
-            setUsers(response.data.users); // Lấy danh sách từ response.data.users
+          if (response.data && Array.isArray(response.data.banners)) {
+            setBanners(response.data.banners); // Lấy danh sách từ response.data.users
           } else {
             console.error("API không trả về danh sách hợp lệ:", response.data);
-            setUsers([]); // Gán mảng rỗng để tránh lỗi hiển thị
+            setBanners([]); // Gán mảng rỗng để tránh lỗi hiển thị
           }
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -49,17 +49,17 @@ const User = props => {
       }
     }, [token]);
     const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
-    const handleToggleStatus = (userId) => {
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === userId ? { ...user, isActive: !user.isActive } : user
+    const handleToggleStatus = (bannerId) => {
+      setBanners((prevBanners) =>
+        prevBanners.map((banner) =>
+          banners.id === bannerId ? { ...banner, isActive: !banner.isActive } : banner
         )
       );
     };
     const data = useMemo(() => ({
       columns: [
-        { label: "Username", field: "username", sort: "asc", width: 150 },
-        { label: "Email", field: "email", sort: "asc", width: 200 },
+        { label: "Bannername", field: "bannername", sort: "asc", width: 150 },
+        { label: "Imgage", field: "bannerImg", sort: "asc", width: 150},
         { label: "CreateDate", field: "created_at", sort: "asc", width: 200 },
         { label: "UpdateDate", field: "updated_at", sort: "asc", width: 200 },
         { label: "Status", field: "status", sort: "asc", width: 100 },
@@ -70,16 +70,16 @@ const User = props => {
         },
          
       ],
-      rows: users.map((user) => ({
-        username: user.username,
-        email: user.email,
-        created_at: formatDate(user.created_at),
-        updated_at: formatDate(user.updated_at),
+      rows: banners.map((banners) => ({
+        bannername: banners.bannername, 
+        bannerImg: banners.bannerImg,     
+        created_at: formatDate(banners.created_at),
+        updated_at: formatDate(banners.updated_at),
         status: (
           <button
-            onClick={() => handleToggleStatus(user.id)}
+            onClick={() => handleToggleStatus(banners.id)}
             style={{
-              backgroundColor: user.isActive ? "green" : "red",
+              backgroundColor: banners.isActive ? "green" : "red",
               color: "white",
               border: "none",
               padding: "5px 10px",
@@ -87,44 +87,44 @@ const User = props => {
               cursor: "pointer"
             }}
           >
-            {user.isActive ? "ON" : "OFF"}
+            {banners.isActive ? "ON" : "OFF"}
           </button>
         ),            
         actions: (
           <div>
             <i
-              onClick={() => handleEdit(user.username)}
+              onClick={() => handleEdit(banners.bannernamename)}
               className="ti-pencil fs-4 me-3 icon-hover text-success"             
             >           
             </i>
             <i
-              onClick={() => handleDelete(user.username)}
+              onClick={() => handleDelete(banners.bannernamename)}
               className="ti-trash fs-4 me-3 icon-hover text-danger"
             >
             </i>
           </div>
         ),                
       })),
-    }), [users]);
+    }), [banners]);
     const handleEdit = (id) => {
-      history.push(`/edit-user/${id}`); // Navigate to the edit page
+      history.push(`/edit-banner/${id}`); // Navigate to the edit page
     };
   
     // Hàm xử lý khi nhấn nút "Xóa"
     const handleDelete = async (id) => {
-      const confirmDelete = window.confirm("Are you sure want to delete this user?");
+      const confirmDelete = window.confirm("Are you sure want to delete this banners?");
       if (confirmDelete) {
         try {
           const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-          await axios.delete(`http://localhost:8086/api/admin/user/${id}`, {
+          await axios.delete(`http://localhost:8086/api/admin/banner/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           alert("Delete successfull!");
-          // Update listUser after delete user
-          setUsers(users.filter((user) => user.id !== id));
+          // Update listUser after delete banners
+          setBanners(banners.filter((banners) => banners.id !== id));
         } catch (error) {
-          console.error("Lỗi khi xóa user:", error);
-          alert("Không thể xóa user. Vui lòng thử lại!");
+          console.error("Lỗi khi xóa banners:", error);
+          alert("Không thể xóa banners. Vui lòng thử lại!");
         }
       }
     };
@@ -133,7 +133,7 @@ const User = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>User | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Banner | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
 
       <Row>
