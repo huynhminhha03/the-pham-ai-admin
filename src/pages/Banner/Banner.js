@@ -45,7 +45,7 @@ const Banner = props => {
       };
     
       if (token) {
-        fetchUsers();
+        fetchBanners();
       }
     }, [token]);
     const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
@@ -58,8 +58,8 @@ const Banner = props => {
     };
     const data = useMemo(() => ({
       columns: [
-        { label: "Bannername", field: "bannername", sort: "asc", width: 150 },
-        { label: "Imgage", field: "bannerImg", sort: "asc", width: 150},
+        { label: "Title", field: "bannername", sort: "asc", width: 150 },
+        { label: "Image", field: "bannerImg", sort: "asc", width: 150},
         { label: "CreateDate", field: "created_at", sort: "asc", width: 200 },
         { label: "UpdateDate", field: "updated_at", sort: "asc", width: 200 },
         { label: "Status", field: "status", sort: "asc", width: 100 },
@@ -149,4 +149,4 @@ const Banner = props => {
   )
 }
 
-export default connect(null, { setBreadcrumbItems })(User)
+export default connect(null, { setBreadcrumbItems })(Banner)

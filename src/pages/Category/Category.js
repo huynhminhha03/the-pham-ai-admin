@@ -111,31 +111,31 @@ const Category = props => {
         name: "John Doe",
         createdDate: "2025-03-28",
         details: "Đây là chi tiết của John Doe",
-        status: (
-          <button
-            onClick={() => handleToggleStatus(user.id)}
-            style={{
-              backgroundColor: cagetory.isActive ? "green" : "red",
-              color: "white",
-              border: "none",
-              padding: "5px 10px",
-              borderRadius: "5px",
-              cursor: "pointer"
-            }}
-          >
-            {user.isActive ? "ON" : "OFF"}
-          </button>
-        ),
-        actions: (
-          <div>
-            <i onClick={() => handleEdit("John Doe")} className="ti-pencil fs-4 me-3 icon-hover text-warning">
+        // status: (
+        //   <button
+        //     onClick={() => handleToggleStatus(user.id)}
+        //     style={{
+        //       backgroundColor: data.isActive ? "green" : "red",
+        //       color: "white",
+        //       border: "none",
+        //       padding: "5px 10px",
+        //       borderRadius: "5px",
+        //       cursor: "pointer"
+        //     }}
+        //   >
+        //     {data.isActive ? "ON" : "OFF"}
+        //   </button>
+        // ),
+        // actions: (
+        //   <div>
+        //     <i onClick={() => handleEdit("John Doe")} className="ti-pencil fs-4 me-3 icon-hover text-warning">
               
-            </i>
-            <i onClick={() => handleDelete("John Doe")} className="ti-trash fs-4 me-3 icon-hover text-warning">
+        //     </i>
+        //     <i onClick={() => handleDelete("John Doe")} className="ti-trash fs-4 me-3 icon-hover text-warning">
               
-            </i>
-          </div>
-        )  
+        //     </i>
+        //   </div>
+        // )  
       },
       {
         name: "Jane Smith",
