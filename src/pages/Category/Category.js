@@ -1,175 +1,105 @@
 import React, { useEffect, useState, useMemo } from "react";
 import MetaTags from "react-meta-tags";
 import { MDBDataTable } from "mdbreact";
-import { Row, Col, Card, CardBody } from "reactstrap";
+import { Row, Col, Card, CardBody, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import { useHistory } from "react-router-dom";
-const Category = props => {
+import axios from "axios";
+
+const Category = (props) => {
+  const history = useHistory();
   const breadcrumbItems = [
     { title: "Thepham AI", link: "#" },
     { title: "Category", link: "#" },
-  ]
-  useEffect(() => {
-        props.setBreadcrumbItems("Category", breadcrumbItems)
-      }, [])    
-    //   const [categories, setCategories] = useState([]);
-    //   const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-    // if (!token) {
-    //   console.error("No token found, please login!");
-    //   return;
-    //}
-  //   useEffect(() => {
-  //     const fetchCategories = async () => {
-  //       try {
-  //         const response = await axios.get("http://localhost:8086/api/admin/category/all", {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         });
-  //         if (response.data && Array.isArray(response.data.categories)) {
-  //           setCategories(response.data.categories); // Lấy danh sách từ response.data.categories
-  //         } else {
-  //           console.error("API không trả về danh sách hợp lệ:", response.data);
-  //           setCategories([]); // Gán mảng rỗng để tránh lỗi hiển thị
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching data:", error);        
-  //       }
-  //     };
-    
-  //     if (token) {
-  //       fetchCategories();
-  //     }
-  //   }, [token]);
-  //   const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
-  //   const data = useMemo(() => ({
-  //     columns: [       
-  //       { label: "Name", field: "name", sort: "asc", width: 200 },
-  //       { label: "CreateDate", field: "created_at", sort: "asc", width: 200 },
-  //       { label: "UpdateDate", field: "updated_at", sort: "asc", width: 200 },       
-  //  ],
-  //     rows: categories.map((categories) => ({     
-  //       created_at: formatDate(categories.created_at),
-  //       updated_at: formatDate(categories.updated_at),        
-  //       name: categories.name,
-  //     })),
-  //   }), [categories]);
-  
-  // const handleEdit = (id) => {
-  //   history.push(`/edit-catgory/${id}`); // Navigate to the edit page
-  // };
+  ];
 
-  // // Hàm xử lý khi nhấn nút "Xóa"
-  // const handleDelete = async (id) => {
-  //   const confirmDelete = window.confirm("Are you sure want to delete this user?");
-  //   if (confirmDelete) {
-  //     try {
-  //       const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-  //       await axios.delete(`http://localhost:8086/api/admin/category/${id}`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-  //       alert("Delete successfull!");
-  //       // Update listUser after delete user
-  //       setCategories(categories.filter(() => categories.id !== id));
-  //     } catch (error) {
-  //       console.error("Lỗi khi xóa category:", error);
-  //       alert("Không thể xóa user. Vui lòng thử lại!");
-  //     }
-  //   }
-  // };
-  const handleEdit = (name) => {
-    history.push("/editcategory")
-  }
-  
-  const handleDelete = (name) => {
-    alert(`Xóa: ${name}`)}
-  const data = {
-    columns: [
-      {
-        label: "Name",
-        field: "name",
-        sort: "asc",        
-        width: 150,
-      },
-      {
-        label: "Ngày tạo",
-        field: "createdDate",
-        sort: "asc",
-        width: 200,
-      },
-      {
-        label: "Chi tiết",
-        field: "details",
-        sort: "asc",
-        width: 300,
-      },
-      { label: "Hành động", 
-        field: "actions", 
-        width: 200 },
-    ],
-    rows: [
-      {
-        name: "John Doe",
-        createdDate: "2025-03-28",
-        details: "Đây là chi tiết của John Doe",
-        // status: (
-        //   <button
-        //     onClick={() => handleToggleStatus(user.id)}
-        //     style={{
-        //       backgroundColor: data.isActive ? "green" : "red",
-        //       color: "white",
-        //       border: "none",
-        //       padding: "5px 10px",
-        //       borderRadius: "5px",
-        //       cursor: "pointer"
-        //     }}
-        //   >
-        //     {data.isActive ? "ON" : "OFF"}
-        //   </button>
-        // ),
-        // actions: (
-        //   <div>
-        //     <i onClick={() => handleEdit("John Doe")} className="ti-pencil fs-4 me-3 icon-hover text-warning">
-              
-        //     </i>
-        //     <i onClick={() => handleDelete("John Doe")} className="ti-trash fs-4 me-3 icon-hover text-warning">
-              
-        //     </i>
-        //   </div>
-        // )  
-      },
-      {
-        name: "Jane Smith",
-        createdDate: "2025-03-27",
-        details: "Đây là chi tiết của Jane Smith",
+  useEffect(() => {
+    props.setBreadcrumbItems("Category", breadcrumbItems);
+  }, [props]);
+
+  const [categories, setCategories] = useState([]);
+  const token = JSON.parse(localStorage.getItem("authUser"))?.token;
+
+  useEffect(() => {
+    if (!token) {
+      console.error("No token found, please login!");
+      return;
+    }
+
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:8086/api/category/all", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.data && Array.isArray(response.data.categories)) {
+          setCategories(response.data.categories);
+        } else {
+          console.error("API không trả về danh sách hợp lệ:", response.data);
+          setCategories([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchCategories();
+  }, [token]);
+
+  const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
+
+  const handleEdit = (id) => {
+    history.push(`/edit-category/${id}`);
+  };
+
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure want to delete this category?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8086/api/category/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        alert("Delete successful!");
+        setCategories(categories.filter((category) => category.id !== id));
+      } catch (error) {
+        console.error("Lỗi khi xóa category:", error);
+        alert("Không thể xóa category. Vui lòng thử lại!");
+      }
+    }
+  };
+  const handleCreateCategory = async () => {
+    history.push("/add-category")
+  };
+  const data = useMemo(
+    () => ({
+      columns: [
+        { label: "Name", field: "name", sort: "asc", width: 200 },
+        { label: "CreateDate", field: "created_at", sort: "asc", width: 200 },
+        { label: "UpdateDate", field: "updated_at", sort: "asc", width: 200 },
+        { label: "Actions", field: "actions", width: 150 },
+      ],
+      rows: categories.map((category) => ({
+        name: category.name,
+        created_at: formatDate(category.created_at),
+        updated_at: formatDate(category.updated_at),
         actions: (
           <div>
-            <i onClick={() => handleEdit("John Doe")} className="ti-pencil fs-4 me-3 icon-hover text-warning">
-              
-            </i>
-            <i onClick={() => handleDelete("John Doe")} className="ti-trash fs-4 me-3 icon-hover text-warning">
-              
-            </i>
+            <i
+              onClick={() => handleEdit(category.id)}
+              className="ti-pencil fs-4 me-3 icon-hover text-success"
+            ></i>
+            <i
+              onClick={() => handleDelete(category.id)}
+              className="ti-trash fs-4 me-3 icon-hover text-danger"
+            ></i>
           </div>
-        )
-      },
-      {
-        name: "Peter Parker",
-        createdDate: "2025-03-26",
-        details: "Đây là chi tiết của Peter Parker",
-        actions: (
-          <div>
-            <i onClick={() => handleEdit("John Doe")} className="ti-pencil fs-4 me-3 icon-hover text-warning">
-            
-            </i>
-            <i onClick={() => handleDelete("John Doe")} className="ti-trash fs-4 me-3 icon-hover text-warning">
-            
-            </i>
-          </div>
-        )
-      },
-    ],
-   };
-  
+        ),
+      })),
+    }),
+    [categories]
+  );
+
   return (
     <React.Fragment>
       <MetaTags>
@@ -180,13 +110,16 @@ const Category = props => {
         <Col className="col-12">
           <Card>
             <CardBody>
+              <Button color="primary" onClick={() => handleCreateCategory()} className="mb-3 ">
+                Add Category
+              </Button>
               <MDBDataTable responsive striped bordered data={data} paging={true} entries={10} />
             </CardBody>
           </Card>
         </Col>
       </Row>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default connect(null, { setBreadcrumbItems })(Category)
+export default connect(null, { setBreadcrumbItems })(Category);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import MetaTags from "react-meta-tags";
 import { MDBDataTable } from "mdbreact";
-import { Row, Col, Card, CardBody } from "reactstrap";
+import { Row, Col, Card, CardBody, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import axios from "axios";
@@ -24,7 +24,7 @@ const Book = (props) => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:8086/api/admin/book/all", {
+        const response = await axios.get("http://localhost:8086/api/book/all", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (response.data && Array.isArray(response.data.books)) {
@@ -56,12 +56,14 @@ const Book = (props) => {
   const handleEdit = (id) => {
     history.push(`/edit-book/${id}`);
   };
-
+  const handleCreateBook = async() =>{
+    history.push('/add-book')
+  }
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa sách này?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8086/api/admin/book/${id}`, {
+        await axios.delete(`http://localhost:8086/api/book/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         alert("Xóa sách thành công!");
@@ -75,16 +77,18 @@ const Book = (props) => {
 
   const data = useMemo(() => ({
     columns: [
-      { label: "Tên sách", field: "title", sort: "asc", width: 200 },
-      { label: "Tác giả", field: "author", sort: "asc", width: 200 },
-      { label: "Ngày xuất bản", field: "published_at", sort: "asc", width: 200 },
-      { label: "Trạng thái", field: "status", width: 100 },
-      { label: "Hành động", field: "actions", width: 200 },
+      { label: "Title", field: "title", sort: "asc", width: 200 },
+      { label: "Author", field: "author", sort: "asc", width: 200 },
+      { label: "Image", field: "image", width: 150, },
+      { label: "PublishDate", field: "published_at", sort: "asc", width: 200 },
+      { label: "Status", field: "status", width: 100 },
+      { label: "Action", field: "actions", width: 200 },
     ],
     rows: books.map((book) => ({
       title: book.title,
       author: book.author,
       published_at: formatDate(book.published_at),
+      image: <img src={book.image} alt="book" style={{ width: "50px", height: "50px" }} />,
       status: (
         <button
           onClick={() => handleToggleStatus(book.id)}
@@ -114,7 +118,6 @@ const Book = (props) => {
       ),
     })),
   }), [books]);
-
   return (
     <React.Fragment>
       <MetaTags>
@@ -125,6 +128,9 @@ const Book = (props) => {
         <Col className="col-12">
           <Card>
             <CardBody>
+              <Button color="primary" onClick={() => handleCreateBook()} className="mb-3 ">
+                Add Book
+              </Button>
               <MDBDataTable responsive striped bordered data={data} paging={true} entries={10} />
             </CardBody>
           </Card>

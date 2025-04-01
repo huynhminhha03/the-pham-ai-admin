@@ -93,12 +93,12 @@ const User = props => {
         actions: (
           <div>
             <i
-              onClick={() => handleEdit(user.username)}
+              onClick={() => handleEdit(user.id)}
               className="ti-pencil fs-4 me-3 icon-hover text-success"             
             >           
             </i>
             <i
-              onClick={() => handleDelete(user.username)}
+              onClick={() => handleDelete(user.id)}
               className="ti-trash fs-4 me-3 icon-hover text-danger"
             >
             </i>

@@ -12,23 +12,21 @@ const EditCategory = () => {
     const history = useHistory(); // Sử dụng useHistory để điều hướng
   
     const [category, setCategory] = useState({
-      name: "",
-      details: "",
+      name: "", 
       created_at: "",
     });
-  
     useEffect(() => {
       const fetchCategory = async () => {
         try {
+          console.log(id);
           const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-          const response = await axios.get(`http://localhost:8086/api/admin/category/${id}`, {
+          const response = await axios.get(`http://localhost:8086/api/category/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (response.data) {
             setCategory({
-              name: response.data.name,
-              email: response.data.detail,
-              createdDate: new Date(response.data.created_at).toLocaleString("vi-VN"),
+              name: response.data.cate.name,             
+              created_at: new Date(response.data.cate.created_at).toLocaleString("vi-VN"),
             });
           }
         } catch (error) {
@@ -44,7 +42,7 @@ const EditCategory = () => {
     const handleSave = async () => {
       try {
         const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        await axios.put(`http://localhost:8086/api/admin/category/${id}`, category, {
+        await axios.put(`http://localhost:8086/api/category/${id}`, category, {
           headers: { Authorization: `Bearer ${token}` },
         });
         alert("Update success!");
@@ -78,20 +76,7 @@ const EditCategory = () => {
                     required: { value: true, errorMessage: "CategoryName not null" },
                     minLength: { value: 3, errorMessage: "Tên phải có ít nhất 3 ký tự" },
                   }}
-                />
-                {/* Detail */}
-                <AvField
-                  className="mb-3"
-                  name="details"
-                  label="Details"
-                  type="text"
-                  value={category.details}
-                  onChange={handleChange}
-                  validate={{
-                    required: { value: true, errorMessage: "Detail not null" },                   
-                  }}
-                />
-
+                />                
                 {/* CreateDate - only view, not Edit */}
                 <AvField
                   className="mb-3"

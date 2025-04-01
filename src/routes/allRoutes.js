@@ -104,6 +104,9 @@ import EditBook from "pages/Book/EditBook"
 import Banner from "pages/Banner/Banner"
 import EditBanner from "pages/Banner/EditBanner"
 import EditRecommend from "pages/Recommend/EditRecommend"
+import AddBanner from "pages/Banner/AddBanner"
+import AddCategory from "pages/Category/AddCategory"
+import AddBook from "pages/Book/AddBook"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -118,7 +121,8 @@ const userRoutes = [
   { path: "/conversation", component: Conversation },
   //category
   { path: "/category", component: Category },
-  { path: "/edit-category", component: EditCategory },
+  { path: "/edit-category/:id", component: EditCategory },
+  {path:"/add-category", component: AddCategory},
   //recommend
   { path: "/recommend", component: Recommend },
   { path: "/edit-recommend", component: EditRecommend },
@@ -126,12 +130,14 @@ const userRoutes = [
   {path:"/notification", component: Notification},
   //Book
   {path:"/book", component: Book},
-  { path: "/edit-book", component: EditBook },
+  { path: "/edit-book/:id", component: EditBook },
+  { path: "/add-book/", component: AddBook },
   //System Management
   {path:"/SystemManagement", component: SystemManagement},
   //Banner
   {path:"/banner", component: Banner},
-  {path:"/edit-banner", component: EditBanner},
+  {path:"/edit-banner/:id", component: EditBanner},
+  {path:"/add-banner", component: AddBanner},
   // // profile
   { path: "/profile", component: UserProfile },
   

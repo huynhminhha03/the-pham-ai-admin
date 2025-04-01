@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MetaTags from "react-meta-tags";
-import { Row, Col, Card, CardBody, Button, FormGroup } from "reactstrap";
+import { Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
@@ -15,6 +15,9 @@ const EditBanner = () => {
     created_at: "",
   });
 
+  const [selectedFile, setSelectedFile] = useState(null);  // state lưu file hình ảnh đã chọn
+  const [previewImage, setPreviewImage] = useState(null);  // state để xem trước hình ảnh
+
   useEffect(() => {
     const fetchBanner = async () => {
       try {
@@ -23,16 +26,18 @@ const EditBanner = () => {
           alert("No token found, please login!");
           return;
         }
-        
-        const response = await axios.get(`http://localhost:8086/api/admin/banner/${id}`, {
+
+        const response = await axios.get(`http://localhost:8086/api/banner/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         if (response.data) {
           setBanner({
-            title: response.data.title,
-            imageUrl: response.data.imageUrl,
-            created_at: new Date(response.data.created_at).toLocaleString("vi-VN"),
+            title: response.data.banner.title,
+            imageUrl: response.data.banner.imageUrl,
+            created_at: new Date(response.data.banner.created_at).toLocaleString("vi-VN"),
           });
+          setPreviewImage(response.data.banner.imageUrl); // Set preview image from existing banner
         }
       } catch (error) {
         console.error("Error fetching banner data:", error);
@@ -46,7 +51,18 @@ const EditBanner = () => {
     setBanner({ ...banner, [e.target.name]: e.target.value });
   };
 
-  const handleSave = async () => {
+  // Xử lý chọn file hình ảnh
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewImage(URL.createObjectURL(file)); // Hiển thị hình ảnh đã chọn trước khi upload
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+
     try {
       const token = JSON.parse(localStorage.getItem("authUser"))?.token;
       if (!token) {
@@ -54,11 +70,19 @@ const EditBanner = () => {
         return;
       }
 
-      await axios.put(`http://localhost:8086/api/admin/banner/${id}`, banner, {
-        headers: { Authorization: `Bearer ${token}` },
+      const formData = new FormData();
+      formData.append("title", banner.title);
+      if (selectedFile) {
+        formData.append("image", selectedFile); // Thêm file hình ảnh vào formData
+      }
+
+      // Gửi request PUT để cập nhật banner với file hình ảnh
+      await axios.patch(`http://localhost:8086/api/banner/${id}`, formData, {
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
+
       alert("Banner updated successfully!");
-      history.push("/banners");
+      history.push("/banner",2000);  // Điều hướng về danh sách banner
     } catch (error) {
       console.error("Error updating banner:", error);
       alert("Failed to update banner. Please try again.");
@@ -91,16 +115,22 @@ const EditBanner = () => {
                   }}
                 />
 
-                {/* Image URL */}
-                <AvField
-                  className="mb-3"
-                  name="imageUrl"
-                  label="Image URL"
-                  type="text"
-                  value={banner.imageUrl}
-                  onChange={handleChange}
-                  validate={{ required: { value: true, errorMessage: "Image URL is required" } }}
-                />
+                {/* Image Upload */}
+                <FormGroup className="mb-3">
+                  <Label for="image">Upload Image</Label>
+                  <Input
+                    type="file"
+                    name="image"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                  {previewImage && (
+                    <div className="image-preview mt-3">
+                      <img src={previewImage} alt="Preview" width="200" />
+                    </div>
+                  )}
+                </FormGroup>
 
                 {/* Created Date - View Only */}
                 <AvField
