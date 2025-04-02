@@ -22,8 +22,7 @@ const EditBanner = () => {
     const fetchBanner = async () => {
       try {
         const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        if (!token) {
-          alert("No token found, please login!");
+        if (!token) {         
           return;
         }
 
@@ -65,8 +64,7 @@ const EditBanner = () => {
 
     try {
       const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-      if (!token) {
-        alert("No token found, please login!");
+      if (!token) {       
         return;
       }
 
@@ -81,11 +79,10 @@ const EditBanner = () => {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
 
-      alert("Banner updated successfully!");
       history.push("/banner",2000);  // Điều hướng về danh sách banner
     } catch (error) {
       console.error("Error updating banner:", error);
-      alert("Failed to update banner. Please try again.");
+     
     }
   };
 

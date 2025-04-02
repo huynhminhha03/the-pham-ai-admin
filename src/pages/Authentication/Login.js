@@ -44,7 +44,7 @@ const Login = props => {
                   </h3>
                   <div className="p-3">
                     <h4 className="text-muted font-size-18 mb-1 text-center">Welcome Back !</h4>
-                    <p className="text-muted text-center">Sign in to continue to Lexa.</p>
+                    <p className="text-muted text-center">Sign in to continue to Unimonollc.</p>
                     <AvForm
                       className="form-horizontal mt-4"
                       onValidSubmit={(e, v) => {
@@ -59,7 +59,7 @@ const Login = props => {
                         <AvField
                           name="email"
                           label="Email"
-                          value="admin@example.com"
+                          value="nguyentan16062003@gmail.com"
                           className="form-control"
                           placeholder="Enter email"
                           type="email"
@@ -71,7 +71,7 @@ const Login = props => {
                         <AvField
                           name="password"
                           label="Password"
-                          value="admin123"
+                          value="Admin@123"
                           type="password"
                           required
                           placeholder="Enter Password"
@@ -120,7 +120,7 @@ const Login = props => {
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Lexa 
+                  © {new Date().getFullYear()} Unimonollc 
                   <span className="d-none d-sm-inline-block"> - Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
                 </p>
               </div>

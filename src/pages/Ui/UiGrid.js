@@ -16,7 +16,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiGrid = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Grid", link: "#" },
   ]

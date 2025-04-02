@@ -23,7 +23,7 @@ import PieChart from "../AllCharts/C3charts/piechart";
 
 const ChartsC3 = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Charts", link: "#" },
         { title: "C3 Chart", link: "#" },
     ]

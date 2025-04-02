@@ -31,7 +31,7 @@ const Register = () => {
                   </h3>
                   <div className="p-3">
                     <h4 className="text-muted font-size-18 mb-1 text-center">Free Register</h4>
-                    <p className="text-muted text-center">Get your free Lexa account now.</p>
+                    <p className="text-muted text-center">Get your free Unimonollc account now.</p>
                     <AvForm
                       className="form-horizontal mt-4"
                     >
@@ -75,7 +75,7 @@ const Register = () => {
 
                       <div className="mb-0 row">
                         <div className="col-12 mt-4">
-                          <p className="text-muted mb-0 font-size-14">By registering you agree to the Lexa <a to="#" className="text-primary">Terms of Use</a></p>
+                          <p className="text-muted mb-0 font-size-14">By registering you agree to the Unimonollc <a to="#" className="text-primary">Terms of Use</a></p>
                         </div>
                       </div>
                     </AvForm>
@@ -91,7 +91,7 @@ const Register = () => {
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Lexa <span className="d-none d-sm-inline-block"> - Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
+                  © {new Date().getFullYear()} Unimonollc <span className="d-none d-sm-inline-block"> - Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
                 </p>
               </div>
             </Col>

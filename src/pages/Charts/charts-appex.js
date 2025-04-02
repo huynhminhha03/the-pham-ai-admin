@@ -22,7 +22,7 @@ import StackedBarChart from "../AllCharts/apex/stackedbarchart";
 
 const ChartsAppex = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Charts", link: "#" },
         { title: "Apex Charts", link: "#" },
     ]

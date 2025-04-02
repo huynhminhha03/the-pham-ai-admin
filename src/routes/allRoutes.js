@@ -107,6 +107,7 @@ import EditRecommend from "pages/Recommend/EditRecommend"
 import AddBanner from "pages/Banner/AddBanner"
 import AddCategory from "pages/Category/AddCategory"
 import AddBook from "pages/Book/AddBook"
+import EditConversation from "pages/Conversation/EditConversation"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -114,11 +115,12 @@ const userRoutes = [
   //calendar
   { path: "/calendar", component: Calendar },
   //user
-  { path: "/user", component: User },
+  { path: "/user/:page?", component: User },
   //Edit user
   { path: "/edit-user/:id", component: EditUser },
   //conversation
   { path: "/conversation", component: Conversation },
+  { path: "/edit-conversation/:id", component: EditConversation },
   //category
   { path: "/category", component: Category },
   { path: "/edit-category/:id", component: EditCategory },
@@ -138,6 +140,7 @@ const userRoutes = [
   {path:"/banner", component: Banner},
   {path:"/edit-banner/:id", component: EditBanner},
   {path:"/add-banner", component: AddBanner},
+  
   // // profile
   { path: "/profile", component: UserProfile },
   

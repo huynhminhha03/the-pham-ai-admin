@@ -42,7 +42,7 @@ const EditCategory = () => {
     const handleSave = async () => {
       try {
         const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        await axios.put(`http://localhost:8086/api/category/${id}`, category, {
+        await axios.patch(`http://localhost:8086/api/category/${id}`, category, {
           headers: { Authorization: `Bearer ${token}` },
         });
         alert("Update success!");

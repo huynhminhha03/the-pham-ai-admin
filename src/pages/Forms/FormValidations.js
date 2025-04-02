@@ -21,7 +21,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const FormValidations = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Forms", link: "#" },
     { title: "Form Validation", link: "#" },
   ]

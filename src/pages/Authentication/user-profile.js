@@ -53,7 +53,7 @@ const UserProfile = props => {
   }, [props.success])
 
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Profile", link: "#" },
   ]
 

@@ -21,7 +21,7 @@ import user7 from "../../assets/images/users/user-7.jpg";
 
 const PagesDirectory = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Pages", link: "#" },
         { title: "Directory", link: "#" },
     ]

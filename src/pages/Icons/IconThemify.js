@@ -16,7 +16,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 const IconThemify = props => {
 
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Icons", link: "#" },
         { title: "Themify Icons", link: "#" },
     ]

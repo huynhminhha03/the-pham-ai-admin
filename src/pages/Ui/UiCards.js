@@ -32,7 +32,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiCards = props => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Cards", link: "#" },
   ]
@@ -52,7 +52,7 @@ const UiCards = props => {
       <Row>
         <Col mg={6} lg={6} xl={3}>
           <Card>
-            <CardImg top className="img-fluid" src={img1} alt="Lexa" />
+            <CardImg top className="img-fluid" src={img1} alt="Unimonollc" />
             <CardBody>
               <CardTitle className="h4">Card title</CardTitle>
               <CardText>
@@ -70,7 +70,7 @@ const UiCards = props => {
         </Col>
         <Col mg={6} lg={6} xl={3}>
           <Card>
-            <CardImg top className="img-fluid" src={img2} alt="Lexa" />
+            <CardImg top className="img-fluid" src={img2} alt="Unimonollc" />
             <CardBody>
               <CardTitle className="h4">Card title</CardTitle>
               <CardText>
@@ -95,7 +95,7 @@ const UiCards = props => {
 
         <Col mg={6} lg={6} xl={3}>
           <Card>
-            <CardImg top className="img-fluid" src={img3} alt="Lexa" />
+            <CardImg top className="img-fluid" src={img3} alt="Unimonollc" />
             <CardBody>
               <CardText>
                 Some quick example text to build on the card title and make
@@ -112,7 +112,7 @@ const UiCards = props => {
                 Support card subtitle
                   </h6>
             </CardBody>
-            <CardImg className="img-fluid" src={img4} alt="Lexa" />
+            <CardImg className="img-fluid" src={img4} alt="Unimonollc" />
             <CardBody>
               <CardText>
                 Some quick example text to build on the card title and make
@@ -275,7 +275,7 @@ const UiCards = props => {
       <Row>
         <Col lg={4}>
           <Card>
-            <CardImg top className="img-fluid" src={img5} alt="Lexa" />
+            <CardImg top className="img-fluid" src={img5} alt="Unimonollc" />
             <CardBody>
               <CardTitle className="h4">Card title</CardTitle>
               <CardText>
@@ -307,13 +307,13 @@ const UiCards = props => {
                     </small>
               </CardText>
             </CardBody>
-            <CardImg bottom className="img-fluid" src={img7} alt="Lexa" />
+            <CardImg bottom className="img-fluid" src={img7} alt="Unimonollc" />
           </Card>
         </Col>
 
         <Col lg={4}>
           <Card>
-            <CardImg className="img-fluid" src={img6} alt="Lexa" />
+            <CardImg className="img-fluid" src={img6} alt="Unimonollc" />
             <CardImgOverlay>
               <CardTitle className="h4 text-white font-16 mt-0">Card title</CardTitle>
               <CardText className="text-light">
@@ -420,7 +420,7 @@ const UiCards = props => {
           <CardDeck className="card-deck-wrapper">
             <div className="card-group">
               <Card className="mb-4">
-                <CardImg top className="img-fluid" src={img4} alt="Lexa" />
+                <CardImg top className="img-fluid" src={img4} alt="Unimonollc" />
                 <CardBody>
                   <CardTitle className="h4">Card title</CardTitle>
                   <CardText>
@@ -436,7 +436,7 @@ const UiCards = props => {
                 </CardBody>
               </Card>
               <Card className="mb-4">
-                <CardImg top className="img-fluid" src={img5} alt="Lexa" />
+                <CardImg top className="img-fluid" src={img5} alt="Unimonollc" />
                 <CardBody>
                   <CardTitle className="h4">Card title</CardTitle>
                   <CardText>
@@ -451,7 +451,7 @@ const UiCards = props => {
                 </CardBody>
               </Card>
               <Card className="mb-4">
-                <CardImg top className="img-fluid" src={img6} alt="Lexa" />
+                <CardImg top className="img-fluid" src={img6} alt="Unimonollc" />
                 <CardBody>
                   <CardTitle className="h4">Card title</CardTitle>
                   <CardText>

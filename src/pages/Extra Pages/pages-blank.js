@@ -8,7 +8,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const PagesBlank = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Pages", link: "#" },
         { title: "Blank page", link: "#" },
     ]

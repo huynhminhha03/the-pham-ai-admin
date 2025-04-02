@@ -17,7 +17,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiModal = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Modals", link: "#" },
   ]

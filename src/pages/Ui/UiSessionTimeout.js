@@ -14,7 +14,7 @@ class UiSessionTimeout extends Component {
     super(props);
     this.state = {
       breadcrumbItems: [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "UI Elements", link: "#" },
         { title: "Session Timeout", link: "#" },
       ],

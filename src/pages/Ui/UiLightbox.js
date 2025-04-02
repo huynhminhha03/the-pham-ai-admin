@@ -39,7 +39,7 @@ const images = [img1, img2, img3, img4, img5, img6]
 
 const UiLightbox = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Lightbox", link: "#" },
   ]
@@ -144,7 +144,7 @@ const UiLightbox = (props) => {
                           setisFits(true)
                         }}
                         className="img-fluid"
-                        alt="Lexa"
+                        alt="Unimonollc"
                         src={img2}
                         width="145"
                       />

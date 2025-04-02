@@ -30,7 +30,7 @@ const ChartsKnob = (props) => {
   }
 
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Charts", link: "#" },
     { title: "Jquery Knob Chart", link: "#" },
   ]

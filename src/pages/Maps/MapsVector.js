@@ -18,7 +18,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const MapsVector = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Maps", link: "#" },
     { title: "Vector Maps", link: "#" },
   ]

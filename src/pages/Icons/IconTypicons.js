@@ -15,7 +15,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const IconTypicons = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Icons", link: "#" },
         { title: "Typicons Icons", link: "#" },
     ]

@@ -18,7 +18,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 const UiPagination = (props) => {
 
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "UI Elements", link: "#" },
         { title: "Pagination", link: "#" },
     ]

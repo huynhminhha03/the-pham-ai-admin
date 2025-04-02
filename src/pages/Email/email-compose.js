@@ -12,7 +12,7 @@ import { Editor } from "react-draft-wysiwyg"
 
 const EmailCompose = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Email", link: "#" },
         { title: "Email Compose", link: "#" },
     ]

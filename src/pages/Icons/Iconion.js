@@ -17,7 +17,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 const IconIon = props => {
 
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Icons", link: "#" },
     { title: "Ion Icons", link: "#" },
   ]

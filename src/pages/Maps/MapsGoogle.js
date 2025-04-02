@@ -14,7 +14,7 @@ const LoadingContainer = () => <div>Loading...</div>
 const MapsGoogle = props => {
 
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Maps", link: "#" },
     { title: "Google Maps", link: "#" },
   ]

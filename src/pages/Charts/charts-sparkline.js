@@ -18,7 +18,7 @@ import {
 
 const SparklineChart = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "Charts", link: "#" },
     { title: "Sparkline Chart", link: "#" },
   ]

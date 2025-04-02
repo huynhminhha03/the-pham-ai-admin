@@ -28,7 +28,7 @@ import "chartist/dist/scss/chartist.scss";
 
 const ChartsChartist = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Charts", link: "#" },
         { title: "Chartist Chart", link: "#" },
     ]

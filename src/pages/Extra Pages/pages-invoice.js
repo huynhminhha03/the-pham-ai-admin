@@ -19,7 +19,7 @@ import imgdark from "../../assets/images/logo-dark.png";
 
 const PagesInvoice = (props) => {
     const breadcrumbItems = [
-        { title: "Lexa", link: "#" },
+        { title: "Unimonollc", link: "#" },
         { title: "Pages", link: "#" },
         { title: "Invoice", link: "#" },
     ]

@@ -22,7 +22,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiCarousel = (props) => {
   const breadcrumbItems = [
-    { title: "Lexa", link: "#" },
+    { title: "Unimonollc", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Carousel", link: "#" },
   ]
