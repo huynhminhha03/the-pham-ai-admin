@@ -1,15 +1,7 @@
-import PropTypes from 'prop-types'
-import MetaTags from 'react-meta-tags';
+import PropTypes from "prop-types"
+import MetaTags from "react-meta-tags"
 import React, { useState, useEffect } from "react"
-import {
-  Row,
-  Col,
-  Card,
-  Alert,
-  CardBody,
-  Media,
-  Button,
-} from "reactstrap"
+import { Row, Col, Card, Alert, CardBody, Media, Button } from "reactstrap"
 
 // availity-reactstrap-validation
 import { AvForm, AvField } from "availity-reactstrap-validation"
@@ -23,34 +15,35 @@ import avatar from "../../assets/images/users/user-1.jpg"
 import { editProfile, resetProfileFlag } from "../../store/actions"
 
 //Import Action to copy breadcrumb items from local state to redux state
-import { setBreadcrumbItems } from "../../store/actions";
+import { setBreadcrumbItems } from "../../store/actions"
+import { authAPI, userApis } from "helpers/api"
 
 const UserProfile = props => {
-  
-  const [email, setemail] = useState("")
-  const [name, setname] = useState("")
-  const [idx, setidx] = useState(1)
-
+  const [user, setUser] = useState()
+  const [username, setUsername] = useState("")
   useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"))
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        setname(obj.displayName)
-        setemail(obj.email)
-        setidx(obj.uid)
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        setname(obj.username)
-        setemail(obj.email)
-        setidx(obj.uid)
+    const fetchUser = async () => {
+      try {
+        const response = await authAPI().get(userApis.currentUser)
+        setUser(response?.data?.user)
+        console.log("User data:", response.data)
+      } catch (error) {
+        console.error("Error fetching user data:", error)
       }
-      setTimeout(() => {
-        props.resetProfileFlag();
-      }, 3000);
     }
-  }, [props.success])
+    fetchUser()
+  }, [])
+
+  const updateUser = async () => {
+    try {
+      await authAPI().patch(userApis.updateCurrentUser, {
+        username: username,
+      })
+      setUser({ ...user, username: username })
+    } catch (error) {
+      console.error("Error updating user data:", error)
+    }
+  }
 
   const breadcrumbItems = [
     { title: "The Pham AI", link: "#" },
@@ -58,19 +51,17 @@ const UserProfile = props => {
   ]
 
   useEffect(() => {
-    props.setBreadcrumbItems('Profile', breadcrumbItems)
+    props.setBreadcrumbItems("Profile", breadcrumbItems)
   })
 
-  function handleValidSubmit(event, values) {
-    props.editProfile(values)
-  }
-
+  
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Profile | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>
+          Profile | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+        </title>
       </MetaTags>
-
 
       <Row>
         <Col lg="12">
@@ -88,14 +79,14 @@ const UserProfile = props => {
                   <img
                     src={avatar}
                     alt=""
-                    className="avatar-md rounded-circle img-thumbnail"
+                    className="avatar-md me-3 rounded-circle img-thumbnail"
                   />
                 </div>
                 <Media body className="align-self-center">
                   <div className="text-muted">
-                    <h5>{name}</h5>
-                    <p className="mb-1">{email}</p>
-                    <p className="mb-0">Id no: #{idx}</p>
+                    <h5>{user?.username}</h5>
+                    <p className="mb-1">{user?.email}</p>
+                    <p className="mb-0">Id: #{user?.id}</p>
                   </div>
                 </Media>
               </Media>
@@ -110,46 +101,50 @@ const UserProfile = props => {
         <CardBody>
           <AvForm
             className="form-horizontal"
-            onValidSubmit={(e, v) => {
-              handleValidSubmit(e, v)
-            }}
+            
           >
             <div className="form-group">
               <AvField
                 name="username"
                 label="User Name"
-                value={name}
+                value={user?.username}
+                onChange={e => setUsername(e.target.value)}
                 className="form-control"
                 placeholder="Enter User Name"
                 type="text"
                 required
               />
-              <AvField name="idx" value={idx} type="hidden" />
+              <AvField name="idx" value={user?.id} type="hidden" />
             </div>
             <div className="text-center mt-4">
-              <Button type="submit" color="danger">
+              <Button type="submit" color="danger" onClick={updateUser}>
                 Edit User Name
-                  </Button>
+              </Button>
             </div>
           </AvForm>
         </CardBody>
       </Card>
-
     </React.Fragment>
   )
 }
 
-UserProfile.propTypes = {
-  editProfile: PropTypes.func,
-  error: PropTypes.any,
-  success: PropTypes.any
-}
+// UserProfile.propTypes = {
+//   editProfile: PropTypes.func,
+//   error: PropTypes.any,
+//   success: PropTypes.any,
+// }
 
-const mapStatetoProps = state => {
-  const { error, success } = state.Profile
-  return { error, success }
-}
+// const mapStatetoProps = state => {
+//   const { error, success } = state.Profile
+//   return { error, success }
+// }
 
-export default withRouter(
-  connect(mapStatetoProps, { editProfile, resetProfileFlag, setBreadcrumbItems })(UserProfile)
-)
+// export default withRouter(
+//   connect(mapStatetoProps, {
+//     resetProfileFlag,
+//     setBreadcrumbItems,
+//   })(UserProfile)
+// )
+
+export default connect(null, { setBreadcrumbItems })(UserProfile)
+

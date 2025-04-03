@@ -1,108 +1,129 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import MetaTags from "react-meta-tags";
-import { MDBDataTable } from "mdbreact";
-import { Row, Col, Card, CardBody, Button, Pagination, PaginationItem, PaginationLink } from "reactstrap";
-import { connect } from "react-redux";
-import { setBreadcrumbItems } from "../../store/actions";
-import { useLocation, useHistory } from "react-router-dom";
-import axios from "axios";
-import { adminApis, authAPI } from "helpers/api";
+import React, { useEffect, useState, useMemo, useCallback } from "react"
+import MetaTags from "react-meta-tags"
+import { MDBDataTable } from "mdbreact"
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Button,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap"
+import { connect } from "react-redux"
+import { setBreadcrumbItems } from "../../store/actions"
+import { useLocation, useHistory } from "react-router-dom"
+import axios from "axios"
+import { adminApis, authAPI } from "helpers/api"
 
-const Category = (props) => {
-  const history = useHistory();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const page = searchParams.get("page") || 1;
+const Category = props => {
+  const history = useHistory()
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const page = searchParams.get("page") || 1
+
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+
   const breadcrumbItems = [
     { title: "Thepham AI", link: "#" },
     { title: "Category", link: "#" },
-  ];
+  ]
 
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([])
   const [currentPage, setCurrentPage] = useState(page || 1)
-  const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 10; 
+  const [totalPages, setTotalPages] = useState(1)
+  const pageSize = 10
 
   useEffect(() => {
-    props.setBreadcrumbItems("Category", breadcrumbItems);
+    props.setBreadcrumbItems("Category", breadcrumbItems)
     if (page) {
-      setCurrentPage(Number(page));
+      setCurrentPage(Number(page))
     }
-  }, [props] [page]);
-  // 
-  useEffect(()=>{
-    const fetchCategories = async () => {
-    try {
-      const response = await authAPI().get(
-        `${adminApis.allCategories}?page=${currentPage}&limit=${pageSize}`
-      );
-   
-        setCategories(response.data.categories);
-        setTotalPages(response.data.totalPages || 1);
-    
-    } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu:", error);
-    }
-  }
-    fetchCategories()
-  }, [currentPage]);
-
-
+  }, [props][page])
   //
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await authAPI().get(
+          `${adminApis.allCategories}?page=${currentPage}&limit=${pageSize}`
+        )
+
+        setCategories(response.data.categories)
+        setTotalPages(response.data.totalPages || 1)
+      } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu:", error)
+      }
+    }
+    fetchCategories()
+  }, [currentPage])
+
+  const handleOpenDeleteModal = category => {
+    setSelectedCategory(category)
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setSelectedCategory(null)
+  }
+
   const handleToggleStatus = async (categoryId, status) => {
     try {
-     await authAPI().patch(
-        adminApis.updateCategory(categoryId),
-        { status: !status },       
-      );      
-      setCategories((prevCategories) =>
-          prevCategories.map((category) =>
-            category.id === categoryId ? { ...category, status: !status } : category
-          )
-        );       
+      await authAPI().patch(adminApis.updateCategory(categoryId), {
+        status: !status,
+      })
+      setCategories(prevCategories =>
+        prevCategories.map(category =>
+          category.id === categoryId
+            ? { ...category, status: !status }
+            : category
+        )
+      )
     } catch (error) {
-      console.error("Failed to update status:", error);
+      console.error("Failed to update status:", error)
     }
-  };
-  
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    history.push(`/category?page=${newPage}`); // Thay đổi URL khi chuyển trang
-  };
+  }
+
+  const handlePageChange = newPage => {
+    setCurrentPage(newPage)
+    history.push(`/category?page=${newPage}`) // Thay đổi URL khi chuyển trang
+  }
   //
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      handlePageChange(currentPage + 1);
+      handlePageChange(currentPage + 1)
     }
-  };
+  }
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      handlePageChange(currentPage - 1);
+      handlePageChange(currentPage - 1)
     }
-  };
+  }
 
-  // 
-  const handleDelete = async (id) => {
-      try {
-        await authAPI().delete(adminApis.deleteCategory(id));
-        setConversations(categories.filter(category => category.id !== id))      
-      } catch (error) {
-        console.error("Error deleting category:", error);
-      }
-  };
+  //
+  const handleDelete = async id => {
+    try {
+      await authAPI().delete(adminApis.deleteCategory(id))
+      setCategories(categories.filter(category => category.id !== id))
+    } catch (error) {
+      console.error("Error deleting category:", error)
+    }
+  }
 
   const handleCreateCategory = () => {
-    history.push("/add-category");
-  };
+    history.push("/add-category")
+  }
 
-  const handleEdit = (id) => {
-    history.push(`/edit-category/${id}`);
-  };
+  const handleEdit = id => {
+    history.push(`/edit-category/${id}`)
+  }
 
-  const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
+  const formatDate = dateStr => new Date(dateStr).toLocaleString("vi-VN")
 
-  // 
+  //
   const data = useMemo(
     () => ({
       columns: [
@@ -112,7 +133,7 @@ const Category = (props) => {
         { label: "Status", field: "status", width: 100 },
         { label: "Actions", field: "actions", width: 150 },
       ],
-      rows: categories.map((category) => ({
+      rows: categories.map(category => ({
         name: category.name,
         created_at: formatDate(category.created_at),
         updated_at: formatDate(category.updated_at),
@@ -139,7 +160,7 @@ const Category = (props) => {
               style={{ cursor: "pointer" }}
             ></i>
             <i
-              onClick={() => handleDelete(category.id)}
+              onClick={() => handleOpenDeleteModal(category)}
               className="ti-trash fs-4 me-3 icon-hover text-danger"
               style={{ cursor: "pointer" }}
             ></i>
@@ -148,22 +169,89 @@ const Category = (props) => {
       })),
     }),
     [categories]
-  );
+  )
 
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Category | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>
+          Category | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+        </title>
       </MetaTags>
-
+      {showModal && (
+        <div
+          className="modal show d-block"
+          tabIndex="-1"
+          role="dialog"
+          style={{
+            backgroundColor: "rgba(0,0,0,0.5)", // Làm mờ nền
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirm Delete</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={handleCloseModal}
+                />
+              </div>
+              <div className="modal-body">
+                <p>
+                  Do you want to delete category named{" "}
+                  <strong>
+                    {selectedCategory ? selectedCategory.name : "this category"}
+                  </strong>
+                  ?
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => handleDelete(selectedCategory.id)}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCloseModal}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <Row>
         <Col className="col-12">
           <Card>
             <CardBody>
-              <Button color="primary" onClick={handleCreateCategory} className="mb-3">
+              <Button
+                color="primary"
+                onClick={handleCreateCategory}
+                className="mb-3"
+              >
                 Add Category
               </Button>
-              <MDBDataTable responsive striped bordered data={data} paging={false} />
+              <MDBDataTable
+                responsive
+                striped
+                bordered
+                data={data}
+                paging={false}
+              />
               {/* <Row className="mt-3">
                 <Col className="d-flex justify-content-center align-items-center">
                   <Button color="secondary" onClick={handlePrevPage} disabled={currentPage === 1}>
@@ -178,19 +266,31 @@ const Category = (props) => {
               <nav aria-label="Page navigation">
                 <Pagination className="d-flex justify-content-end">
                   <PaginationItem disabled={currentPage === 1}>
-                    <PaginationLink previous onClick={handlePrevPage}>Previous</PaginationLink>
+                    <PaginationLink previous onClick={handlePrevPage}>
+                      Previous
+                    </PaginationLink>
                   </PaginationItem>
 
-                  {[...Array(totalPages).keys()].map((page) => (
-                    <PaginationItem key={page + 1} active={currentPage === page + 1}>
-                      <PaginationLink onClick={() => handlePageChange(page + 1)}>
+                  {[...Array(totalPages).keys()].map(page => (
+                    <PaginationItem
+                      key={page + 1}
+                      active={currentPage === page + 1}
+                    >
+                      <PaginationLink
+                        onClick={() => handlePageChange(page + 1)}
+                      >
                         {page + 1}
                       </PaginationLink>
                     </PaginationItem>
                   ))}
 
-                  <PaginationItem disabled={currentPage === totalPages} active={currentPage===totalPages}>
-                    <PaginationLink next onClick={handleNextPage}>Next</PaginationLink>
+                  <PaginationItem
+                    disabled={currentPage === totalPages}
+                    active={currentPage === totalPages}
+                  >
+                    <PaginationLink next onClick={handleNextPage}>
+                      Next
+                    </PaginationLink>
                   </PaginationItem>
                 </Pagination>
               </nav>
@@ -199,7 +299,7 @@ const Category = (props) => {
         </Col>
       </Row>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default connect(null, { setBreadcrumbItems })(Category);
+export default connect(null, { setBreadcrumbItems })(Category)

@@ -15,7 +15,6 @@ import { connect } from "react-redux"
 import { setBreadcrumbItems } from "../../store/actions"
 
 import { useHistory, useLocation } from "react-router-dom"
-import actions from "redux-form/lib/actions"
 import { adminApis, authAPI } from "helpers/api"
 
 const User = props => {
@@ -26,11 +25,13 @@ const User = props => {
   const history = useHistory()
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  
+  const [showModal, setShowModal] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
+
   useEffect(() => {
     props.setBreadcrumbItems("User", breadcrumbItems)
   }, [props])
-  
+
   const [users, setUsers] = useState([])
   const [currentPage, setCurrentPage] = useState(searchParams.get("page") || 1)
   const [totalPages, setTotalPages] = useState(1)
@@ -59,21 +60,15 @@ const User = props => {
 
   const handleToggleStatus = async (userId, status) => {
     try {
-      await authAPI().patch(
-        adminApis.updateUser(userId),
-        { status: 
-          !status },        
-      )     
-    
-        setUsers(prevUsers =>
-          prevUsers.map(user =>
-            user.id === userId ? { ...user, status: !status } : user
-          )
+      await authAPI().patch(adminApis.updateUser(userId), { status: !status })
+
+      setUsers(prevUsers =>
+        prevUsers.map(user =>
+          user.id === userId ? { ...user, status: !status } : user
         )
-       
+      )
     } catch (error) {
       console.error("Lỗi khi cập nhật trạng thái user:", error)
-     
     }
   }
   const handlePageChange = newPage => {
@@ -133,7 +128,7 @@ const User = props => {
               className="ti-pencil fs-4 me-3 icon-hover text-success"
             ></i>
             <i
-              onClick={() => handleDelete(user.id)}
+              onClick={() => handleOpenDeleteModal(user)}
               className="ti-trash fs-4 me-3 icon-hover text-danger"
             ></i>
           </div>
@@ -147,27 +142,95 @@ const User = props => {
   }
 
   // Hàm xử lý khi nhấn nút "Xóa"
-  const handleDelete = async (id) => {   
-      try {
-       
-        await authAPI().delete(adminApis.deleteUser(id))
-        setUsers(users.filter(user => user.id !== id))
-      } catch (error) {
-        console.error("Lỗi khi xóa user:", error)        
-      }
-    } 
+  const handleDelete = async id => {
+    try {
+      await authAPI().delete(adminApis.deleteUser(id))
+      setUsers(users.filter(user => user.id !== id))
+      setShowModal(false)
+
+    } catch (error) {
+      console.error("Lỗi khi xóa user:", error)
+      setShowModal(false)
+
+    }
+  }
+  const handleOpenDeleteModal = user => {
+    setSelectedUser(user)
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setSelectedUser(null)
+  }
+
 
   return (
     <React.Fragment>
       <MetaTags>
         <title>User | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
       </MetaTags>
-
+      {showModal && (
+        <div
+          className="modal show d-block"
+          tabIndex="-1"
+          role="dialog"
+          style={{
+            backgroundColor: "rgba(0,0,0,0.5)", // Làm mờ nền
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirm Delete</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={handleCloseModal}
+                />
+              </div>
+              <div className="modal-body">
+                <p>
+                  Do you want to delete user named{" "}
+                  <strong>
+                    {selectedUser ? selectedUser.username : "this user"}
+                  </strong>
+                  ?
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => handleDelete(selectedUser.id)}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCloseModal}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <Row>
         <Col className="col-12">
           <Card>
             <CardBody>
-              {/* Bảng danh sách banner */}
+              {/* Bảng danh sách user */}
               <MDBDataTable
                 responsive
                 striped

@@ -3,7 +3,7 @@ import { Card, CardBody, Button, Form, FormGroup, Label, Input, Alert } from "re
 import axios from "axios";
 import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { adminApis, authAPI } from "helpers/api";
 
 const AddCategory = (props) => {

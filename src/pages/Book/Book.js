@@ -27,16 +27,16 @@ const Book = props => {
   const searchParams = new URLSearchParams(location.search)
   const page = searchParams.get("page") || 1
   const [showModal, setShowModal] = useState(false)
-  const [selectedBanner, setSelectedBanner] = useState(null)
+  const [selectedBook, setSelectedBook] = useState(null)
 
-  const handleOpenDeleteModal = banner => {
-    setSelectedBanner(banner)
+  const handleOpenDeleteModal = book => {
+    setSelectedBook(book)
     setShowModal(true)
   }
 
   const handleCloseModal = () => {
     setShowModal(false)
-    setSelectedBanner(null)
+    setSelectedBook(null)
   }
   useEffect(() => {
     props.setBreadcrumbItems("Books", breadcrumbItems)
@@ -248,9 +248,9 @@ const Book = props => {
                         <p>
                           Do you want to delete the book named{" "}
                           <strong>
-                            {selectedBanner
-                              ? selectedBanner.title
-                              : "this banner"}
+                            {selectedBook
+                              ? selectedBook.title
+                              : "this book"}
                           </strong>
                           ?
                         </p>
@@ -259,7 +259,7 @@ const Book = props => {
                         <button
                           type="button"
                           className="btn btn-primary"
-                          onClick={() => handleDelete(selectedBanner.id)}
+                          onClick={() => handleDelete(selectedBook.id)}
                         >
                           Yes
                         </button>

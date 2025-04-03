@@ -27,10 +27,11 @@ const Dashboard = (props) => {
     { title: "Thepham AI", link: "#" },
     { title: "Dashboard", link: "#" }
   ]
+  
 
   useEffect(() => {
     props.setBreadcrumbItems('Dashboard' , breadcrumbItems)
-  },)
+  },[])
 
   const reports = [
     { title: "Orders", iconClass: "cube-outline", total: "1,587", average: "+11%", badgecolor: "info" },
