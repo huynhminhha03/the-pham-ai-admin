@@ -1,17 +1,26 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { connect } from "react-redux";
+import { setBreadcrumbItems } from "../../store/actions";
+import React, { useEffect, useState } from "react";
 import MetaTags from "react-meta-tags";
 import { Row, Col, Card, CardBody, Button, FormGroup } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation"
-//import { FormGroup, Form } from "redux-form";
-import axios from "axios"; // Thêm axios để gọi API
 import { useParams, useHistory } from "react-router-dom";
 import { adminApis, authAPI } from "helpers/api";
 
 
-const EditCategory = () => {
+const EditCategory = (props) => {
+
+  const breadcrumbItems = [
+    { title: "Thepham AI", link: "#" },
+    { title: "Category", link: "#" },
+    { title: "EditCategory", link: "#" },
+  ];
+  useEffect(() => {
+      props.setBreadcrumbItems("Category", breadcrumbItems);
+    }, [props]);
     const { id } = useParams();
     const history = useHistory(); // Sử dụng useHistory để điều hướng
-  
+    const [loading, setLoading] = useState(false); 
     const [category, setCategory] = useState({
       name: "", 
       created_at: "",
@@ -36,11 +45,15 @@ const EditCategory = () => {
         setCategory({ ...category, [e.target.name]: e.target.value });
       };    
     const handleSave = async () => {
+      setLoading(true);
       try {
         await authAPI().patch(adminApis.updateCategory(id), category);       
         history.push("/category"); // Chuyển hướng về danh sách category
       } catch (error) {
         console.error("Lỗi khi cập nhật category:", error);
+      }
+      finally {
+        setLoading(false);
       }
     };
     
@@ -55,7 +68,7 @@ const EditCategory = () => {
           <Card>      
             <CardBody>
             <h4 className="card-title">Edit Category</h4>
-              <AvForm onSubmit={handleSave}>
+              <AvForm>
                 {/* Catename*/}
                 <AvField
                   className="mb-3"
@@ -80,9 +93,13 @@ const EditCategory = () => {
                 />             
                 <FormGroup className="mb-0">
                   <div>
-                    <Button type="submit" color="primary" className="ms-1">
-                      Submit
-                        </Button>{" "}
+                    <Button color="primary" type="submit" onClick={handleSave} disabled={loading}>
+                              {loading ? (
+                                <span>Loading...</span> // Hiển thị trạng thái loading
+                              ) : (
+                                "Submit"
+                              )}
+                            </Button>{" "}
                     <Button type="reset" color="secondary" onClick={() => history.push("/category")}>
                       Cancel
                         </Button>
@@ -97,5 +114,5 @@ const EditCategory = () => {
   )
 }
 
-export default EditCategory;
+export default connect(null, { setBreadcrumbItems })(EditCategory);
 

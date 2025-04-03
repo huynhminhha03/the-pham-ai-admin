@@ -6,17 +6,17 @@ import {
   Col,
   Card,
   CardBody,
-  Button,
+  Input,
   Pagination,
   PaginationItem,
   PaginationLink,
 } from "reactstrap"
 import { connect } from "react-redux"
 import { setBreadcrumbItems } from "../../store/actions"
-import axios from "axios" // Thêm axios để gọi API
+
 import { useHistory, useLocation } from "react-router-dom"
 import actions from "redux-form/lib/actions"
-import { adminApis, authAPI, authApis } from "helpers/api"
+import { adminApis, authAPI } from "helpers/api"
 
 const User = props => {
   const breadcrumbItems = [
@@ -26,15 +26,13 @@ const User = props => {
   const history = useHistory()
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const page = searchParams.get("page") || 1
+  
   useEffect(() => {
     props.setBreadcrumbItems("User", breadcrumbItems)
-    if (page) {
-      setCurrentPage(Number(page))
-    }
-  }, [props, page])
+  }, [props])
+  
   const [users, setUsers] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(searchParams.get("page") || 1)
   const [totalPages, setTotalPages] = useState(1)
   const pageSize = 10
 
