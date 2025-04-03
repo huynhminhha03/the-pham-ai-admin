@@ -1,34 +1,39 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Card, CardBody, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
-import axios from "axios";
-import { adminApis, authAPI } from "helpers/api";
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
+import {
+  Card,
+  CardBody,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Alert,
+} from "reactstrap"
+import axios from "axios"
+import { adminApis, authAPI } from "helpers/api"
 
 const AddCategory = () => {
-  const history = useHistory();
-  const [name, setName] = useState("");
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const token = JSON.parse(localStorage.getItem("authUser"))?.token;
+  const history = useHistory()
+  const [name, setName] = useState("")
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault()
     if (!name.trim()) {
-      setError("Category name is required!");
-      return;
-    }  
+      setError("Category name is required!")
+      return
+    }
 
     try {
-      await authAPI().post(adminApis.createCategory,
-        { name },        
-      );    
-        setSuccess("Category added successfully!");
-        setTimeout(() => history.push("/category"), 2000);     
+      await authAPI().post(adminApis.createCategory, { name })
+      setSuccess("Category added successfully!")
+      setTimeout(() => history.push("/category"), 2000)
     } catch (err) {
-      setError("Error adding category: " + err.message);
+      setError("Error adding category: " + err.message)
     }
-    
-  };
+  }
 
   return (
     <Card>
@@ -45,19 +50,23 @@ const AddCategory = () => {
               id="categoryName"
               placeholder="Enter category name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
             />
-          </FormGroup >
-          <Button color="primary" type="submit" >
+          </FormGroup>
+          <Button color="primary" type="submit">
             Add Category
           </Button>
-          <Button color="secondary" className="ms-2" onClick={() => history.push("/category")}>
+          <Button
+            color="secondary"
+            className="ms-2"
+            onClick={() => history.push("/category")}
+          >
             Cancel
           </Button>
         </Form>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default AddCategory;
+export default AddCategory

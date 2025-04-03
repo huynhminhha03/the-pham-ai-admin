@@ -13,10 +13,8 @@ import {
 } from "reactstrap"
 import { connect } from "react-redux"
 import { setBreadcrumbItems } from "../../store/actions"
-import axios from "axios" // Thêm axios để gọi API
 import { useHistory, useLocation } from "react-router-dom"
-import actions from "redux-form/lib/actions"
-import { adminApis, authAPI, authApis } from "helpers/api"
+import { adminApis, authAPI } from "helpers/api"
 
 const User = props => {
   const breadcrumbItems = [

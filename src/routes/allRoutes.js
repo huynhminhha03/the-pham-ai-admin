@@ -126,7 +126,7 @@ const userRoutes = [
   { path: "/edit-category/:id", component: EditCategory },
   {path:"/add-category", component: AddCategory},
   //recommend
-  { path: "/recommend", component: Recommend },
+  // { path: "/recommend", component: Recommend },
   { path: "/edit-recommend", component: EditRecommend },
   //notification
   {path:"/notification", component: Notification},

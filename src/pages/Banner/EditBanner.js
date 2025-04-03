@@ -1,81 +1,105 @@
-import React, { useEffect, useState } from "react";
-import MetaTags from "react-meta-tags";
-import { Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from "reactstrap";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import { useParams, useHistory } from "react-router-dom";
-import { adminApis, authAPI } from "helpers/api";
+import React, { useEffect, useState } from "react"
+import MetaTags from "react-meta-tags"
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Button,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap"
+import { AvForm, AvField } from "availity-reactstrap-validation"
+import { useParams, useHistory } from "react-router-dom"
+import { adminApis, authAPI } from "helpers/api"
+import { setBreadcrumbItems } from "../../store/actions"
+import { connect } from "react-redux"
 
-const EditBanner = () => {
-  const { id } = useParams();
-  const history = useHistory();
+const EditBanner = props => {
+  const { id } = useParams()
+  const history = useHistory()
+
+  const breadcrumbItems = [
+    { title: "Thepham AI", link: "#" },
+    { title: "Banner", link: "#" },
+    { title: "Edit Banner", link: "#" },
+  ]
+
+  useEffect(() => {
+    props.setBreadcrumbItems("Edit Banner", breadcrumbItems)
+  }, [])
 
   const [banner, setBanner] = useState({
     title: "",
     image: "",
     created_at: "",
-  });
+  })
 
-  const [selectedFile, setSelectedFile] = useState(null);  // state lưu file hình ảnh đã chọn
-  const [previewImage, setPreviewImage] = useState(null);  // state để xem trước hình ảnh
+  const [selectedFile, setSelectedFile] = useState(null) // state lưu file hình ảnh đã chọn
+  const [previewImage, setPreviewImage] = useState(null) // state để xem trước hình ảnh
 
   useEffect(() => {
     const fetchBanner = async () => {
-      try {       
-        const response = await authAPI().get(adminApis.getBannerById(id));
-            
+      try {
+        const response = await authAPI().get(adminApis.getBannerById(id))
+
         setBanner({
           title: response.data.banner.title,
           image: response.data.banner.image,
-          created_at: new Date(response.data.banner.created_at).toLocaleString("vi-VN"),
-        });
-        setPreviewImage(response.data.banner.image); // Set preview image from existing banner
-      
+          created_at: new Date(response.data.banner.created_at).toLocaleString(
+            "vi-VN"
+          ),
+        })
+        setPreviewImage(response.data.banner.image) // Set preview image from existing banner
       } catch (error) {
-        console.error("Error fetching banner data:", error);
+        console.error("Error fetching banner data:", error)
       }
-    };
+    }
 
-    fetchBanner();
-  }, [id]);
+    fetchBanner()
+  }, [id])
 
-  const handleChange = (e) => {
-    setBanner({ ...banner, [e.target.name]: e.target.value });
-  };
+  const handleChange = e => {
+    setBanner({ ...banner, [e.target.name]: e.target.value })
+  }
 
   // Xử lý chọn file hình ảnh
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = e => {
+    const file = e.target.files[0]
     if (file) {
-      setSelectedFile(file);
-      setPreviewImage(URL.createObjectURL(file)); // Hiển thị hình ảnh đã chọn trước khi upload
+      setSelectedFile(file)
+      setPreviewImage(URL.createObjectURL(file)) // Hiển thị hình ảnh đã chọn trước khi upload
     }
-  };
+  }
 
-  const handleSave = async (e) => {
-    e.preventDefault();
+  const handleSave = async e => {
+    e.preventDefault()
 
-    try {            
-      const formData = new FormData();
-      formData.append("title", banner.title);
+    try {
+      const formData = new FormData()
+      formData.append("title", banner.title)
       if (selectedFile) {
-        formData.append("image", selectedFile); // Thêm file hình ảnh vào formData
+        formData.append("image", selectedFile) // Thêm file hình ảnh vào formData
       }
 
       // Gửi request PUT để cập nhật banner với file hình ảnh
       await authAPI().patch(adminApis.updateBanner(id), formData, {
-        headers: {"Content-Type": "multipart/form-data" } },);
+        headers: { "Content-Type": "multipart/form-data" },
+      })
 
-      history.push("/banner",2000);  // Điều hướng về danh sách banner
+      history.push("/banner", 2000) // Điều hướng về danh sách banner
     } catch (error) {
-      console.error("Error updating banner:", error);
-     
+      console.error("Error updating banner:", error)
     }
-  };
+  }
 
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Edit Banner | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>
+          Edit Banner | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+        </title>
       </MetaTags>
 
       <Row>
@@ -93,14 +117,22 @@ const EditBanner = () => {
                   value={banner.title}
                   onChange={handleChange}
                   validate={{
-                    required: { value: true, errorMessage: "Title is required" },
-                    minLength: { value: 3, errorMessage: "Title must be at least 3 characters" },
+                    required: {
+                      value: true,
+                      errorMessage: "Title is required",
+                    },
+                    minLength: {
+                      value: 3,
+                      errorMessage: "Title must be at least 3 characters",
+                    },
                   }}
                 />
 
                 {/* Image Upload */}
                 <FormGroup className="mb-3">
-                  <Label for="image" className="mb-3 me-3">Upload Image</Label>
+                  <Label for="image" className="mb-3 me-3">
+                    Upload Image
+                  </Label>
                   <Input
                     type="file"
                     name="image"
@@ -130,7 +162,11 @@ const EditBanner = () => {
                     <Button type="submit" color="primary" className="ms-1">
                       Save
                     </Button>{" "}
-                    <Button type="reset" color="secondary" onClick={() => history.push("/banner")}>
+                    <Button
+                      type="reset"
+                      color="secondary"
+                      onClick={() => history.push("/banner")}
+                    >
                       Cancel
                     </Button>
                   </div>
@@ -141,7 +177,7 @@ const EditBanner = () => {
         </Col>
       </Row>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default EditBanner;
+export default connect(null, { setBreadcrumbItems })(EditBanner)

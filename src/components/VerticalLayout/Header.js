@@ -102,7 +102,7 @@ const Header = props => {
             >
               <i className="mdi mdi-menu"></i>
             </button>
-            <div className="d-none d-sm-block">
+            {/* <div className="d-none d-sm-block">
               <Dropdown
                 isOpen={createmenu}
                 toggle={() => setCreateMenu(!createmenu)}
@@ -128,7 +128,7 @@ const Header = props => {
 
                 </div>
               </Dropdown>
-            </div>
+            </div> */}
           </div>
           <div className="d-flex">
             <form className="app-search d-none d-lg-block">

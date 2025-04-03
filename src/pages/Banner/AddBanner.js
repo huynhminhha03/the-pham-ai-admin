@@ -1,49 +1,85 @@
-import React, { useState, useEffect } from "react";
-import MetaTags from "react-meta-tags";
-import { Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from "reactstrap";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { adminApis, authAPI } from "helpers/api";
+import React, { useState, useEffect } from "react"
+import MetaTags from "react-meta-tags"
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Button,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap"
+import { AvForm, AvField } from "availity-reactstrap-validation"
+import { useHistory } from "react-router-dom"
+import { adminApis, authAPI } from "helpers/api"
+import { setBreadcrumbItems } from "../../store/actions"
+import { connect } from "react-redux"
 
-const AddBanner = () => {
-  const history = useHistory();
+const AddBanner = props => {
+  const breadcrumbItems = [
+    { title: "Banner", link: "/banner" },
+    { title: "Add Banner", link: "#" },
+  ]
+
+  useEffect(() => {
+    props.setBreadcrumbItems("Add Banner", breadcrumbItems)
+  }, [])
+
+  const history = useHistory()
   const [banner, setBanner] = useState({
     title: "",
     category_id: "",
-  });
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  })
+  const [selectedFile, setSelectedFile] = useState(null)
+  const [previewImage, setPreviewImage] = useState(null)
+  const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(false)
 
-
-  const handleChange = (e) => {
-    setBanner({ ...banner, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreviewImage(URL.createObjectURL(file));
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await authAPI().get(adminApis.allCategories)
+        if (response.data) {
+          setCategories(response.data.categories)
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error)
+      }
     }
-  };
+    fetchCategories()
+  }, [])
+
+  const handleChange = e => {
+    setBanner({ ...banner, [e.target.name]: e.target.value })
+  }
+
+  const handleFileChange = e => {
+    const file = e.target.files[0]
+    if (file) {
+      setSelectedFile(file)
+      setPreviewImage(URL.createObjectURL(file))
+    }
+  }
 
   const handleSave = async () => {
-    try {     
-
-      const formData = new FormData();
-      formData.append("title", banner.title);
-      formData.append("category_id", banner.category_id);
+    try {
+      setLoading(true)
+      const formData = new FormData()
+      formData.append("title", banner.title)
+      formData.append("category_id", banner.category_id)
       if (selectedFile) {
-        formData.append("image", selectedFile);
+        formData.append("image", selectedFile)
       }
 
-      await authAPI().post(adminApis.createBanner, formData);
-      history.push("/banner",2000);
+      await authAPI().post(adminApis.createBanner, formData)
+      setLoading(false)
+      history.push("/banner", 2000)
     } catch (error) {
-      console.error("Error adding banner:", error);
+      setLoading(false)
+      console.error("Error adding banner:", error)
     }
-  };
+  }
 
   return (
     <React.Fragment>
@@ -64,14 +100,25 @@ const AddBanner = () => {
                   type="text"
                   value={banner.title || ""}
                   onChange={handleChange}
-                  validate={{ required: { value: true, errorMessage: "Title is required" } }}
+                  validate={{
+                    required: {
+                      value: true,
+                      errorMessage: "Title is required",
+                    },
+                  }}
                 />
 
                 {/* Upload Ảnh */}
                 <FormGroup className="mb-3">
                   <Label for="image">Upload Image</Label>
                   <div className="image-upload-wrapper">
-                    <Input type="file" name="image" id="image" accept="image/*" onChange={handleFileChange} />
+                    <Input
+                      type="file"
+                      name="image"
+                      id="image"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
                     {previewImage && (
                       <div className="image-preview">
                         <img src={previewImage} alt="Preview" />
@@ -83,9 +130,15 @@ const AddBanner = () => {
                 {/* Chọn Category */}
                 <FormGroup className="mb-3">
                   <Label for="category_id">Category</Label>
-                  <Input type="select" name="category_id" id="category_id" value={banner.category_id||""} onChange={handleChange}>
+                  <Input
+                    type="select"
+                    name="category_id"
+                    id="category_id"
+                    value={banner.category_id || ""}
+                    onChange={handleChange}
+                  >
                     <option value="">Select Category</option>
-                    {categories.map((category) => (
+                    {categories.map(category => (
                       <option key={category.id} value={category.id}>
                         {category.name}
                       </option>
@@ -95,10 +148,23 @@ const AddBanner = () => {
 
                 <FormGroup className="mb-3">
                   <div>
-                    <Button type="submit" color="primary" className="ms-1">
-                      Save
+                    <Button
+                      type="submit"
+                      color="primary"
+                      className="ms-1"
+                      disabled={loading}
+                    >
+                      {loading ? (
+                        <span>Loading...</span> // Hiển thị trạng thái loading
+                      ) : (
+                        "Save"
+                      )}
                     </Button>{" "}
-                    <Button type="button" color="secondary" onClick={() => history.push("/banner")}>
+                    <Button
+                      type="button"
+                      color="secondary"
+                      onClick={() => history.push("/banner")}
+                    >
                       Cancel
                     </Button>
                   </div>
@@ -138,7 +204,7 @@ const AddBanner = () => {
         `}
       </style>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default AddBanner;
+export default connect(null, { setBreadcrumbItems })(AddBanner)
