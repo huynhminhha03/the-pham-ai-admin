@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { connect } from "react-redux";
+import { setBreadcrumbItems } from "../../store/actions";
 import MetaTags from "react-meta-tags";
 import { Row, Col, Card, CardBody, Button, FormGroup } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
@@ -6,7 +8,17 @@ import axios from "axios"; // Thêm axios để gọi API
 import { useParams, useHistory } from "react-router-dom";
 import { adminApis, authAPI } from "helpers/api";
 
-const EditConversation = () => {
+const EditConversation = (props) => {
+  const breadcrumbItems = [
+    { title: "Thepham AI", link: "#" },
+    {title: "Conversation", link:"#"},
+    { title: "EditConversation", link: "#" },
+  ];
+  useEffect(() => {
+      props.setBreadcrumbItems("Conversation", breadcrumbItems);
+    }, [props]);
+
+  const [loading, setLoading] = useState(false);  
   const { id } = useParams();  // Lấy id từ URL
   const history = useHistory(); // Sử dụng useHistory để điều hướng
 
@@ -22,8 +34,8 @@ const EditConversation = () => {
         const response = await authAPI().get(adminApis.updateConversation(id));       
           
         setConversation({
-            name: response.data.conversation.name,
-            created_at: new Date(response.data.conversation.created_at).toLocaleString("vi-VN"),
+            name: response.data.name,
+            created_at: new Date(response.data.created_at).toLocaleString("vi-VN"),
           });       
       } catch (error) {
         console.error("Error get data conversation:", error);
@@ -39,11 +51,15 @@ const EditConversation = () => {
 
   // Hàm lưu thông tin đã chỉnh sửa
   const handleSave = async () => {
+    setLoading(true);
     try {
       await authAPI().patch(adminApis.updateConversation(id), conversation);
       history.push("/conversation"); 
     } catch (error) {
       console.error("Lỗi khi cập nhật conversation:", error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -83,9 +99,13 @@ const EditConversation = () => {
                 />
                 <FormGroup className="mb-0">
                   <div>
-                    <Button type="submit" color="primary" className="ms-1">
-                      Submit
-                    </Button>{" "}
+                    <Button color="primary" type="submit" onClick={handleSave} disabled={loading}>
+                              {loading ? (
+                                <span>Loading...</span> // Hiển thị trạng thái loading
+                              ) : (
+                                "Submit"
+                              )}
+                            </Button>{" "}
                     <Button type="reset" color="secondary" onClick={() => history.push("/conversation")}>
                       Cancel
                     </Button>
@@ -100,4 +120,4 @@ const EditConversation = () => {
   );
 };
 
-export default EditConversation;
+export default connect(null, { setBreadcrumbItems })(EditConversation);

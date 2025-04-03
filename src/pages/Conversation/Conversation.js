@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
 import MetaTags from "react-meta-tags";
 import { MDBDataTable } from "mdbreact";
 import { Row, Col, Card, CardBody, Button, Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import { useLocation, useHistory } from "react-router-dom";
@@ -24,7 +24,6 @@ const Conversation = (props) => {
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10; // Số cuộc trò chuyện trên mỗi trang
 
-  const token = JSON.parse(localStorage.getItem("authUser"))?.token;
 
   useEffect(() => {
     props.setBreadcrumbItems("Conversation", breadcrumbItems);

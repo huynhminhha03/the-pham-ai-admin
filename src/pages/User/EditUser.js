@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { setBreadcrumbItems } from "../../store/actions";
 import MetaTags from "react-meta-tags";
 import { Row, Col, Card, CardBody, Button, FormGroup } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation"
-//import { FormGroup, Form } from "redux-form";
-import axios from "axios"; // Thêm axios để gọi API
+
 import { useParams, useHistory } from "react-router-dom";
 import { adminApis, authAPI } from "helpers/api";
-const EditUser = () => {
+const EditUser = (props) => {
+  const breadcrumbItems = [
+    { title: "Thepham AI", link: "#" },
+    { title:"User", link:"#"},
+    { title: "EditUser", link: "#" },
+  ]
+  useEffect(() => {
+      props.setBreadcrumbItems("User", breadcrumbItems)
+    }, [])
+
     const { id } = useParams();
     const history = useHistory(); // Sử dụng useHistory để điều hướng
   
@@ -19,14 +29,12 @@ const EditUser = () => {
     useEffect(() => {
       const fetchUser = async () => {
         try {
-          await authAPI().get(adminApis.getUserById(id));
-          if (response.data) {
+          const response = await authAPI().get(adminApis.getUserById(id)); 
             setUser({
               username: response.data.username,
               email: response.data.email,
-              createdDate: new Date(response.data.created_at).toLocaleString("vi-VN"),
+              created_at: new Date(response.data.created_at).toLocaleString("vi-VN"),
             });
-          }
         } catch (error) {
           console.error("Lỗi khi lấy dữ liệu user:", error);
         }
@@ -40,7 +48,7 @@ const EditUser = () => {
     const handleSave = async () => {
       try {
         await authAPI().put(adminApis.updateUser(id), user, {
-          headers: { Authorization: `Bearer ${token}` },
+          
         });
         history.push("/user");
       } catch (error) {
@@ -58,7 +66,7 @@ const EditUser = () => {
         <Col className="col-12">
           <Card>      
             <CardBody>
-            <h4 className="card-title">Chỉnh sửa thông tin User</h4>
+            <h4 className="card-title">Edit User</h4>
               <AvForm onSubmit={handleSave}>
                 {/* username*/}
                 <AvField
@@ -115,5 +123,5 @@ const EditUser = () => {
   )
 }
 
-export default EditUser;
+export default connect(null, { setBreadcrumbItems })(EditUser)
 
