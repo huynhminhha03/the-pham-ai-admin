@@ -17,7 +17,7 @@ import EmailToolbar from "./email-toolbar"
 const EmailInbox = (props) => {
 
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "Email", link: "#" },
     { title: "Inbox", link: "#" },
   ]

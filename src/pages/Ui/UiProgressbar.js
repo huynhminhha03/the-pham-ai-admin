@@ -8,7 +8,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiProgressbar = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Progress Bars", link: "#" },
   ]

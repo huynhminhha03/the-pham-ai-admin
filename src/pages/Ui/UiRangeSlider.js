@@ -12,7 +12,7 @@ import "react-rangeslider/lib/index.css"
 
 const UiRangeSlider = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Range Slider", link: "#" },
   ]

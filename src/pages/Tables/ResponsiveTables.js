@@ -12,7 +12,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const ResponsiveTables = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "Tables", link: "#" },
     { title: "Responsive Table", link: "#" },
   ]

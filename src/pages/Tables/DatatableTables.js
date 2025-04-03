@@ -12,7 +12,7 @@ import "./datatables.scss"
 
 const DatatableTables = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "Tables", link: "#" },
     { title: "Data Tables", link: "#" },
   ]

@@ -21,7 +21,7 @@ import img2 from "../../assets/images/small/img-2.jpg";
 const PagesTimeline = (props) => {
 
     const breadcrumbItems = [
-        { title: "Unimonollc", link: "#" },
+        { title: "The Pham AI", link: "#" },
         { title: "Pages", link: "#" },
         { title: "Timeline", link: "#" },
     ]

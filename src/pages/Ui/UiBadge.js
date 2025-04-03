@@ -17,7 +17,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 const UiBadge = (props) => {
 
     const breadcrumbItems = [
-        { title: "Unimonollc", link: "#" },
+        { title: "The Pham AI", link: "#" },
         { title: "UI Elements", link: "#" },
         { title: "Badge", link: "#" },
     ]

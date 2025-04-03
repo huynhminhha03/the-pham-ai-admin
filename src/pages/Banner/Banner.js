@@ -38,7 +38,7 @@ const Banner = (props) => {
     const fetchBanners = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8086/api/banner/all?page=${currentPage}&limit=${pageSize}`,
+          `http://localhost:8000/api/admin/all-banner?page=${currentPage}&limit=${pageSize}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

@@ -20,7 +20,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 const UiPopoverTooltips = (props) => {
 
     const breadcrumbItems = [
-        { title: "Unimonollc", link: "#" },
+        { title: "The Pham AI", link: "#" },
         { title: "UI Elements", link: "#" },
         { title: "Popover & Tooltips", link: "#" },
     ]

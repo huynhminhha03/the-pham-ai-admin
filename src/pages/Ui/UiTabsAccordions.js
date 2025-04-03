@@ -29,7 +29,7 @@ class UiTabsAccordions extends Component {
     super(props)
     this.state = {
       breadcrumbItems: [
-        { title: "Unimonollc", link: "#" },
+        { title: "The Pham AI", link: "#" },
         { title: "UI Elements", link: "#" },
         { title: "Tabs & Accordions", link: "#" },
       ],

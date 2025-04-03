@@ -23,7 +23,7 @@ import PolarChart from "../AllCharts/chartjs/polarchart";
 
 const ChartsJs = (props) => {
     const breadcrumbItems = [
-        { title: "Unimonollc", link: "#" },
+        { title: "The Pham AI", link: "#" },
         { title: "Charts", link: "#" },
         { title: "Chartjs Chart", link: "#" },
     ]

@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types'
-import MetaTags from 'react-meta-tags';
-import React from "react"
-
+import PropTypes from "prop-types"
+import MetaTags from "react-meta-tags"
+import React, { useState } from "react"
+import axios from "axios"
 import { Row, Col, CardBody, Card, Alert, Container } from "reactstrap"
+import { useHistory } from "react-router-dom"
 
 // Redux
 import { connect } from "react-redux"
@@ -17,18 +18,33 @@ import { loginUser, apiError } from "../../store/actions"
 // import images
 import logoLightjng from "../../assets/images/logo-light.png"
 import logoDark from "../../assets/images/logo-dark.png"
+import api, { authApis } from "helpers/api"
 
 const Login = props => {
+  const history = useHistory()
+  const [error, setError] = useState("")
   // handleValidSubmit
-  const handleValidSubmit = (event, values) => {
-    console.log(values);
-    props.loginUser(values, props.history)
+  const handleValidSubmit = async (event, values) => {
+    try {
+      const response = await api.post(authApis.login, {
+        email: values.email,
+        password: values.password,
+      })
+
+      localStorage.setItem("token", response.data.token)
+      history.replace("/dashboard")
+    } catch (error) {
+      console.log(error)
+      setError("Invalid email or password")
+    }
   }
 
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Login | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>
+          Login | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+        </title>
       </MetaTags>
       <div className="account-pages my-5 pt-sm-5">
         <Container>
@@ -38,28 +54,40 @@ const Login = props => {
                 <CardBody className="pt-0">
                   <h3 className="text-center mt-5 mb-4">
                     <Link to="/" className="d-block auth-logo">
-                      <img src={logoDark} alt="" height="100" className="auth-logo-dark" />
-                      <img src={logoLightjng} alt="" height="100" className="auth-logo-light" />
+                      <img
+                        src={logoDark}
+                        alt=""
+                        height="100"
+                        className="auth-logo-dark"
+                      />
+                      <img
+                        src={logoLightjng}
+                        alt=""
+                        height="100"
+                        className="auth-logo-light"
+                      />
                     </Link>
                   </h3>
                   <div className="p-3">
-                    <h4 className="text-muted font-size-18 mb-1 text-center">Welcome Back !</h4>
-                    <p className="text-muted text-center">Sign in to continue to Unimonollc.</p>
+                    <h4 className="text-muted font-size-18 mb-1 text-center">
+                      Welcome Back !
+                    </h4>
+                    <p className="text-muted text-center">
+                      Sign in to continue to The Pham AI.
+                    </p>
                     <AvForm
                       className="form-horizontal mt-4"
                       onValidSubmit={(e, v) => {
                         handleValidSubmit(e, v)
                       }}
                     >
-                      {props.error && typeof props.error === "string" ? (
-                        <Alert color="danger">{props.error}</Alert>
-                      ) : null}
+                      {error ? <Alert color="danger">{error}</Alert> : null}
 
                       <div className="mb-3">
                         <AvField
                           name="email"
                           label="Email"
-                          value="nguyentan16062003@gmail.com"
+                          value="admin@example.com"
                           className="form-control"
                           placeholder="Enter email"
                           type="email"
@@ -95,15 +123,22 @@ const Login = props => {
                           </div>
                         </div>
                         <div className="col-6 text-end">
-                          <button className="btn btn-primary w-md waves-effect waves-light" type="submit" >Log In</button>
+                          <button
+                            className="btn btn-primary w-md waves-effect waves-light"
+                            type="submit"
+                          >
+                            Log In
+                          </button>
                         </div>
                       </div>
                       <div className="form-group mb-0 row">
                         <div className="col-12 mt-4">
-                          <Link to="/forgot-password" className="text-muted"><i className="mdi mdi-lock"></i> Forgot your password?</Link>
+                          <Link to="/forgot-password" className="text-muted">
+                            <i className="mdi mdi-lock"></i> Forgot your
+                            password?
+                          </Link>
                         </div>
                       </div>
-
                     </AvForm>
                   </div>
                 </CardBody>
@@ -111,17 +146,18 @@ const Login = props => {
               <div className="mt-5 text-center">
                 <p>
                   Don&#39;t have an account ?{" "}
-                  <Link
-                    to="register"
-                    className="text-primary"
-                  >
+                  <Link to="register" className="text-primary">
                     {" "}
                     Signup now{" "}
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Unimonollc 
-                  <span className="d-none d-sm-inline-block"> - Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
+                  © {new Date().getFullYear()} The Pham AI
+                  <span className="d-none d-sm-inline-block">
+                    {" "}
+                    - Crafted with <i className="mdi mdi-heart text-danger"></i>{" "}
+                    by EnochTech.
+                  </span>
                 </p>
               </div>
             </Col>

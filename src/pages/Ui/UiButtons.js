@@ -22,7 +22,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiButtons = (props) => {
     const breadcrumbItems = [
-        { title: "Unimonollc", link: "#" },
+        { title: "The Pham AI", link: "#" },
         { title: "UI Elements", link: "#" },
         { title: "Buttons", link: "#" },
     ]

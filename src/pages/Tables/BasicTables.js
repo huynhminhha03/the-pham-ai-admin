@@ -17,7 +17,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const BasicTable = (props) => {
   const breadcrumbItems = [
-    { title : "Unimonollc", link : "#" },
+    { title : "The Pham AI", link : "#" },
     { title : "Tables", link : "#" },
     { title : "Basic Tables", link : "#" },
   ]

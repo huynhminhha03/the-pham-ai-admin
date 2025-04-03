@@ -13,7 +13,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const UiSweetAlert = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "UI Elements", link: "#" },
     { title: "Sweet-Alert", link: "#" },
   ]

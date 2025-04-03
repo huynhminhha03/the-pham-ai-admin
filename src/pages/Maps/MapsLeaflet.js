@@ -18,7 +18,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 
 const MapsLeaflet = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "Maps", link: "#" },
     { title: "Leaflet Maps", link: "#" },
   ]

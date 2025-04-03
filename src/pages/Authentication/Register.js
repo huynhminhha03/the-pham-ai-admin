@@ -47,7 +47,7 @@ const Register = props => {
                   </h3>
                   <div className="p-3">
                     <h4 className="text-muted font-size-18 mb-1 text-center">Free Register</h4>
-                    <p className="text-muted text-center">Get your free Unimonollc account now.</p>
+                    <p className="text-muted text-center">Get your free The Pham AI account now.</p>
                     <AvForm
                       className="form-horizontal mt-4"
                       onValidSubmit={(e, v) => {
@@ -106,7 +106,7 @@ const Register = props => {
 
                       <div className="mb-0 row">
                         <div className="col-12 mt-4">
-                          <p className="text-muted mb-0 font-size-14">By registering you agree to the Unimonollc <Link to="#" className="text-primary">Terms of Use</Link></p>
+                          <p className="text-muted mb-0 font-size-14">By registering you agree to the The Pham AI <Link to="#" className="text-primary">Terms of Use</Link></p>
                         </div>
                       </div>
                     </AvForm>
@@ -122,7 +122,7 @@ const Register = props => {
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Unimonollc <span className="d-none d-sm-inline-block"> - Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
+                  © {new Date().getFullYear()} The Pham AI <span className="d-none d-sm-inline-block"> - Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
                 </p>
               </div>
             </Col>

@@ -40,7 +40,7 @@ const columns = [
 
 const EditableTables = (props) => {
   const breadcrumbItems = [
-    { title: "Unimonollc", link: "#" },
+    { title: "The Pham AI", link: "#" },
     { title: "Tables", link: "#" },
     { title: "Editable Table", link: "#" },
   ]
