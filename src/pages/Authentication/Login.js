@@ -18,7 +18,7 @@ import { loginUser, apiError } from "../../store/actions"
 // import images
 import logoLightjng from "../../assets/images/logo-light.png"
 import logoDark from "../../assets/images/logo-dark.png"
-import api, { authApis } from "helpers/api"
+import api, { authAPI, authApis } from "helpers/api"
 
 const Login = props => {
   const history = useHistory()
@@ -26,7 +26,7 @@ const Login = props => {
   // handleValidSubmit
   const handleValidSubmit = async (event, values) => {
     try {
-      const response = await api.post(authApis.login, {
+      const response = await authAPI().post(authApis.login, {
         email: values.email,
         password: values.password,
       })
