@@ -43,6 +43,7 @@ export const adminApis = {
     getConversationById: (id) => `/admin/conversation/${id}`,
     updateConversation: (id) => `/admin/conversation/${id}`,
     deleteConversation: (id) => `/admin/conversation/${id}`,
+    countAllConversations: '/admin/conversation/count-all',
 
     // Book management
     allBooks: '/admin/all-book',

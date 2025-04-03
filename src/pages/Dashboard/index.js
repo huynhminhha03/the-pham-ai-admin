@@ -1,4 +1,4 @@
-import React , {useEffect} from "react"
+import React , {useState , useEffect} from "react"
 import MetaTags from 'react-meta-tags';
 import { connect } from "react-redux";
 import {
@@ -20,6 +20,8 @@ import LatestOrders from "./latest-orders";
 
 //Import Action to copy breadcrumb items from local state to redux state
 import { setBreadcrumbItems } from "../../store/actions";
+import { adminApis, authAPI } from "helpers/api";
+import { error } from "toastr";
 
 const Dashboard = (props) => {
 
@@ -30,13 +32,63 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     props.setBreadcrumbItems('Dashboard' , breadcrumbItems)
-  },)
+  },[props])
+ 
+  const [countUsers, setCountUsers ] = useState();
+  const [countConversation, setCountConversation ] = useState();
+  const [countBook, setCountBook ] = useState();
+  const [countBanner, setCountBanner ] = useState();
+  useEffect(() =>{
+    const fetchCountUsers = async () => {
+      try {
+        const response = await authAPI().get(
+          adminApis.countAllUsers);
+        setCountUsers(response.data.count);
+        console.log(countUsers)     
+      }
+      catch(err){
+        console.error("Error get data", error);
+      }
+    }
+    fetchCountUsers()
+
+    const fetchCountConversation = async() => {
+      try{
+        const response = await authAPI().get(adminApis.countAllConversations);
+        setCountConversation(response.data.count)
+      }catch(err){
+        console.error("Error get data", error)
+      }
+    }
+    fetchCountConversation()
+
+    const fetchCountBook = async() => {
+      try{
+        const response = await authAPI().get(adminApis.countAllBooks);
+        setCountBook(response.data.count)
+      }catch(err){
+        console.error("Error get data", error)
+      }
+    }
+    fetchCountBook()
+
+    const fetchCountBanner = async() => {
+      try{
+        const response = await authAPI().get(adminApis.countAllBooks);
+        setCountBanner(response.data.count)
+      }catch(err){
+        console.error("Error get data", error)
+      }
+    }
+    fetchCountBanner()
+  },[])
+
 
   const reports = [
-    { title: "Orders", iconClass: "cube-outline", total: "1,587", average: "+11%", badgecolor: "info" },
-    { title: "Revenue", iconClass: "buffer", total: "$46,782", average: "-29%", badgecolor: "danger" },
-    { title: "Average Price", iconClass: "tag-text-outline", total: "$15.9", average: "0%", badgecolor: "warning" },
-    { title: "Product Sold", iconClass: "briefcase-check", total: "1890", average: "+89%", badgecolor: "info" },
+    { title: "User", iconClass: "cube-outline", total: countUsers || "0", average: "+11%", badgecolor: "info" },
+    { title: "Conversation", iconClass: "buffer", total: countConversation || "0", average: "-29%", badgecolor: "danger" },
+    { title: "Book", iconClass: "tag-text-outline", total: countBook || "0", average: "0%", badgecolor: "warning" },
+    { title: "Banner", iconClass: "briefcase-check", total: countBanner || "0", average: "+89%", badgecolor: "info" },
   ]
 
   return (
