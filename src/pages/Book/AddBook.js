@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
 import axios from "axios";
+import { adminApis, authAPI } from "helpers/api";
 
 const AddBook = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,7 +16,6 @@ const AddBook = () => {
     publishDate: "",
   });
   const [loading, setLoading] = useState(false); 
-  const token = JSON.parse(localStorage.getItem("authUser"))?.token;
 
   // Xử lý thay đổi input text
   const handleChange = (e) => {
@@ -52,16 +52,14 @@ const AddBook = () => {
     
     setLoading(true);
     try {
-      await axios.post("http://localhost:8086/api/book/create", formDataToSend, {
+      await authAPI().post(adminApis.createBook, formDataToSend, {
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });     
       history.push("/book",1000);
     } catch (error) {
-      console.error("Lỗi khi thêm sách:", error);
-      alert("Có lỗi xảy ra khi thêm sách. Vui lòng thử lại!");
+      console.error("Lỗi khi thêm sách:", error);    
     }
     finally {
       setLoading(false);

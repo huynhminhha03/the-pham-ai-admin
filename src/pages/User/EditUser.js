@@ -5,6 +5,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation"
 //import { FormGroup, Form } from "redux-form";
 import axios from "axios"; // Thêm axios để gọi API
 import { useParams, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 const EditUser = () => {
     const { id } = useParams();
     const history = useHistory(); // Sử dụng useHistory để điều hướng
@@ -18,10 +19,7 @@ const EditUser = () => {
     useEffect(() => {
       const fetchUser = async () => {
         try {
-          const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-          const response = await axios.get(`http://localhost:8086/api/admin/user/${id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          await authAPI().get(adminApis.getUserById(id));
           if (response.data) {
             setUser({
               username: response.data.username,
@@ -41,12 +39,10 @@ const EditUser = () => {
       };    
     const handleSave = async () => {
       try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        await axios.put(`http://localhost:8086/api/admin/user/${id}`, user, {
+        await authAPI().put(adminApis.updateUser(id), user, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        alert("Cập nhật thành công!");
-        history.push("/user"); // Chuyển hướng về danh sách users
+        history.push("/user");
       } catch (error) {
         console.error("Lỗi khi cập nhật user:", error);
       }

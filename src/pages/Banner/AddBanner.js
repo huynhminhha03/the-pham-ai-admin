@@ -4,10 +4,10 @@ import { Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from "react
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 const AddBanner = () => {
   const history = useHistory();
-  const [categories, setCategories] = useState([]);
   const [banner, setBanner] = useState({
     title: "",
     category_id: "",
@@ -15,24 +15,6 @@ const AddBanner = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        if (!token) {
-          alert("No token found, please login!");
-          return;
-        }
-        const response = await axios.get("http://localhost:8086/api/category/all", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setCategories(response.data.categories || []);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   const handleChange = (e) => {
     setBanner({ ...banner, [e.target.name]: e.target.value });
@@ -47,12 +29,7 @@ const AddBanner = () => {
   };
 
   const handleSave = async () => {
-    try {
-      const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-      if (!token) {
-        alert("No token found, please login!");
-        return;
-      }
+    try {     
 
       const formData = new FormData();
       formData.append("title", banner.title);
@@ -61,14 +38,10 @@ const AddBanner = () => {
         formData.append("image", selectedFile);
       }
 
-      await axios.post("http://127.0.0.1:8086/api/banner/create", formData, {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-      });
-      alert("Banner added successfully!");
+      await authAPI().post(adminApis.createBanner, formData);
       history.push("/banner",2000);
     } catch (error) {
       console.error("Error adding banner:", error);
-      alert("Failed to add banner. Please try again.");
     }
   };
 

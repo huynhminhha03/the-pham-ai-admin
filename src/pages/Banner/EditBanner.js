@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import MetaTags from "react-meta-tags";
 import { Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 const EditBanner = () => {
   const { id } = useParams();
@@ -11,7 +11,7 @@ const EditBanner = () => {
 
   const [banner, setBanner] = useState({
     title: "",
-    imageUrl: "",
+    image: "",
     created_at: "",
   });
 
@@ -20,24 +20,16 @@ const EditBanner = () => {
 
   useEffect(() => {
     const fetchBanner = async () => {
-      try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        if (!token) {         
-          return;
-        }
-
-        const response = await axios.get(`http://localhost:8086/api/banner/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
+      try {       
+        const response = await authAPI().get(adminApis.getBannerById(id));
+            
+        setBanner({
+          title: response.data.banner.title,
+          image: response.data.banner.image,
+          created_at: new Date(response.data.banner.created_at).toLocaleString("vi-VN"),
         });
-
-        if (response.data) {
-          setBanner({
-            title: response.data.banner.title,
-            imageUrl: response.data.banner.imageUrl,
-            created_at: new Date(response.data.banner.created_at).toLocaleString("vi-VN"),
-          });
-          setPreviewImage(response.data.banner.imageUrl); // Set preview image from existing banner
-        }
+        setPreviewImage(response.data.banner.image); // Set preview image from existing banner
+      
       } catch (error) {
         console.error("Error fetching banner data:", error);
       }
@@ -62,12 +54,7 @@ const EditBanner = () => {
   const handleSave = async (e) => {
     e.preventDefault();
 
-    try {
-      const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-      if (!token) {       
-        return;
-      }
-
+    try {            
       const formData = new FormData();
       formData.append("title", banner.title);
       if (selectedFile) {
@@ -75,9 +62,8 @@ const EditBanner = () => {
       }
 
       // Gửi request PUT để cập nhật banner với file hình ảnh
-      await axios.patch(`http://localhost:8086/api/banner/${id}`, formData, {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-      });
+      await authAPI().patch(adminApis.updateBanner(id), formData, {
+        headers: {"Content-Type": "multipart/form-data" } },);
 
       history.push("/banner",2000);  // Điều hướng về danh sách banner
     } catch (error) {
@@ -114,7 +100,7 @@ const EditBanner = () => {
 
                 {/* Image Upload */}
                 <FormGroup className="mb-3">
-                  <Label for="image">Upload Image</Label>
+                  <Label for="image" className="mb-3 me-3">Upload Image</Label>
                   <Input
                     type="file"
                     name="image"

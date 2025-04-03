@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
+import { adminApis, authAPI } from "helpers/api";
 
 const Category = (props) => {
   const history = useHistory();
@@ -20,9 +21,7 @@ const Category = (props) => {
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(page || 1)
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 10; // Số danh mục trên mỗi trang
-
-  const token = JSON.parse(localStorage.getItem("authUser"))?.token;
+  const pageSize = 10; 
 
   useEffect(() => {
     props.setBreadcrumbItems("Category", breadcrumbItems);
@@ -31,54 +30,36 @@ const Category = (props) => {
     }
   }, [props] [page]);
   // 
-  const fetchCategories = useCallback(async () => {
-    if (!token) return console.error("No token found, please login!");
-
+  useEffect(()=>{
+    const fetchCategories = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8086/api/category/all?page=${currentPage}&limit=${pageSize}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await authAPI().get(
+        `${adminApis.allCategories}?page=${currentPage}&limit=${pageSize}`
       );
-
-      console.log("API Response:", response.data); 
-
-      if (response.data && Array.isArray(response.data.categories)) {
+   
         setCategories(response.data.categories);
         setTotalPages(response.data.totalPages || 1);
-      } else {
-        console.error("API không trả về danh sách hợp lệ:", response.data);
-        setCategories([]);
-      }
+    
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu:", error);
     }
-  }, [token, currentPage]);
+  }
+    fetchCategories()
+  }, [currentPage]);
 
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
 
   //
-  const handleToggleStatus = async (categoryId) => {
+  const handleToggleStatus = async (categoryId, status) => {
     try {
-      const updatedCategory = categories.find((category) => category.id === categoryId);
-      const newStatus = !updatedCategory.status;
-
-      const response = await axios.patch(
-        `http://localhost:8086/api/category/${categoryId}`,
-        { status: newStatus },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (response.status === 200) {
-        setCategories((prevCategories) =>
+     await authAPI().patch(
+        adminApis.updateCategory(categoryId),
+        { status: !status },       
+      );      
+      setCategories((prevCategories) =>
           prevCategories.map((category) =>
-            category.id === categoryId ? { ...category, status: newStatus } : category
+            category.id === categoryId ? { ...category, status: !status } : category
           )
-        );
-      } else {
-        console.error("Failed to update status:", response);
-      }
+        );       
     } catch (error) {
       console.error("Failed to update status:", error);
     }
@@ -103,18 +84,12 @@ const Category = (props) => {
 
   // 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
       try {
-        await axios.delete(`http://localhost:8086/api/category/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert("Category deleted successfully!");
-        fetchCategories(); // Load lại dữ liệu sau khi xóa
+        await authAPI().delete(adminApis.deleteCategory(id));
+        setConversations(categories.filter(category => category.id !== id))      
       } catch (error) {
         console.error("Error deleting category:", error);
-        alert("Failed to delete category. Please try again!");
       }
-    }
   };
 
   const handleCreateCategory = () => {
@@ -143,7 +118,7 @@ const Category = (props) => {
         updated_at: formatDate(category.updated_at),
         status: (
           <button
-            onClick={() => handleToggleStatus(category.id)}
+            onClick={() => handleToggleStatus(category.id, category.status)}
             style={{
               backgroundColor: category.status ? "green" : "red",
               color: "white",

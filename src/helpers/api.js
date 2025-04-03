@@ -47,6 +47,7 @@ export const adminApis = {
     // Book management
     allBooks: '/admin/all-book',
     getBookById: (id) => `/admin/book/${id}`,
+    createBook: '/admin/book',
     updateBook: (id) => `/admin/book/${id}`,
     deleteBook: (id) => `/admin/book/${id}`,
     countAllBooks: '/admin/book/count-all',
@@ -54,13 +55,16 @@ export const adminApis = {
     // Banner management
     allBanners: '/admin/all-banner',
     getBannerById: (id) => `/admin/banner/${id}`,
+    createBanner: '/admin/banner',
     updateBanner: (id) => `/admin/banner/${id}`,
     deleteBanner: (id) => `/admin/banner/${id}`,
     countAllBanners: '/admin/banner/count-all',
 
+
     // Category management
     allCategories: '/admin/all-category',
     getCategoryById: (id) => `/admin/category/${id}`,
+    createCategory: '/admin/category',
     updateCategory: (id) => `/admin/category/${id}`,
     deleteCategory: (id) => `/admin/category/${id}`,
 };

@@ -4,6 +4,7 @@ import { Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from "react
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 const EditBook = () => {
   const { id } = useParams();  // Lấy id từ URL
@@ -12,8 +13,9 @@ const EditBook = () => {
   const [book, setBook] = useState({
     title: "",
     author: "",
-    imageUrl: "",
-    published_at: "",
+    description:"",
+    image: "",
+    published_year: "",
   });
 
   const [selectedFile, setSelectedFile] = useState(null);  // Thêm state để lưu file đã chọn
@@ -22,27 +24,19 @@ const EditBook = () => {
   // Fetch dữ liệu sách từ API khi component được mount
   useEffect(() => {
     const fetchBook = async () => {
-      try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        if (!token) {
-          alert("No token found, please login!");
-          return;
-        }
-
-        const response = await axios.get(`http://localhost:8086/api/book/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.data) {
-          setBook({
+      try {       
+        const response = await authAPI().get(adminApis.getBookById(id));
+          
+        setBook({
             title: response.data.book.title,
             author: response.data.book.author,
-            imageUrl: response.data.book.imageUrl,
-            published_at: new Date(response.data.book.published_at).toLocaleDateString("vi-VN"),
+            description: response.data.book.description,
+            image: response.data.book.image,
+            published_year: new Date(response.data.book.published_year).toLocaleDateString("vi-VN"),
           });
-          setPreviewImage(response.data.book.imageUrl); // Hiển thị hình ảnh hiện tại
+          setPreviewImage(response.data.book.image); // Hiển thị hình ảnh hiện tại
         }
-      } catch (error) {
+       catch (error) {
         console.error("Error fetching book data:", error);
       }
     };
@@ -68,30 +62,25 @@ const EditBook = () => {
     e.preventDefault();
 
     try {
-      const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-      if (!token) {
-        alert("No token found, please login!");
-        return;
-      }
-
       const formData = new FormData();
       formData.append("title", book.title);
       formData.append("author", book.author);
-      formData.append("published_at", new Date(book.published_at).toLocaleDateString("vi-VN")); // Sửa chính tả ở đây
+      formData.append("description", book.description);
+      formData.append("published_year", new Date(book.published_year).toLocaleDateString("vi-VN")); // Sửa chính tả ở đây
 
       if (selectedFile) {
         formData.append("image", selectedFile); // Thêm file hình ảnh vào formData
       }
 
-      await axios.patch(`http://localhost:8086/api/book/${id}`, formData, {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
+      await authAPI().patch(adminApis.updateBook(id), formData, {
+        headers: {"Content-Type": "multipart/form-data" },
       });
 
-      alert("Book updated successfully!");
+      
       history.push("/book",2000);  // Điều hướng về danh sách sách
     } catch (error) {
       console.error("Error updating book:", error);
-      alert("Failed to update book. Please try again.");
+    
     }
   };
 
@@ -134,10 +123,19 @@ const EditBook = () => {
                     minLength: { value: 3, errorMessage: "Author must be at least 3 characters" },
                   }}
                 />
-
+                <Input
+                  className="mb-3"
+                  type="textarea"
+                  id="textarea"
+                  onChange={
+                    handleChange                  }
+                  maxLength="225"
+                  rows="3" 
+                  value={book.description}                             
+                />
                 {/* Image Upload */}
-                <FormGroup className="mb-3">
-                  <Label for="image">Upload Image</Label>
+                <FormGroup className="md-3">
+                  <Label for="image" className="mb-3 me-3">Upload Image</Label>
                   <Input
                     type="file"
                     name="image"
@@ -146,7 +144,7 @@ const EditBook = () => {
                     onChange={handleFileChange}
                   />
                   {previewImage && (
-                    <div className="image-preview mt-3">
+                    <div className="image-preview md-3 ">
                       <img src={previewImage} alt="Preview" width="200" />
                     </div>
                   )}
@@ -155,10 +153,10 @@ const EditBook = () => {
                 {/* Published Date */}
                 <AvField
                   className="mb-3"
-                  name="published_at"
+                  name="published_year"
                   label="Published Date"
                   type="date"
-                  value={book.published_at}
+                  value={book.published_year}
                   onChange={handleChange}
                   validate={{
                     required: { value: true, errorMessage: "Published Date is required" },

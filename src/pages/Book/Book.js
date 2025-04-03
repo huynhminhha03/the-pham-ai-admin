@@ -7,6 +7,7 @@ import { setBreadcrumbItems } from "../../store/actions";
 import axios from "axios";
 
 import { useLocation, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 const Book = (props) => {
   const breadcrumbItems = [
@@ -22,7 +23,7 @@ const Book = (props) => {
     if (page) {
       setCurrentPage(Number(page));
     }
-  }, [props] [page]);
+  }, [props, page]);
 
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,48 +34,31 @@ const Book = (props) => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(`http://localhost:8086/api/book/all?page=${currentPage}&limit=${pageSize}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.data && Array.isArray(response.data.books)) {
+        const response = await authAPI().get(`${adminApis.allBooks}?page=${currentPage}&limit=${pageSize}`); 
           setBooks(response.data.books);
           setTotalPages(response.data.totalPages || Math.ceil(response.data.totalItems / pageSize) || 1);
-        } else {
-          console.error("API không trả về danh sách hợp lệ:", response.data);
-          setBooks([]);
-        }
+               
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
     };
-
-    if (token) {
-      fetchBooks();
-    }
-  }, [token, currentPage]);
+      fetchBooks(); 
+  }, [currentPage]);
 
   const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
 
-  const handleToggleStatus = async (bookId) => {
-    try {
-      const updatedBook = books.find(book => book.id === bookId);
-      const newStatus = !updatedBook.status;
-  
-      const response = await axios.patch(`http://localhost:8086/api/book/${bookId}`, 
-        { status: newStatus }, 
-        { headers: { Authorization: `Bearer ${token}` } }
+  const handleToggleStatus = async (bookId, status) => {
+    try { 
+      await authAPI().patch(adminApis.updateBook(bookId),
+        { status: 
+          !status },        
       );
-  
-      if (response.status === 200) { // Kiểm tra API phản hồi thành công
+
         setBooks((prevBooks) =>
           prevBooks.map((book) =>
-            book.id === bookId ? { ...book, status: newStatus } : book
+            book.id === bookId ? { ...book, status: !status } : book
           )
         );
-      } else {
-        console.error("Failed to update status:", response);
-      }
     } catch (error) {
       console.error("Lỗi khi cập nhật trạng thái sách:", error);
     }
@@ -120,6 +104,7 @@ const Book = (props) => {
       handlePageChange(currentPage - 1);
     }
   };
+  const max_lenght = 20;
 
   const data = useMemo(() => ({
     columns: [
@@ -134,12 +119,18 @@ const Book = (props) => {
     rows: books.map((book) => ({
       title: book.title,
       author: book.author,
-      description: book.description,
+      description: (
+        <span title={book.description}>
+          {book.description.length > max_lenght
+            ? `${book.description.substring(0, max_lenght)}...`
+            : book.description}
+        </span>
+      ),
       published_at: formatDate(book.published_at),
       image: <img src={book.image} alt="book" style={{ width: "50px", height: "50px" }} />,
       status: (
         <button
-          onClick={() => handleToggleStatus(book.id)}
+          onClick={() => handleToggleStatus(book.id, book.status)}
           style={{
             backgroundColor: book.status ? "green" : "red",
             color: "white",

@@ -6,82 +6,65 @@ import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import axios from "axios"; 
 import { useLocation, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 const Banner = (props) => {
   const breadcrumbItems = [
     { title: "Thepham AI", link: "#" },
     { title: "Banner", link: "#" },
   ];
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const page = searchParams.get("page") || 1;
   const history = useHistory();
+  const [selectedBanner, setSelectedBanner] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+
   useEffect(() => {
     props.setBreadcrumbItems("Banner", breadcrumbItems);
     if (page) {
       setCurrentPage(Number(page));
     }
-  }, [page] [props]);
+  }, [page,props]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
   const [banners, setBanners] = useState([]);
 
-  const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-  if (!token) {
-    console.error("No token found, please login!");
-    return;
-  }
 
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/admin/all-banner?page=${currentPage}&limit=${pageSize}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        console.log("API Response:", response.data); // Kiểm tra dữ liệu trả về
-
-        if (response.data && Array.isArray(response.data.banners)) {
+        const response = await authAPI().get(
+          `${adminApis.allBanners}?page=${currentPage}&limit=${pageSize}`
+        );        
           setBanners(response.data.banners);
-          setTotalPages(response.data.totalPages || 1); // Cập nhật số trang
-        } else {
-          console.error("API không trả về danh sách hợp lệ:", response.data);
-          setBanners([]);
-        }
+          setTotalPages(response.data.totalPages || 1); 
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
     };
 
     fetchBanners();
-  }, [token, currentPage]); // 🔥 Gọi API khi `currentPage` thay đổi
+  }, [currentPage]);
 
   const formatDate = (dateStr) => new Date(dateStr).toLocaleString("vi-VN");
 
-  const handleToggleStatus = async (bannerId) => {
+  const handleToggleStatus = async (bannerId, status) => {
     try {
-      const updatedBanner = banners.find((banner) => banner.id === bannerId);
-      const newStatus = !updatedBanner.status;
-
-      const response = await axios.patch(
-        `http://localhost:8086/api/banner/${bannerId}`,
-        { status: newStatus },
-        { headers: { Authorization: `Bearer ${token}` } }
+      await authAPI().patch(
+        adminApis.updateBanner(bannerId),
+        { status: !status },
       );
 
-      if (response.status === 200) {
         setBanners((prevBanners) =>
           prevBanners.map((banner) =>
-            banner.id === bannerId ? { ...banner, status: newStatus } : banner
+            banner.id === bannerId ? { ...banner, status: !status } : banner
           )
         );
-      } else {
-        console.error("Failed to update banner status:", response);
-        alert("Không thể cập nhật trạng thái banner!");
-      }
     } catch (error) {
       console.error("Lỗi khi cập nhật trạng thái banner:", error);
       alert("Lỗi khi cập nhật trạng thái banner!");
@@ -96,21 +79,27 @@ const Banner = (props) => {
     history.push(`/edit-banner/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa banner này?");
-    if (confirmDelete) {
-      try {
-        await axios.delete(`http://localhost:8086/api/banner/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+  
 
-        alert("Xóa thành công!");
+  const handleDelete = async (id) => {
+      try {
+        await authAPI().delete(adminApis.deleteBanner(id));
         setBanners(banners.filter((banner) => banner.id !== id));
+        setShowModal(false);
+        setSelectedBanner(null); 
       } catch (error) {
-        console.error("Lỗi khi xóa banner:", error);
-        alert("Không thể xóa banner. Vui lòng thử lại!");
-      }
-    }
+        console.error("Lỗi khi xóa banner:", error);  }
+
+  };
+
+  const handleOpenDeleteModal = (banner) => {
+    setSelectedBanner(banner);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedBanner(null);
   };
 
   const handlePageChange = (newPage) => {
@@ -128,7 +117,6 @@ const Banner = (props) => {
       handlePageChange(currentPage- 1);
     }
   };
-
   const data = useMemo(
     () => ({
       columns: [
@@ -173,9 +161,11 @@ const Banner = (props) => {
               style={{ cursor: "pointer" }}
             ></i>
             <i
-              onClick={() => handleDelete(banner.id)}
+              onClick={() => handleOpenDeleteModal(banner.id)}
               className="ti-trash fs-4 me-3 icon-hover text-danger"
               style={{ cursor: "pointer" }}
+              data-toggle="modal"
+              data-target="#deleteModal"
             ></i>
           </div>
         ),
@@ -197,7 +187,47 @@ const Banner = (props) => {
               <Button color="primary" onClick={handleCreateBanner} className="mb-3">
                 Add Banner
               </Button>
-
+              <div
+                className="modal bs-example-modal"
+                tabIndex="-1"  
+                role="dialog"  
+                isOpen={showModal} 
+                toggle={handleCloseModal}           
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title mt-0" toggle={handleCloseModal}>Comfirm delete</h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <p>
+                        Do you want to delete{" "}
+                        <strong>{selectedBanner ? selectedBanner.title : "this banner"}</strong>?
+                      </p>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-primary"  onClick={() => handleDelete(selectedBanner.id)}>
+                        Yes
+                            </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-dismiss="modal"
+                        onClick={handleCloseModal}
+                      >
+                        No
+                            </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <MDBDataTable
                 responsive
                 striped

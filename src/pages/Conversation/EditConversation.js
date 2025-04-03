@@ -4,6 +4,7 @@ import { Row, Col, Card, CardBody, Button, FormGroup } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import axios from "axios"; // Thêm axios để gọi API
 import { useParams, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 const EditConversation = () => {
   const { id } = useParams();  // Lấy id từ URL
@@ -18,24 +19,18 @@ const EditConversation = () => {
   useEffect(() => {
     const fetchConversation = async () => {
       try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        const response = await axios.get(`http://localhost:8086/api/conversation/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.data) {
-          setConversation({
+        const response = await authAPI().get(adminApis.updateConversation(id));       
+          
+        setConversation({
             name: response.data.conversation.name,
             created_at: new Date(response.data.conversation.created_at).toLocaleString("vi-VN"),
-          });
-        }
+          });       
       } catch (error) {
         console.error("Error get data conversation:", error);
       }
     };
-
     fetchConversation();
-  }, [id]);
+  }, []);
 
   // Hàm để cập nhật giá trị khi người dùng nhập vào
   const handleChange = (e) => {
@@ -45,11 +40,8 @@ const EditConversation = () => {
   // Hàm lưu thông tin đã chỉnh sửa
   const handleSave = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-      await axios.patch(`http://localhost:8086/api/conversation/${id}`, conversation, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      history.push("/conversation"); // Chuyển hướng về danh sách cuộc trò chuyện
+      await authAPI().patch(adminApis.updateConversation(id), conversation);
+      history.push("/conversation"); 
     } catch (error) {
       console.error("Lỗi khi cập nhật conversation:", error);
     }

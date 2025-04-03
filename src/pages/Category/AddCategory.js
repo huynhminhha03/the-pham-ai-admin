@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Card, CardBody, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import axios from "axios";
+import { adminApis, authAPI } from "helpers/api";
 
 const AddCategory = () => {
   const history = useHistory();
@@ -18,18 +19,11 @@ const AddCategory = () => {
     }  
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8086/api/category/create",
-        { name },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (response.status === 201) {
+      await authAPI().post(adminApis.createCategory,
+        { name },        
+      );    
         setSuccess("Category added successfully!");
-        setTimeout(() => history.push("/category"), 2000);
-      } else {
-        setError("Failed to add category. Please try again.");
-      }
+        setTimeout(() => history.push("/category"), 2000);     
     } catch (err) {
       setError("Error adding category: " + err.message);
     }

@@ -5,6 +5,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation"
 //import { FormGroup, Form } from "redux-form";
 import axios from "axios"; // Thêm axios để gọi API
 import { useParams, useHistory } from "react-router-dom";
+import { adminApis, authAPI } from "helpers/api";
 
 
 const EditCategory = () => {
@@ -17,18 +18,13 @@ const EditCategory = () => {
     });
     useEffect(() => {
       const fetchCategory = async () => {
-        try {
-          console.log(id);
-          const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-          const response = await axios.get(`http://localhost:8086/api/category/${id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          if (response.data) {
-            setCategory({
+        try {                
+          const response = await authAPI().get(adminApis.getCategoryById(id));        
+            
+          setCategory({
               name: response.data.cate.name,             
               created_at: new Date(response.data.cate.created_at).toLocaleString("vi-VN"),
-            });
-          }
+            });          
         } catch (error) {
           console.error("Error get data category:", error);
         }
@@ -41,11 +37,7 @@ const EditCategory = () => {
       };    
     const handleSave = async () => {
       try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token;
-        await axios.patch(`http://localhost:8086/api/category/${id}`, category, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert("Update success!");
+        await authAPI().patch(adminApis.updateCategory(id), category);       
         history.push("/category"); // Chuyển hướng về danh sách category
       } catch (error) {
         console.error("Lỗi khi cập nhật category:", error);

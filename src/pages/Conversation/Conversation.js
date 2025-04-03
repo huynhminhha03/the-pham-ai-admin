@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
+import { adminApis, authAPI } from "helpers/api";
 
 const Conversation = (props) => {
   const history = useHistory();
@@ -31,35 +32,26 @@ const Conversation = (props) => {
       setCurrentPage(Number(page));
     }
   }, [props, page]);
-
-  const fetchConversations = useCallback(async () => {
-    if (!token) return console.error("No token found, please login!");
-
+  
+  
+  useEffect(()=>{
+    const fetchConversations = async () => { 
     try {
-      const response = await axios.get(
-        `http://localhost:8086/api/conversation/admin/all?page=${currentPage}&limit=${pageSize}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await authAPI().get(
+        `${adminApis.allConversations}?page=${currentPage}&limit=${pageSize}`,
       );
-
-      console.log("API Response:", response.data);
-
-      if (response.data && Array.isArray(response.data.conversations)) {
+     
         setConversations(response.data.conversations);
         setTotalPages(response.data.totalPages || 1);
-      } else {
-        console.error("API không trả về danh sách hợp lệ:", response.data);
-        setConversations([]);
-      }
+      
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu:", error);
     }
-  }, [token, currentPage]);
-
-  useEffect(() => {
-    fetchConversations();
-  }, [fetchConversations]);
-
-
+  }
+  fetchConversations()
+}, [currentPage]);
+ 
+  
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
     history.push(`/conversation?page=${newPage}`); // Thay đổi URL khi chuyển trang
@@ -78,18 +70,13 @@ const Conversation = (props) => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this conversation?")) {
+    
       try {
-        await axios.delete(`http://localhost:8086/api/conversation/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert("Conversation deleted successfully!");
-        fetchConversations(); // Load lại dữ liệu sau khi xóa
+        await authAPI().delete(adminApis.deleteConversation(id));
+        setConversations(conversations.filter(conversation => conversation.id !== id))
       } catch (error) {
-        console.error("Error deleting conversation:", error);
-        alert("Failed to delete conversation. Please try again!");
-      }
-    }
+        console.error("Error deleting conversation:", error);        
+      }   
   };
 
   const handleEdit = (id) => {

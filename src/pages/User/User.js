@@ -16,7 +16,7 @@ import { setBreadcrumbItems } from "../../store/actions"
 import axios from "axios" // Thêm axios để gọi API
 import { useHistory, useLocation } from "react-router-dom"
 import actions from "redux-form/lib/actions"
-import { adminApis, authAPI } from "helpers/api"
+import { adminApis, authAPI, authApis } from "helpers/api"
 
 const User = props => {
   const breadcrumbItems = [
@@ -32,7 +32,7 @@ const User = props => {
     if (page) {
       setCurrentPage(Number(page))
     }
-  }, [props][page])
+  }, [props, page])
   const [users, setUsers] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -55,34 +55,27 @@ const User = props => {
       }
     }
     fetchUsers()
-  }, [])
+  }, [currentPage])
 
   const formatDate = dateStr => new Date(dateStr).toLocaleString("vi-VN")
 
-  const handleToggleStatus = async userId => {
+  const handleToggleStatus = async (userId, status) => {
     try {
-      const updatedUser = users.find(user => user.id === userId)
-      const newStatus = !updatedUser.isActive
-
-      const response = await axios.patch(
-        `http://localhost:8086/api/user/${userId}`,
-        { status: newStatus },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-
-      if (response.status === 200) {
+      await authAPI().patch(
+        adminApis.updateUser(userId),
+        { status: 
+          !status },        
+      )     
+    
         setUsers(prevUsers =>
           prevUsers.map(user =>
-            user.id === userId ? { ...user, status: newStatus } : user
+            user.id === userId ? { ...user, status: !status } : user
           )
         )
-      } else {
-        console.error("Failed to update user status:", response)
-        alert("Không thể cập nhật trạng thái user!")
-      }
+       
     } catch (error) {
       console.error("Lỗi khi cập nhật trạng thái user:", error)
-      alert("Lỗi khi cập nhật trạng thái user!")
+     
     }
   }
   const handlePageChange = newPage => {
@@ -122,7 +115,7 @@ const User = props => {
         updated_at: formatDate(user.updated_at),
         status: (
           <button
-            onClick={() => handleToggleStatus(user.id)}
+            onClick={() => handleToggleStatus(user.id, user.status)}
             style={{
               backgroundColor: user.status ? "green" : "red",
               color: "white",
@@ -132,7 +125,7 @@ const User = props => {
               cursor: "pointer",
             }}
           >
-            {users.st ? "ON" : "OFF"}
+            {user.status ? "ON" : "OFF"}
           </button>
         ),
         actions: (
@@ -156,25 +149,15 @@ const User = props => {
   }
 
   // Hàm xử lý khi nhấn nút "Xóa"
-  const handleDelete = async id => {
-    const confirmDelete = window.confirm(
-      "Are you sure want to delete this user?"
-    )
-    if (confirmDelete) {
+  const handleDelete = async (id) => {   
       try {
-        const token = JSON.parse(localStorage.getItem("authUser"))?.token
-        await axios.delete(`http://localhost:8086/api/user/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        alert("Delete successfull!")
-        // Update listUser after delete user
+       
+        await authAPI().delete(adminApis.deleteUser(id))
         setUsers(users.filter(user => user.id !== id))
       } catch (error) {
-        console.error("Lỗi khi xóa user:", error)
-        alert("Không thể xóa user. Vui lòng thử lại!")
+        console.error("Lỗi khi xóa user:", error)        
       }
-    }
-  }
+    } 
 
   return (
     <React.Fragment>
