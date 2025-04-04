@@ -120,7 +120,7 @@ const Banner = props => {
     () => ({
       columns: [
         { label: "Title", field: "title", sort: "asc", width: 200 },
-        { label: "Image", field: "image", width: 150 },
+        { label: "Image", field: "image", width: 2000 },
         { label: "CreateDate", field: "created_at", sort: "asc", width: 200 },
         { label: "UpdateDate", field: "updated_at", sort: "asc", width: 200 },
         { label: "Status", field: "status", width: 100 },
@@ -132,7 +132,7 @@ const Banner = props => {
           <img
             src={banner.image}
             alt="banner"
-            style={{ width: "50px", height: "50px" }}
+            style={{ height: "50px" }}
           />
         ),
         created_at: formatDate(banner.created_at),

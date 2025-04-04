@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import MetaTags from "react-meta-tags";
-import { Row, Col, Card, CardBody, Button, FormGroup } from "reactstrap";
+import { Row, Col, Card, CardBody, Button, FormGroup, Label } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation"
 
 import { useParams, useHistory } from "react-router-dom";
@@ -24,6 +24,7 @@ const EditUser = (props) => {
       username: "",
       email: "",
       created_at: "",
+      status:"",
     });
   
     useEffect(() => {
@@ -34,6 +35,7 @@ const EditUser = (props) => {
               username: response.data.username,
               email: response.data.email,
               created_at: new Date(response.data.created_at).toLocaleString("vi-VN"),
+              status: response.data.status
             });
         } catch (error) {
           console.error("Lỗi khi lấy dữ liệu user:", error);
@@ -42,19 +44,27 @@ const EditUser = (props) => {
   
       fetchUser();
     }, [id]);
+
     const handleChange = (e) => {
         setUser({ ...user, [e.target.username]: e.target.value });
-      };    
+      }; 
+
+    const handleToggleStatus = () => {  
+    setUser((prevUser) => ({
+        ...prevUser,
+        status: !prevUser.status,
+    }));
+};
+
     const handleSave = async () => {
       try {
-        await authAPI().put(adminApis.updateUser(id), user, {
-          
-        });
+        await authAPI().patch(adminApis.updateUser(id), user);
         history.push("/user");
       } catch (error) {
         console.error("Lỗi khi cập nhật user:", error);
       }
     };
+    
     
   return (
     <React.Fragment>
@@ -67,10 +77,10 @@ const EditUser = (props) => {
           <Card>      
             <CardBody>
             <h4 className="card-title">Edit User</h4>
-              <AvForm onSubmit={handleSave}>
+              <AvForm>
                 {/* username*/}
                 <AvField
-                  className="mb-3"
+                  className="mb-4"
                   name="username"
                   label="Username"
                   type="text"
@@ -83,7 +93,7 @@ const EditUser = (props) => {
                 />
                 {/* Email */}
                 <AvField
-                  className="mb-3"
+                  className="mb-4"
                   name="email"
                   label="Email"
                   type="email"
@@ -97,16 +107,33 @@ const EditUser = (props) => {
 
                 {/* CreateDate - only view, not Edit */}
                 <AvField
-                  className="mb-3"
+                  className="mb-4"
                   name="createdDate"
                   label="Ngày tạo"
                   type="text"
                   value={user.created_at}
                   disabled
-                />             
+                /> 
+                <FormGroup className="mb-4"> 
+                <Label className="mb-3 me-3">Status</Label>
+                <button
+                    onClick={() => handleToggleStatus()}
+                    style={{
+                      backgroundColor: user.status ? "green" : "red",
+                      color: "white",
+                      border: "none",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {user.status ? "ON" : "OFF"}
+                </button>
+                  </FormGroup>
+
                 <FormGroup className="mb-0">
                   <div>
-                    <Button type="submit" color="primary" className="ms-1">
+                    <Button type="submit" color="primary" className="ms-1" onClick={handleSave}>
                       Submit
                         </Button>{" "}
                     <Button type="reset" color="secondary" onClick={() => history.push("/user")}>
