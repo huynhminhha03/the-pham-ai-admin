@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Redirect } from "react-router-dom"
 
 // Profile
@@ -108,6 +108,7 @@ import AddBanner from "pages/Banner/AddBanner"
 import AddCategory from "pages/Category/AddCategory"
 import AddBook from "pages/Book/AddBook"
 import EditConversation from "pages/Conversation/EditConversation"
+import VerifyEmailSuccess from "pages/VerifyEmailSuccess"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -218,6 +219,7 @@ const userRoutes = [
 ]
 
 const authRoutes = [
+  {path:"/user/verify-email", component: VerifyEmailSuccess},
   { path: "/logout", component: Logout },
   { path: "/login", component: Login },
   { path: "/forgot-password", component: ForgetPwd },

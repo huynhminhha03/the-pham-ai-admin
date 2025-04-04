@@ -158,7 +158,7 @@ const SidebarContent = props => {
               </Link>
             </li> */}
 
-            {/* <li>
+            <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-email-outline"></i>
                 <span>{props.t("Email")}</span>
@@ -442,8 +442,8 @@ const SidebarContent = props => {
                   <Link to="/pages-500">{props.t("Error 500")}</Link>
                 </li>
               </ul>
-            </li> */}
-            {/* <li>
+            </li>
+            <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-share-variant"></i>
                 <span>{props.t("Multi Level")}</span>
@@ -466,7 +466,7 @@ const SidebarContent = props => {
                   </ul>
                 </li>
               </ul>
-            </li> */}
+            </li>
           </ul>
         </div>
       </SimpleBar>

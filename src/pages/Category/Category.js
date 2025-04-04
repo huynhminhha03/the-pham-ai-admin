@@ -14,7 +14,6 @@ import {
 import { connect } from "react-redux"
 import { setBreadcrumbItems } from "../../store/actions"
 import { useLocation, useHistory } from "react-router-dom"
-import axios from "axios"
 import { adminApis, authAPI } from "helpers/api"
 
 const Category = props => {
@@ -108,8 +107,10 @@ const Category = props => {
     try {
       await authAPI().delete(adminApis.deleteCategory(id))
       setCategories(categories.filter(category => category.id !== id))
+      setShowModal(false)
     } catch (error) {
       console.error("Error deleting category:", error)
+      setShowModal(false)
     }
   }
 
