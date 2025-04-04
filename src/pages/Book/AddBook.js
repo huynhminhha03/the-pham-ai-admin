@@ -20,6 +20,7 @@ const AddBook = (props) => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
   const history = useHistory()
+  const [textareabadge, settextareabadge] = useState(0)
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -28,6 +29,16 @@ const AddBook = (props) => {
     published_year: "",
   })
   const [loading, setLoading] = useState(false)
+
+  const textareachange = e => {
+    const count = e.target.value.length
+    if (count > 0) {
+      settextareabadge(true)
+    } else {
+      settextareabadge(false)
+    }
+    settextcount(e.target.value.length)
+  }
 
   // Xử lý thay đổi input text
   const handleChange = e => {
@@ -71,7 +82,7 @@ const AddBook = (props) => {
       })
       history.push("/book", 1000)
     } catch (error) {
-      console.error("Lỗi khi thêm sách:", error)
+      console.error("Error :", error)
     } finally {
       setLoading(false)
     }
@@ -104,15 +115,21 @@ const AddBook = (props) => {
           />
         </FormGroup>
         <FormGroup className="mt-3">
-          <Label for="description">Description</Label>
+        <Label>Description</Label>      
           <Input
-            type="text"
-            name="description"
-            id="description"
-            value={formData.description}
+            type="textarea"
+            id="decription"
             onChange={handleChange}
-            required
+            maxLength="1000"
+            rows="3"
+            placeholder="This textarea has a limit of 1000 chars."
           />
+          {textareabadge ? (
+            <span className="badgecount badge badge-success">
+              {" "}
+              {textcount} / 225{" "}
+            </span>
+          ) : null}
         </FormGroup>
         <FormGroup className="mt-3">
           <Label for="image">Book Image</Label>
