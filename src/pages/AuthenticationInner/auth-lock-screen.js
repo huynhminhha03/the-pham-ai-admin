@@ -16,7 +16,7 @@ class LockScreen extends Component {
         return (
             <React.Fragment>
                 <MetaTags>
-                    <title>Loak Screen | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                    <title>Loak Screen | ThePhamAI</title>
                 </MetaTags>
                 <div className="account-pages my-5 pt-sm-5">
                     <Container>

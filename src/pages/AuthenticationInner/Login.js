@@ -16,7 +16,7 @@ const Login = () => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Login | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Login | ThePhamAI</title>
       </MetaTags>
       <div className="account-pages my-5 pt-sm-5">
         <Container>

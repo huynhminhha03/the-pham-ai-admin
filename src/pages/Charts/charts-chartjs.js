@@ -36,7 +36,7 @@ const ChartsJs = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Chartjs Chart | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Chartjs Chart | ThePhamAI</title>
             </MetaTags>
 
 

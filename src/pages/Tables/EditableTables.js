@@ -53,7 +53,7 @@ const EditableTables = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Editable Table | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Editable Table | ThePhamAI</title>
       </MetaTags>
 
       <Row>

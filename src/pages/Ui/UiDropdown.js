@@ -60,7 +60,7 @@ const UiDropdown = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Dropdowns | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Dropdowns | ThePhamAI</title>
       </MetaTags>
 
       <Row>

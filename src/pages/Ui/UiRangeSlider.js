@@ -54,7 +54,7 @@ const UiRangeSlider = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Range Slider | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Range Slider | ThePhamAI</title>
       </MetaTags>
 
       <Row>

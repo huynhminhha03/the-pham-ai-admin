@@ -21,7 +21,7 @@ const UiProgressbar = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Progress Bars | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Progress Bars | ThePhamAI</title>
       </MetaTags>
 
       <Row>

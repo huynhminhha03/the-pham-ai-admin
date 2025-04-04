@@ -68,7 +68,7 @@ const EditRecommend = () => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Edit Recommendation | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Edit Recommendation | ThePhamAI</title>
       </MetaTags>
 
       <Row>

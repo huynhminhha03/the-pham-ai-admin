@@ -59,7 +59,7 @@ const EditUser = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>EditCategory | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>EditCategory | ThePhamAI</title>
       </MetaTags>
 
       <Row>

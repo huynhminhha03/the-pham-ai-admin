@@ -43,7 +43,7 @@ const Login = props => {
     <React.Fragment>
       <MetaTags>
         <title>
-          Login | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+          Login | ThePhamAI
         </title>
       </MetaTags>
       <div className="account-pages my-5 pt-sm-5">
@@ -87,7 +87,7 @@ const Login = props => {
                         <AvField
                           name="email"
                           label="Email"
-                          value="admin@example.com"
+                          value=""
                           className="form-control"
                           placeholder="Enter email"
                           type="email"
@@ -99,15 +99,15 @@ const Login = props => {
                         <AvField
                           name="password"
                           label="Password"
-                          value="Admin@123"
+                          value=""
                           type="password"
                           required
                           placeholder="Enter Password"
                         />
                       </div>
 
-                      <div className="mb-3 row mt-4">
-                        <div className="col-6">
+                      <div className="mb-3 row mt-4 ">
+                        {/* <div className="col-6">
                           <div className="form-check">
                             <input
                               type="checkbox"
@@ -121,8 +121,8 @@ const Login = props => {
                               Remember me
                             </label>
                           </div>
-                        </div>
-                        <div className="col-6 text-end">
+                        </div> */}
+                        <div className="col-12 text-end d-flex justify-content-center">
                           <button
                             className="btn btn-primary w-md waves-effect waves-light"
                             type="submit"
@@ -131,26 +131,26 @@ const Login = props => {
                           </button>
                         </div>
                       </div>
-                      <div className="form-group mb-0 row">
+                      {/* <div className="form-group mb-0 row">
                         <div className="col-12 mt-4">
                           <Link to="/forgot-password" className="text-muted">
                             <i className="mdi mdi-lock"></i> Forgot your
                             password?
                           </Link>
                         </div>
-                      </div>
+                      </div> */}
                     </AvForm>
                   </div>
                 </CardBody>
               </Card>
               <div className="mt-5 text-center">
-                <p>
+                {/* <p>
                   Don&#39;t have an account ?{" "}
                   <Link to="register" className="text-primary">
                     {" "}
                     Signup now{" "}
                   </Link>{" "}
-                </p>
+                </p> */}
                 <p>
                   © {new Date().getFullYear()} The Pham AI
                   <span className="d-none d-sm-inline-block">

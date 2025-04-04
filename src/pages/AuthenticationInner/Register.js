@@ -14,7 +14,7 @@ const Register = () => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Register | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Register | ThePhamAI</title>
       </MetaTags>
 
       <div className="account-pages my-5 pt-sm-5">

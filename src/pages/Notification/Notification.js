@@ -15,7 +15,7 @@ const Notification = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Notification | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Notification | ThePhamAI</title>
       </MetaTags>
       <Row>
         <Col className="col-12">

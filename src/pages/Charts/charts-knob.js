@@ -44,7 +44,7 @@ const ChartsKnob = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Jquery Knob charts | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Jquery Knob charts | ThePhamAI</title>
       </MetaTags>
 
       <Row>

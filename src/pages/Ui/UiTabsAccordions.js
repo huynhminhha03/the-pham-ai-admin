@@ -172,7 +172,7 @@ class UiTabsAccordions extends Component {
     return (
       <React.Fragment>
         <MetaTags>
-          <title>Tabs & Accordions | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+          <title>Tabs & Accordions | ThePhamAI</title>
         </MetaTags>
 
         <Row>

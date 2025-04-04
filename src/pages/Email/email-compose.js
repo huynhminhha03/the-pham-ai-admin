@@ -25,7 +25,7 @@ const EmailCompose = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Email Compose | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Email Compose | ThePhamAI</title>
             </MetaTags>
 
             <Row>

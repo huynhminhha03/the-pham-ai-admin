@@ -39,50 +39,27 @@ const Dashboard = (props) => {
   const [countConversation, setCountConversation ] = useState();
   const [countBook, setCountBook ] = useState();
   const [countBanner, setCountBanner ] = useState();
-  useEffect(() =>{
-    const fetchCountUsers = async () => {
+  useEffect(() => {
+    const fetchCounts = async () => {
       try {
-        const response = await authAPI().get(
-          adminApis.countAllUsers);
-        setCountUsers(response.data.count);
-        console.log(countUsers)     
-      }
-      catch(err){
-        console.error("Error get data", error);
-      }
-    }
-    fetchCountUsers()
+        const [usersResponse, conversationsResponse, booksResponse, bannersResponse] = await Promise.all([
+          authAPI().get(adminApis.countAllUsers),
+          authAPI().get(adminApis.countAllConversations),
+          authAPI().get(adminApis.countAllBooks),
+          authAPI().get(adminApis.countAllBooks)
+        ]);
 
-    const fetchCountConversation = async() => {
-      try{
-        const response = await authAPI().get(adminApis.countAllConversations);
-        setCountConversation(response.data.count)
-      }catch(err){
-        console.error("Error get data", error)
+        setCountUsers(usersResponse.data.count);
+        setCountConversation(conversationsResponse.data.count);
+        setCountBook(booksResponse.data.count);
+        setCountBanner(bannersResponse.data.count);
+      } catch (err) {
+        console.error("Error fetching data", error);
       }
-    }
-    fetchCountConversation()
+    };
 
-    const fetchCountBook = async() => {
-      try{
-        const response = await authAPI().get(adminApis.countAllBooks);
-        setCountBook(response.data.count)
-      }catch(err){
-        console.error("Error get data", error)
-      }
-    }
-    fetchCountBook()
-
-    const fetchCountBanner = async() => {
-      try{
-        const response = await authAPI().get(adminApis.countAllBooks);
-        setCountBanner(response.data.count)
-      }catch(err){
-        console.error("Error get data", error)
-      }
-    }
-    fetchCountBanner()
-  },[])
+    fetchCounts();
+  }, []);
 
 
   const reports = [
@@ -96,7 +73,7 @@ const Dashboard = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Dashboard | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Dashboard | ThePhamAI</title>
       </MetaTags>
 
       {/*mimi widgets */}

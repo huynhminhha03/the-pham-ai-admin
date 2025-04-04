@@ -28,7 +28,7 @@ const IconThemify = props => {
     return (
         <React.Fragment>
             <MetaTags>
-                <title>Themify Icons | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Themify Icons | ThePhamAI</title>
             </MetaTags>
 
             <Row>

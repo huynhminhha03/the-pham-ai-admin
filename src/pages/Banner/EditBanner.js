@@ -98,7 +98,7 @@ const EditBanner = props => {
     <React.Fragment>
       <MetaTags>
         <title>
-          Edit Banner | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+          Edit Banner | ThePhamAI
         </title>
       </MetaTags>
 

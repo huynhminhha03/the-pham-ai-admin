@@ -30,7 +30,7 @@ const UiGrid = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Grid | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Grid | ThePhamAI</title>
       </MetaTags>
 
       <Row>

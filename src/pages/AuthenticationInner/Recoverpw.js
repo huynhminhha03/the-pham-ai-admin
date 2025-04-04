@@ -17,7 +17,7 @@ const Recoverpw = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Recover Password | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Recover Password | ThePhamAI</title>
       </MetaTags>
       <div className="account-pages my-5 pt-sm-5">
         <Container>

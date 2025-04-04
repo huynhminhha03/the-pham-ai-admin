@@ -131,7 +131,7 @@ const Header = props => {
             </div> */}
           </div>
           <div className="d-flex">
-            <form className="app-search d-none d-lg-block">
+            {/* <form className="app-search d-none d-lg-block">
               <div className="position-relative">
                 <input
                   type="text"
@@ -140,8 +140,8 @@ const Header = props => {
                 />
                 <span className="fa fa-search"></span>
               </div>
-            </form>
-            <div className="dropdown d-inline-block d-lg-none ml-2">
+            </form> */}
+            {/* <div className="dropdown d-inline-block d-lg-none ml-2">
               <button
                 onClick={() => {
                   setsearch(!search)
@@ -179,7 +179,7 @@ const Header = props => {
                 </form>
               </div>
             </div>
-            <LanguageDropdown />
+            <LanguageDropdown /> */}
             <div className="dropdown d-none d-lg-inline-block">
               <button
                 type="button"
@@ -192,9 +192,9 @@ const Header = props => {
                 <i className="mdi mdi-fullscreen font-size-24"></i>
               </button>
             </div>
-            <NotificationDropdown />
+            {/* <NotificationDropdown /> */}
             <ProfileMenu />
-            <div
+            {/* <div
               onClick={() => {
                 props.showRightSidebarAction(!props.showRightSidebar)
               }}
@@ -206,7 +206,7 @@ const Header = props => {
               >
                 <i className="mdi mdi-spin mdi-cog"></i>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

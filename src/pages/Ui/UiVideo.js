@@ -22,7 +22,7 @@ const UiVideo = (props) => {
   return (
     <React.Fragment>
         <MetaTags>
-          <title>Video | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+          <title>Video | ThePhamAI</title>
         </MetaTags>
         
           <Row>

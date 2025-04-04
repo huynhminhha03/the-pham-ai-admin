@@ -30,7 +30,7 @@ const UiBadge = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>Badge | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Badge | ThePhamAI</title>
             </MetaTags>
 
             <Row>

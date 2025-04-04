@@ -109,7 +109,7 @@ const EditBook = props => {
     <React.Fragment>
       <MetaTags>
         <title>
-          Edit Book | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+          Edit Book | ThePhamAI
         </title>
       </MetaTags>
 

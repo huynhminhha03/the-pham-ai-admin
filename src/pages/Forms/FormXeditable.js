@@ -32,7 +32,7 @@ const FormXeditable = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Form Xeditable | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Form Xeditable | ThePhamAI</title>
       </MetaTags>
 
       <Row>

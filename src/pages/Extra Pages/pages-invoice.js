@@ -36,7 +36,7 @@ const PagesInvoice = (props) => {
     return (
         <React.Fragment>
             <MetaTags>
-                <title>Invoice | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Invoice | ThePhamAI</title>
             </MetaTags>
             <Row>
                 <Col xs="12">

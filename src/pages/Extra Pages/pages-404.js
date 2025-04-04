@@ -9,7 +9,7 @@ class Pages404 extends Component {
         return (
             <React.Fragment>
                 <MetaTags>
-                    <title>Error 404 | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                    <title>Error 404 | ThePhamAI</title>
                 </MetaTags>
                 <div className="account-pages my-5 pt-sm-5">
                     <Container>

@@ -26,7 +26,7 @@ const ResponsiveTables = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Responsive Table | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Responsive Table | ThePhamAI</title>
       </MetaTags>
 
 

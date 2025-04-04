@@ -66,7 +66,7 @@ const EditConversation = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>EditConversation | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>EditConversation | ThePhamAI</title>
       </MetaTags>
 
       <Row>

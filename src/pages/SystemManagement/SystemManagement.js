@@ -15,7 +15,7 @@ const SystemManagement = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>SystemManagement | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>SystemManagement | ThePhamAI</title>
       </MetaTags>
 
       <Row>

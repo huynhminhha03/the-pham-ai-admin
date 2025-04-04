@@ -223,7 +223,7 @@ const getApi = () => {
       />
 
       <MetaTags>
-        <title>Calendar | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Calendar | ThePhamAI</title>
       </MetaTags>
 
       <Row className="mb-4">

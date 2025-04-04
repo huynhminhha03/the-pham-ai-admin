@@ -34,7 +34,7 @@ const EmailRead = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Email Read | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Email Read | ThePhamAI</title>
       </MetaTags>
 
       <Row>

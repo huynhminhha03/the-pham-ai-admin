@@ -168,7 +168,7 @@ const User = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>User | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>User | ThePhamAI</title>
       </MetaTags>
       {showModal && (
         <div

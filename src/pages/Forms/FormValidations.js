@@ -95,7 +95,7 @@ const FormValidations = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Form Validation | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Form Validation | ThePhamAI</title>
       </MetaTags>
 
       <Row>

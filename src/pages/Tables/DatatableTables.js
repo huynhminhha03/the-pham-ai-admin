@@ -524,7 +524,7 @@ const DatatableTables = (props) => {
     <React.Fragment>
       
         <MetaTags>
-          <title>Data Tables | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+          <title>Data Tables | ThePhamAI</title>
         </MetaTags>
 
           <Row>

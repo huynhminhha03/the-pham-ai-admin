@@ -31,7 +31,7 @@ const MapsVector = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Vector Maps | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Vector Maps | ThePhamAI</title>
       </MetaTags>
 
 

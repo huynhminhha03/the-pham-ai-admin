@@ -59,7 +59,7 @@ const UserProfile = props => {
     <React.Fragment>
       <MetaTags>
         <title>
-          Profile | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+          Profile | ThePhamAI
         </title>
       </MetaTags>
 

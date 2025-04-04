@@ -33,7 +33,7 @@ const MapsGoogle = props => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Google Maps | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Google Maps | ThePhamAI</title>
       </MetaTags>
 
       <Row>

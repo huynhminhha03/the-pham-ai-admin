@@ -35,7 +35,7 @@ const UiCarousel = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Carousel | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Carousel | ThePhamAI</title>
       </MetaTags>
 
       <Row>

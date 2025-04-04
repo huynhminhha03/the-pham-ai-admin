@@ -60,7 +60,7 @@ const UiModal = (props) => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Modals | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Modals | ThePhamAI</title>
       </MetaTags>
 
       <Row>

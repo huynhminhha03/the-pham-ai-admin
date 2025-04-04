@@ -36,7 +36,7 @@ const ChartsC3 = (props) => {
         <React.Fragment>
 
             <MetaTags>
-                <title>C3 Chart | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>C3 Chart | ThePhamAI</title>
             </MetaTags>
 
             <Row>

@@ -175,7 +175,7 @@ const Category = props => {
     <React.Fragment>
       <MetaTags>
         <title>
-          Category | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard
+          Category | ThePhamAI
         </title>
       </MetaTags>
       {showModal && (

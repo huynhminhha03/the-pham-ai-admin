@@ -132,33 +132,33 @@ const SidebarContent = props => {
                 <i className="mdi mdi-chat"></i>
                 <span>{props.t("Banner")}</span>
               </Link>
-            </li>           
-            <li>
+            </li>
+            {/* <li>
               <Link to="/systemManagement" className=" waves-effect">
                 <i className="mdi mdi-chat"></i>
                 <span>{props.t("SystemManagement")}</span>
               </Link>
-            </li>
-            <li>
-              {/* <Link to="/Recommend" className=" waves-effect">
+            </li> */}
+            {/* <li>
+              <Link to="/Recommend" className=" waves-effect">
                 <i className="mdi mdi-chat"></i>
                 <span>{props.t("Recommend")}</span>
-              </Link> */}
-            </li>
+              </Link>
+            </li> */}
             {/* <li>
               <Link to="/Notification" className=" waves-effect">
                 <i className="mdi mdi-chat"></i>
                 <span>{props.t("Notification")}</span>
               </Link>
             </li> */}
-            <li>
+            {/* <li>
               <Link to="/calendar" className=" waves-effect">
                 <i className="mdi mdi-calendar-check"></i>
                 <span>{props.t("Calendar")}</span>
               </Link>
-            </li>
+            </li> */}
 
-            <li>
+            {/* <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-email-outline"></i>
                 <span>{props.t("Email")}</span>
@@ -442,7 +442,7 @@ const SidebarContent = props => {
                   <Link to="/pages-500">{props.t("Error 500")}</Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
             {/* <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-share-variant"></i>

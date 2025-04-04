@@ -20,7 +20,7 @@ const PagesBlank = (props) => {
     return (
         <React.Fragment>
             <MetaTags>
-                <title>Starter Page | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Starter Page | ThePhamAI</title>
             </MetaTags>
         </React.Fragment>
     )

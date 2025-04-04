@@ -90,7 +90,7 @@ const PagesDirectory = (props) => {
     return (
         <React.Fragment>
             <MetaTags>
-                <title>Directory | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+                <title>Directory | ThePhamAI</title>
             </MetaTags>
 
             <Row>

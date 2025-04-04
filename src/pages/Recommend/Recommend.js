@@ -59,7 +59,7 @@ const Recommend = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Recommand | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Recommand | ThePhamAI</title>
       </MetaTags>
 
       <Row>

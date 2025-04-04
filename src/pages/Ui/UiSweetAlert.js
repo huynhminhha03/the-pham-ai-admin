@@ -95,7 +95,7 @@ const UiSweetAlert = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>SweetAlert | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>SweetAlert | ThePhamAI</title>
       </MetaTags>
 
       {success_dlg ? (

@@ -118,7 +118,7 @@ const Conversation = (props) => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Conversation | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Conversation | ThePhamAI</title>
       </MetaTags>
 
       <Row>

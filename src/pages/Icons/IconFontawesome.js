@@ -77,7 +77,7 @@ const IconFontawesome = props => {
     <React.Fragment>
 
       <MetaTags>
-        <title>Font Awesome | ThePhamAI - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Font Awesome | ThePhamAI</title>
       </MetaTags>
 
       <Row>

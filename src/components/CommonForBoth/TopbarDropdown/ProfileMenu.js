@@ -20,22 +20,10 @@ const ProfileMenu = props => {
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
 
-  const [username, setusername] = useState("Admin")
 
-  useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        const obj = JSON.parse(localStorage.getItem("authUser"))
-        setusername(obj.displayName)
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        const obj = JSON.parse(localStorage.getItem("authUser"))
-        setusername(obj.username)
-      }
-    }
-  }, [props.success])
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  }
 
   return (
     <React.Fragment>
@@ -61,23 +49,23 @@ const ProfileMenu = props => {
             <i className="mdi mdi-account-circle font-size-17 text-muted align-middle me-1"/>
             {props.t("Profile")}{" "}
           </DropdownItem>
-          <DropdownItem tag="a" href="#">
+          {/* <DropdownItem tag="a" href="#">
             <i className="mdi mdi-wallet font-size-17 text-muted align-middle me-1"/>
             {props.t("My Wallet")}
-          </DropdownItem>
-          <DropdownItem tag="a" href="#">
+          </DropdownItem> */}
+          {/* <DropdownItem tag="a" href="#">
             <span className="badge bg-success float-end">11</span>
             <i className="mdi mdi-cog font-size-17 text-muted align-middle me-1"/>
             {props.t("Settings")}
-          </DropdownItem>
-          <DropdownItem tag="a" href="auth-lock-screen">
+          </DropdownItem> */}
+          {/* <DropdownItem tag="a" href="auth-lock-screen">
             <i className="mdi mdi-lock-open-outline font-size-17 text-muted align-middle me-1"/>
             {props.t("Lock screen")}
-          </DropdownItem>
+          </DropdownItem> */}
           <div className="dropdown-divider"/>
-          <Link to="/logout" className="dropdown-item text-danger">
+          <Link to="/login" className="dropdown-item text-danger" onClick={handleLogout}>
             <i className="mdi mdi-power font-size-17 text-muted align-middle me-1 text-danger"/>
-            <span>{props.t("Logout")}</span>
+            <span>Logout</span>
           </Link>
         </DropdownMenu>
       </Dropdown>
