@@ -161,7 +161,8 @@ const EditBook = props => {
                 <Input
                   className="mb-3"
                   type="textarea"
-                  id="textarea"
+                  id="description"
+                  name="description"
                   onChange={handleChange}
                   maxLength="225"
                   rows="3"

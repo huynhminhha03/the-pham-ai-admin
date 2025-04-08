@@ -33,6 +33,7 @@ const EditBanner = props => {
   const [banner, setBanner] = useState({
     title: "",
     image: "",
+    description: "",
     created_at: "",
   })
 
@@ -47,6 +48,7 @@ const EditBanner = props => {
         setBanner({
           title: response.data.banner.title,
           image: response.data.banner.image,
+          description: response.data.banner.description,
           created_at: new Date(response.data.banner.created_at).toLocaleString(
             "vi-VN"
           ),
@@ -60,7 +62,7 @@ const EditBanner = props => {
     fetchBanner()
   }, [id])
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setBanner({ ...banner, [e.target.name]: e.target.value })
   }
 
@@ -79,6 +81,7 @@ const EditBanner = props => {
     try {
       const formData = new FormData()
       formData.append("title", banner.title)
+      formData.append("description", banner.description)
       if (selectedFile) {
         formData.append("image", selectedFile) // Thêm file hình ảnh vào formData
       }
@@ -146,7 +149,16 @@ const EditBanner = props => {
                     </div>
                   )}
                 </FormGroup>
-
+                <Input
+                    className="mb-3"
+                    type="textarea"
+                    id="description"
+                    name="description"
+                    onChange={handleChange}
+                    maxLength="225"
+                    rows="3"
+                    value={banner.description}
+                  />
                 {/* Created Date - View Only */}
                 <AvField
                   className="mb-3"

@@ -27,10 +27,11 @@ const AddBanner = props => {
   }, [])
 
   const history = useHistory()
-  const [banner, setBanner] = useState({
-    title: "",
-    category_id: "",
-  })
+   const [formData, setFormData] = useState({
+      title: "",   
+      description: "",
+      image: null,
+    })
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
   const [categories, setCategories] = useState([])
@@ -51,7 +52,11 @@ const AddBanner = props => {
   }, [])
 
   const handleChange = e => {
-    setBanner({ ...banner, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
   }
 
   const handleFileChange = e => {
@@ -59,28 +64,45 @@ const AddBanner = props => {
     if (file) {
       setSelectedFile(file)
       setPreviewImage(URL.createObjectURL(file))
+      setFormData({
+        ...formData,
+        image: file, // Cập nhật vào formData
+      })
     }
   }
 
-  const handleSave = async () => {
-    try {
+  const handleSubmit = async e => {
+      e.preventDefault()
+  
+      const formDataToSend = new FormData()
+      formDataToSend.append("title", formData.title)
+      formDataToSend.append("description", formData.description)
+      formDataToSend.append("image", formData.image)
+  
       setLoading(true)
-      const formData = new FormData()
-      formData.append("title", banner.title)
-      formData.append("category_id", banner.category_id)
-      if (selectedFile) {
-        formData.append("image", selectedFile)
+      try {
+        await authAPI().post(adminApis.createBanner, formDataToSend, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        history.push("/banner", 1000)
+      } catch (error) {
+        console.error("Error :", error)
+      } finally {
+        setLoading(false)
       }
-
-      await authAPI().post(adminApis.createBanner, formData)
-      setLoading(false)
-      history.push("/banner", 2000)
-    } catch (error) {
-      setLoading(false)
-      console.error("Error adding banner:", error)
     }
+  const [textareabadge, settextareabadge] = useState(0);
+  const textareachange = e => {
+    const count = e.target.value.length
+    if (count > 0) {
+      settextareabadge(true)
+    } else {
+      settextareabadge(false)
+    }
+    settextcount(e.target.value.length)
   }
-
   return (
     <React.Fragment>
       <MetaTags>
@@ -92,13 +114,13 @@ const AddBanner = props => {
           <Card>
             <CardBody>
               <h4 className="card-title">Add New Banner</h4>
-              <AvForm onSubmit={handleSave}>
+              <AvForm>
                 <AvField
                   className="mb-3"
                   name="title"
                   label="Title"
                   type="text"
-                  value={banner.title || ""}
+                  value={formData.title}
                   onChange={handleChange}
                   validate={{
                     required: {
@@ -126,6 +148,25 @@ const AddBanner = props => {
                     )}
                   </div>
                 </FormGroup>
+                
+                <FormGroup className="mt-3">
+                  <Label>Description</Label>      
+                    <Input
+                      type="textarea"
+                      id="description"
+                      name="description"
+                      onChange={handleChange}
+                      maxLength="1000"
+                      rows="3"
+                      placeholder="This textarea has a limit of 1000 chars."
+                    />
+                    {textareabadge ? (
+                      <span className="badgecount badge badge-success">
+                        {" "}
+                        {textcount} / 225{" "}
+                      </span>
+                    ) : null}
+                  </FormGroup>
 
                 {/* Chọn Category */}
                 <FormGroup className="mb-3">
@@ -134,7 +175,7 @@ const AddBanner = props => {
                     type="select"
                     name="category_id"
                     id="category_id"
-                    value={banner.category_id || ""}
+                    value={formData.category_id || ""}
                     onChange={handleChange}
                   >
                     <option value="">Select Category</option>
@@ -152,12 +193,13 @@ const AddBanner = props => {
                       type="submit"
                       color="primary"
                       className="ms-1"
+                      onClick={handleSubmit}
                       disabled={loading}
                     >
                       {loading ? (
                         <span>Loading...</span> // Hiển thị trạng thái loading
                       ) : (
-                        "Save"
+                        "AddBanner"
                       )}
                     </Button>{" "}
                     <Button

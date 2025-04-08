@@ -117,19 +117,19 @@ const SidebarContent = props => {
             </li>
             <li>
               <Link to="/category" className=" waves-effect">
-                <i className="mdi mdi-chat"></i>
+                <i className="mdi mdi-menu"></i>
                 <span>{props.t("Category")}</span>
               </Link>
             </li>
             <li>
               <Link to="/book" className=" waves-effect">
-                <i className="mdi mdi-chat"></i>
+                <i className="mdi mdi-book-open"></i>
                 <span>{props.t("Book")}</span>
               </Link>
             </li>
             <li>
               <Link to="/banner" className=" waves-effect">
-                <i className="mdi mdi-chat"></i>
+                <i className="mdi mdi-toy-brick-outline"></i>
                 <span>{props.t("Banner")}</span>
               </Link>
             </li>
