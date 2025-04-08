@@ -40,7 +40,7 @@ const EditUser = props => {
           status: response.data.status,
         })
       } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu user:", error)
+        console.error("Error getting data user:", error)
       }
     }
 
@@ -67,7 +67,7 @@ const EditUser = props => {
       await authAPI().patch(adminApis.updateUser(id), updatedUser)
       history.push("/user")
     } catch (error) {
-      console.error("Lỗi khi cập nhật user:", error)
+      console.error("Error updating user:", error)
     }
   }
 
@@ -98,7 +98,7 @@ const EditUser = props => {
                     },
                     minLength: {
                       value: 3,
-                      errorMessage: "Tên phải có ít nhất 3 ký tự",
+                      errorMessage: "Name must be at least 3 characters",
                     },
                   }}
                 />

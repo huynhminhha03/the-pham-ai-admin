@@ -46,7 +46,7 @@ const Banner = props => {
         setBanners(response.data.banners)
         setTotalPages(response.data.totalPages || 1)
       } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu:", error)
+        console.error("Error get data:", error)
       }
     }
 
@@ -67,8 +67,8 @@ const Banner = props => {
         )
       )
     } catch (error) {
-      console.error("Lỗi khi cập nhật trạng thái banner:", error)
-      alert("Lỗi khi cập nhật trạng thái banner!")
+      console.error("Error update status banner:", error)
+      alert("Error update status banner!")
     }
   }
 
@@ -87,7 +87,7 @@ const Banner = props => {
       setShowModal(false)
       setSelectedBanner(null)
     } catch (error) {
-      console.error("Lỗi khi xóa banner:", error)
+      console.error("Error delete banner:", error)
     }
   }
 
@@ -103,7 +103,7 @@ const Banner = props => {
 
   const handlePageChange = newPage => {
     setCurrentPage(newPage)
-    history.push(`banner?page=${newPage}`) // Thay đổi URL khi chuyển trang
+    history.push(`banner?page=${newPage}`) // Change URL turn page
   }
   const handleNextPage = () => {
     if (currentPage < totalPages) {

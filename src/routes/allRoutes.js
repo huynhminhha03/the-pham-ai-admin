@@ -5,12 +5,12 @@ import { Redirect } from "react-router-dom"
 import UserProfile from "../pages/Authentication/user-profile"
 
 // Pages Calendar
-import Calendar from "../pages/Calendar/index"
+//import Calendar from "../pages/Calendar/index"
 
 //Email
-import EmailInbox from "../pages/Email/email-inbox"
-import EmailRead from "../pages/Email/email-read"
-import EmailCompose from "../pages/Email/email-compose"
+//import EmailInbox from "../pages/Email/email-inbox"
+//import EmailRead from "../pages/Email/email-read"
+//import EmailCompose from "../pages/Email/email-compose"
 
 // Authentication related pages
 import Login from "../pages/Authentication/Login"
@@ -36,9 +36,9 @@ import ChartsC3 from "../pages/Charts/charts-c3";
 import ChartsSparkLine from "../pages/Charts/charts-sparkline";
 
 // Maps
-import MapsGoogle from "../pages/Maps/MapsGoogle"
-import MapsVector from "../pages/Maps/MapsVector"
-import MapsLeaflet from "../pages/Maps/MapsLeaflet"
+//import MapsGoogle from "../pages/Maps/MapsGoogle"
+//import MapsVector from "../pages/Maps/MapsVector"
+//import MapsLeaflet from "../pages/Maps/MapsLeaflet"
 
 //Icons
 import IconMaterialdesign from "../pages/Icons/IconMaterialdesign"
@@ -94,16 +94,16 @@ import User from "pages/User/User"
 
 import Conversation from "pages/Conversation/Conversation"
 import Category from "pages/Category/Category"
-import Recommend from "pages/Recommend/Recommend"
-import Notification from "pages/Notification/Notification"
-import SystemManagement from "pages/SystemManagement/SystemManagement"
+//import Recommend from "pages/Recommend/Recommend"
+//import Notification from "pages/Notification/Notification"
+//import SystemManagement from "pages/SystemManagement/SystemManagement"
 import EditUser from "pages/User/EditUser"
 import EditCategory from "pages/Category/EditCategory"
 import Book from "pages/Book/Book"
 import EditBook from "pages/Book/EditBook"
 import Banner from "pages/Banner/Banner"
 import EditBanner from "pages/Banner/EditBanner"
-import EditRecommend from "pages/Recommend/EditRecommend"
+//import EditRecommend from "pages/Recommend/EditRecommend"
 import AddBanner from "pages/Banner/AddBanner"
 import AddCategory from "pages/Category/AddCategory"
 import AddBook from "pages/Book/AddBook"
@@ -114,7 +114,7 @@ const userRoutes = [
   { path: "/dashboard", component: Dashboard },
 
   //calendar
-  { path: "/calendar", component: Calendar },
+  //{ path: "/calendar", component: Calendar },
   //user
   { path: "/user/:page?", component: User },
   //Edit user
@@ -128,15 +128,15 @@ const userRoutes = [
   {path:"/add-category", component: AddCategory},
   //recommend
   // { path: "/recommend", component: Recommend },
-  { path: "/edit-recommend", component: EditRecommend },
+  //{ path: "/edit-recommend", component: EditRecommend },
   //notification
-  {path:"/notification", component: Notification},
+  //{path:"/notification", component: Notification},
   //Book
   {path:"/book", component: Book},
   { path: "/edit-book/:id", component: EditBook },
   { path: "/add-book/", component: AddBook },
   //System Management
-  {path:"/SystemManagement", component: SystemManagement},
+  //{path:"/SystemManagement", component: SystemManagement},
   //Banner
   {path:"/banner", component: Banner},
   {path:"/edit-banner/:id", component: EditBanner},
@@ -148,9 +148,9 @@ const userRoutes = [
 
 
   // //Email
-  { path: "/email-inbox", component: EmailInbox },
-  { path: "/email-read", component: EmailRead },
-  { path: "/email-compose", component: EmailCompose },
+  //{ path: "/email-inbox", component: EmailInbox },
+//{ path: "/email-read", component: EmailRead },
+  //{ path: "/email-compose", component: EmailCompose },
 
   // //Charts
   { path: "/apex-charts", component: ChartsAppex },
@@ -175,9 +175,9 @@ const userRoutes = [
   { path: "/tables-editable", component: EditableTables },
 
   // // Maps
-  { path: "/maps-google", component: MapsGoogle },
-  { path: "/maps-vector", component: MapsVector },
-  { path: "/maps-leaflet", component: MapsLeaflet },
+  //{ path: "/maps-google", component: MapsGoogle },
+  //{ path: "/maps-vector", component: MapsVector },
+  //{ path: "/maps-leaflet", component: MapsLeaflet },
 
   // // Forms
   { path: "/form-elements", component: FormElements },

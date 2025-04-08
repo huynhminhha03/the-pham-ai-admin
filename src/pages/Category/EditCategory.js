@@ -35,7 +35,7 @@ const EditCategory = (props) => {
               created_at: new Date(response.data.cate.created_at).toLocaleString("vi-VN"),
             });          
         } catch (error) {
-          console.error("Error get data category:", error);
+          console.error("Error getting data category:", error);
         }
       };
   
@@ -48,9 +48,9 @@ const EditCategory = (props) => {
       setLoading(true);
       try {
         await authAPI().patch(adminApis.updateCategory(id), category);       
-        history.push("/category"); // Chuyển hướng về danh sách category
+        history.push("/category"); 
       } catch (error) {
-        console.error("Lỗi khi cập nhật category:", error);
+        console.error("Error updating category:", error);
       }
       finally {
         setLoading(false);
@@ -95,7 +95,7 @@ const EditCategory = (props) => {
                   <div>
                     <Button color="primary" type="submit" onClick={handleSave} disabled={loading}>
                               {loading ? (
-                                <span>Loading...</span> // Hiển thị trạng thái loading
+                                <span>Loading...</span>
                               ) : (
                                 "Submit"
                               )}

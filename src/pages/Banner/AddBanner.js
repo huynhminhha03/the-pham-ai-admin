@@ -37,6 +37,7 @@ const AddBanner = props => {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(false)
 
+  //fetch cate
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -66,7 +67,7 @@ const AddBanner = props => {
       setPreviewImage(URL.createObjectURL(file))
       setFormData({
         ...formData,
-        image: file, // Cập nhật vào formData
+        image: file, // update formData
       })
     }
   }
@@ -120,7 +121,7 @@ const AddBanner = props => {
                   }}
                 />
 
-                {/* Upload Ảnh */}
+                {/* Upload Image */}
                 <FormGroup className="mb-3">
                   <Label for="image">Upload Image</Label>
                   <div className="image-upload-wrapper">

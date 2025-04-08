@@ -19,15 +19,15 @@ const EditConversation = (props) => {
     }, [props]);
 
   const [loading, setLoading] = useState(false);  
-  const { id } = useParams();  // Lấy id từ URL
-  const history = useHistory(); // Sử dụng useHistory để điều hướng
+  const { id } = useParams();  
+  const history = useHistory(); 
 
   const [conversation, setConversation] = useState({
     name: "",
     created_at: "",
   });
 
-  // Hàm để lấy thông tin cuộc trò chuyện từ API
+
   useEffect(() => {
     const fetchConversation = async () => {
       try {
@@ -44,19 +44,19 @@ const EditConversation = (props) => {
     fetchConversation();
   }, [id]);
 
-  // Hàm để cập nhật giá trị khi người dùng nhập vào
+  
   const handleChange = (e) => {
     setConversation({ ...conversation, [e.target.name]: e.target.value });
   };
 
-  // Hàm lưu thông tin đã chỉnh sửa
+
   const handleSave = async () => {
     setLoading(true);
     try {
       await authAPI().patch(adminApis.updateConversation(id), conversation);
       history.push("/conversation"); 
     } catch (error) {
-      console.error("Lỗi khi cập nhật conversation:", error);
+      console.error("Error update conversation:", error);
     }
     finally {
       setLoading(false);
@@ -75,7 +75,7 @@ const EditConversation = (props) => {
             <CardBody>
               <h4 className="card-title">Edit Conversation</h4>
               <AvForm onSubmit={handleSave}>
-                {/* Tên cuộc trò chuyện */}
+                {/* ConversationName */}
                 <AvField
                   className="mb-3"
                   name="name"
@@ -88,7 +88,7 @@ const EditConversation = (props) => {
                     minLength: { value: 3, errorMessage: "Tên phải có ít nhất 3 ký tự" },
                   }}
                 />
-                {/* Ngày tạo - chỉ hiển thị, không chỉnh sửa */}
+                {/* Create_at - only view */}
                 <AvField
                   className="mb-3"
                   name="created_at"
@@ -101,7 +101,7 @@ const EditConversation = (props) => {
                   <div>
                     <Button color="primary" type="submit" onClick={handleSave} disabled={loading}>
                               {loading ? (
-                                <span>Loading...</span> // Hiển thị trạng thái loading
+                                <span>Loading...</span>
                               ) : (
                                 "Submit"
                               )}

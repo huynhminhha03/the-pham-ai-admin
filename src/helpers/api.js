@@ -41,6 +41,8 @@ export const adminApis = {
     // Conversation management
     allConversations: '/admin/all-conversation',
     getConversationById: (id) => `/admin/conversation/${id}`,
+    conversationStatisticsByDay: '/admin/conversation/day-statistics',
+    conversationStatisticsByMonth: '/admin/conversation/month-statistics',
     updateConversation: (id) => `/admin/conversation/${id}`,
     deleteConversation: (id) => `/admin/conversation/${id}`,
     countAllConversations: '/admin/conversation/count-all',

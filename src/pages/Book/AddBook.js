@@ -20,7 +20,6 @@ const AddBook = (props) => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
   const history = useHistory()
-  const [textareabadge, settextareabadge] = useState(0)
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -30,7 +29,7 @@ const AddBook = (props) => {
   })
   const [loading, setLoading] = useState(false)
 
-  // Xử lý thay đổi input text
+  // handle change input text
   const handleChange = e => {
     const { name, value } = e.target
     setFormData({
@@ -39,7 +38,7 @@ const AddBook = (props) => {
     })
   }
 
-  // Xử lý khi chọn file ảnh
+  // handle input image file
   const handleFileChange = e => {
     const file = e.target.files[0]
     if (file) {
@@ -47,12 +46,12 @@ const AddBook = (props) => {
       setPreviewImage(URL.createObjectURL(file))
       setFormData({
         ...formData,
-        image: file, // Cập nhật vào formData
+        image: file, // update formData
       })
     }
   }
 
-  // Xử lý khi submit form
+  // handle submit form
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -155,7 +154,7 @@ const AddBook = (props) => {
           disabled={loading}
         >
           {loading ? (
-            <span>Loading...</span> // Hiển thị trạng thái loading
+            <span>Loading...</span> 
           ) : (
             "Add Book"
           )}

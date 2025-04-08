@@ -52,7 +52,7 @@ const Category = props => {
         setCategories(response.data.categories)
         setTotalPages(response.data.totalPages || 1)
       } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu:", error)
+        console.error("Error getting data:", error)
       }
     }
     fetchCategories()
@@ -87,7 +87,7 @@ const Category = props => {
 
   const handlePageChange = newPage => {
     setCurrentPage(newPage)
-    history.push(`/category?page=${newPage}`) // Thay đổi URL khi chuyển trang
+    history.push(`/category?page=${newPage}`)
   }
   //
   const handleNextPage = () => {

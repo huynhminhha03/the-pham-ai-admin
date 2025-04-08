@@ -48,7 +48,7 @@ const Book = props => {
   const [books, setBooks] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
-  const pageSize = 10 // Số sách trên mỗi trang
+  const pageSize = 10
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -63,7 +63,7 @@ const Book = props => {
             1
         )
       } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu:", error)
+        console.error("Error getting data:", error)
       }
     }
     fetchBooks()
@@ -81,7 +81,7 @@ const Book = props => {
         )
       )
     } catch (error) {
-      console.error("Lỗi khi cập nhật trạng thái sách:", error)
+      console.error("Error update status book:", error)
     }
   }
 
@@ -99,14 +99,14 @@ const Book = props => {
       setBooks(prevBooks => prevBooks.filter(book => book.id !== id))
       setShowModal(false)
     } catch (error) {
-      console.error("Lỗi khi xóa sách:", error)
+      console.error("Error deletting book:", error)
       
     }
   }
 
   const handlePageChange = newPage => {
     setCurrentPage(newPage)
-    history.push(`/book?page=${newPage}`) // Thay đổi URL khi chuyển trang
+    history.push(`/book?page=${newPage}`) // Change URL turn page
   }
   //
   const handleNextPage = () => {
@@ -212,7 +212,7 @@ const Book = props => {
                 striped
                 bordered
                 data={data}
-                paging={false} // Tắt phân trang mặc định
+                paging={false}
               />
               {showModal && (
                 <div
@@ -220,7 +220,7 @@ const Book = props => {
                   tabIndex="-1"
                   role="dialog"
                   style={{
-                    backgroundColor: "rgba(0,0,0,0.5)", // Làm mờ nền
+                    backgroundColor: "rgba(0,0,0,0.5)",
                     position: "fixed",
                     top: 0,
                     left: 0,

@@ -49,7 +49,7 @@ function LatestTransactions() {
                                                 <td>
                                                     <img src={user1} alt="user" className="avatar-xs rounded-circle me-2" /> {user.username}
                                                 </td>
-                                                <td><span class={`rounded-pill bg-${getStatusColor(user.status)} badge badge-secondary`}>{getStatuscheck(user.status)}</span></td>         
+                                                <td><span className={`rounded-pill bg-${getStatusColor(user.status)} badge badge-secondary`}>{getStatuscheck(user.status)}</span></td>         
                                                 <td>
                                                 {user.email || "No Email"}
                                                 </td>

@@ -68,12 +68,12 @@ const User = props => {
         )
       )
     } catch (error) {
-      console.error("Lỗi khi cập nhật trạng thái user:", error)
+      console.error("Error updating status user:", error)
     }
   }
   const handlePageChange = newPage => {
     setCurrentPage(newPage)
-    history.push(`/user?page=${newPage}`) // Thay đổi URL khi chuyển trang
+    history.push(`/user?page=${newPage}`) 
   }
   //
   const handleNextPage = () => {

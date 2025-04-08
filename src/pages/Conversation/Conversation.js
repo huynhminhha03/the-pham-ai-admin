@@ -22,7 +22,7 @@ const Conversation = (props) => {
   const [conversations, setConversations] = useState([]);
   const [currentPage, setCurrentPage] = useState(page || 1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 10; // Số cuộc trò chuyện trên mỗi trang
+  const pageSize = 10;
 
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const Conversation = (props) => {
   
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-    history.push(`/conversation?page=${newPage}`); // Thay đổi URL khi chuyển trang
+    history.push(`/conversation?page=${newPage}`);
   };
 
   const handleNextPage = () => {

@@ -37,8 +37,8 @@ const EditBanner = props => {
     created_at: "",
   })
 
-  const [selectedFile, setSelectedFile] = useState(null) // state lưu file hình ảnh đã chọn
-  const [previewImage, setPreviewImage] = useState(null) // state để xem trước hình ảnh
+  const [selectedFile, setSelectedFile] = useState(null) 
+  const [previewImage, setPreviewImage] = useState(null) 
 
   useEffect(() => {
     const fetchBanner = async () => {
@@ -66,12 +66,12 @@ const EditBanner = props => {
     setBanner({ ...banner, [e.target.name]: e.target.value })
   }
 
-  // Xử lý chọn file hình ảnh
+  // handle select imagefile
   const handleFileChange = e => {
     const file = e.target.files[0]
     if (file) {
       setSelectedFile(file)
-      setPreviewImage(URL.createObjectURL(file)) // Hiển thị hình ảnh đã chọn trước khi upload
+      setPreviewImage(URL.createObjectURL(file)) // Show image
     }
   }
 
@@ -83,15 +83,15 @@ const EditBanner = props => {
       formData.append("title", banner.title)
       formData.append("description", banner.description)
       if (selectedFile) {
-        formData.append("image", selectedFile) // Thêm file hình ảnh vào formData
+        formData.append("image", selectedFile) // add imagefile into formData
       }
 
-      // Gửi request PUT để cập nhật banner với file hình ảnh
+      // Send request PUT to update banner with imagefile
       await authAPI().patch(adminApis.updateBanner(id), formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
 
-      history.push("/banner", 2000) // Điều hướng về danh sách banner
+      history.push("/banner", 2000) // 
     } catch (error) {
       console.error("Error updating banner:", error)
     }

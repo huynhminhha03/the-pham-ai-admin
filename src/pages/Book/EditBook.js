@@ -17,8 +17,8 @@ import { connect } from "react-redux"
 import { setBreadcrumbItems } from "../../store/actions"
 
 const EditBook = props => {
-  const { id } = useParams() // Lấy id từ URL
-  const history = useHistory() // Để điều hướng sau khi lưu
+  const { id } = useParams() 
+  const history = useHistory()
 
   const breadcrumbItems = [
     { title: "Thepham AI", link: "#" },
@@ -37,10 +37,10 @@ const EditBook = props => {
     published_year: "",
   })
 
-  const [selectedFile, setSelectedFile] = useState(null) // Thêm state để lưu file đã chọn
-  const [previewImage, setPreviewImage] = useState(null) // Thêm state để xem trước ảnh
+  const [selectedFile, setSelectedFile] = useState(null) 
+  const [previewImage, setPreviewImage] = useState(null) 
 
-  // Fetch dữ liệu sách từ API khi component được mount
+ 
   useEffect(() => {
     const fetchBook = async () => {
       try {
@@ -55,7 +55,7 @@ const EditBook = props => {
             response.data.book.published_year
           ).toLocaleDateString("vi-VN"),
         })
-        setPreviewImage(response.data.book.image) // Hiển thị hình ảnh hiện tại
+        setPreviewImage(response.data.book.image) 
       } catch (error) {
         console.error("Error fetching book data:", error)
       }
@@ -68,16 +68,16 @@ const EditBook = props => {
     setBook({ ...book, [e.target.name]: e.target.value })
   }
 
-  // Xử lý thay đổi file hình ảnh
+  
   const handleFileChange = e => {
     const file = e.target.files[0]
     if (file) {
       setSelectedFile(file)
-      setPreviewImage(URL.createObjectURL(file)) // Cập nhật hình ảnh xem trước
+      setPreviewImage(URL.createObjectURL(file)) 
     }
   }
 
-  // Xử lý lưu thay đổi
+ 
   const handleSave = async e => {
     e.preventDefault()
 
@@ -89,17 +89,17 @@ const EditBook = props => {
       formData.append(
         "published_year",
         new Date(book.published_year).toLocaleDateString("vi-VN")
-      ) // Sửa chính tả ở đây
+      ) 
 
       if (selectedFile) {
-        formData.append("image", selectedFile) // Thêm file hình ảnh vào formData
+        formData.append("image", selectedFile) 
       }
 
       await authAPI().patch(adminApis.updateBook(id), formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
 
-      history.push("/book", 2000) // Điều hướng về danh sách sách
+      history.push("/book", 2000) 
     } catch (error) {
       console.error("Error updating book:", error)
     }

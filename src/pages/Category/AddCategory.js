@@ -54,7 +54,7 @@ const AddCategory = (props) => {
           </FormGroup >
           <Button color="primary" type="submit" onClick={handleSubmit} disabled={loading}>
                     {loading ? (
-                      <span>Loading...</span> // Hiển thị trạng thái loading
+                      <span>Loading...</span>
                     ) : (
                       "Add Category"
                     )}
