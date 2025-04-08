@@ -169,7 +169,7 @@ const EditBook = props => {
                   value={book.description}
                 />
                 {/* Image Upload */}
-                <FormGroup className="md-3">
+                <FormGroup className="md-3 mb-3">
                   <Label for="image" className="mb-3 me-3">
                     Upload Image
                   </Label>
@@ -203,7 +203,7 @@ const EditBook = props => {
                   }}
                 />
 
-                <FormGroup className="mb-0">
+                <FormGroup className="mb-2">
                   <div>
                     <Button type="submit" color="primary" className="ms-1">
                       Save

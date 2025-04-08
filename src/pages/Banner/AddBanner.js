@@ -93,16 +93,6 @@ const AddBanner = props => {
         setLoading(false)
       }
     }
-  const [textareabadge, settextareabadge] = useState(0);
-  const textareachange = e => {
-    const count = e.target.value.length
-    if (count > 0) {
-      settextareabadge(true)
-    } else {
-      settextareabadge(false)
-    }
-    settextcount(e.target.value.length)
-  }
   return (
     <React.Fragment>
       <MetaTags>
@@ -156,16 +146,8 @@ const AddBanner = props => {
                       id="description"
                       name="description"
                       onChange={handleChange}
-                      maxLength="1000"
-                      rows="3"
-                      placeholder="This textarea has a limit of 1000 chars."
+                      rows="3"                    
                     />
-                    {textareabadge ? (
-                      <span className="badgecount badge badge-success">
-                        {" "}
-                        {textcount} / 225{" "}
-                      </span>
-                    ) : null}
                   </FormGroup>
 
                 {/* Chọn Category */}

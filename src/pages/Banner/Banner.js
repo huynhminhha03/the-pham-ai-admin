@@ -116,6 +116,7 @@ const Banner = props => {
       handlePageChange(currentPage - 1)
     }
   }
+  const max_lenght = 20
   const data = useMemo(
     () => ({
       columns: [
@@ -136,7 +137,13 @@ const Banner = props => {
             style={{ height: "50px" }}
           />
         ),
-        description: banner.description,
+        description: (
+          <span title={banner.description}>
+            {banner.description.length > max_lenght
+              ? `${banner.description.substring(0, max_lenght)}...`
+              : banner.description}
+          </span>
+        ),
         created_at: formatDate(banner.created_at),
         updated_at: formatDate(banner.updated_at),
         status: (

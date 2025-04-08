@@ -155,7 +155,6 @@ const EditBanner = props => {
                     id="description"
                     name="description"
                     onChange={handleChange}
-                    maxLength="225"
                     rows="3"
                     value={banner.description}
                   />
