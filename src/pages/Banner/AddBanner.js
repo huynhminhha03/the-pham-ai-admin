@@ -146,7 +146,7 @@ const AddBanner = props => {
                       id="description"
                       name="description"
                       onChange={handleChange}
-                      rows="3"                    
+                      rows="5"                    
                     />
                   </FormGroup>
 

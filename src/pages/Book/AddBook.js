@@ -30,16 +30,6 @@ const AddBook = (props) => {
   })
   const [loading, setLoading] = useState(false)
 
-  const textareachange = e => {
-    const count = e.target.value.length
-    if (count > 0) {
-      settextareabadge(true)
-    } else {
-      settextareabadge(false)
-    }
-    settextcount(e.target.value.length)
-  }
-
   // Xử lý thay đổi input text
   const handleChange = e => {
     const { name, value } = e.target
@@ -121,15 +111,8 @@ const AddBook = (props) => {
             id="decription"
             onChange={handleChange}
             maxLength="1000"
-            rows="3"
-            placeholder="This textarea has a limit of 1000 chars."
-          />
-          {textareabadge ? (
-            <span className="badgecount badge badge-success">
-              {" "}
-              {textcount} / 225{" "}
-            </span>
-          ) : null}
+            rows="5"
+          />         
         </FormGroup>
         <FormGroup className="mt-3">
           <Label for="image">Book Image</Label>
