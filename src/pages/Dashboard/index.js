@@ -79,14 +79,14 @@ const Dashboard = (props) => {
       {/*mimi widgets */}
       <Miniwidget reports={reports} />
 
-      <Row>
+      {/* <Row>
         <Col xl="3">
-          {/* Monthly Earnings */}
+          
           <MonthlyEarnings />
         </Col>
 
         <Col xl="6">
-          {/* Email sent */}
+         
           <EmailSent />
         </Col>
 
@@ -94,7 +94,7 @@ const Dashboard = (props) => {
           <MonthlyEarnings2 />
         </Col>
 
-      </Row>
+      </Row> */}
       <Row>
 
         <Col xl="4" lg="6">
