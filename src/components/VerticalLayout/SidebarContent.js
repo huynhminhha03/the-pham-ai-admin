@@ -158,7 +158,7 @@ const SidebarContent = props => {
               </Link>
             </li> */}
 
-            <li>
+            {/* <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-email-outline"></i>
                 <span>{props.t("Email")}</span>
@@ -466,7 +466,7 @@ const SidebarContent = props => {
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </SimpleBar>

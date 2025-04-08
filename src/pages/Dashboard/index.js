@@ -46,7 +46,7 @@ const Dashboard = (props) => {
           authAPI().get(adminApis.countAllUsers),
           authAPI().get(adminApis.countAllConversations),
           authAPI().get(adminApis.countAllBooks),
-          authAPI().get(adminApis.countAllBooks)
+          authAPI().get(adminApis.countAllBanners)
         ]);
 
         setCountUsers(usersResponse.data.count);

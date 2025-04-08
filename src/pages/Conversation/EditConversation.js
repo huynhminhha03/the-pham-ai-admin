@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setBreadcrumbItems } from "../../store/actions";
 import MetaTags from "react-meta-tags";
@@ -34,15 +34,15 @@ const EditConversation = (props) => {
         const response = await authAPI().get(adminApis.updateConversation(id));       
           
         setConversation({
-            name: response.data.name,
-            created_at: new Date(response.data.created_at).toLocaleString("vi-VN"),
+            name: response.data.conversation.name,
+            created_at: new Date(response.data.conversation.created_at).toLocaleString("vi-VN"),
           });       
       } catch (error) {
         console.error("Error get data conversation:", error);
       }
     };
     fetchConversation();
-  }, []);
+  }, [id]);
 
   // Hàm để cập nhật giá trị khi người dùng nhập vào
   const handleChange = (e) => {
