@@ -107,7 +107,9 @@ const AddBook = (props) => {
         <Label>Description</Label>      
           <Input
             type="textarea"
-            id="decription"
+            id="description"
+            name="description"
+            value={formData.description}
             onChange={handleChange}
             maxLength="1000"
             rows="5"

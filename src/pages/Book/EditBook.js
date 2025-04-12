@@ -17,7 +17,7 @@ import { connect } from "react-redux"
 import { setBreadcrumbItems } from "../../store/actions"
 
 const EditBook = props => {
-  const { id } = useParams() 
+  const { id } = useParams()
   const history = useHistory()
 
   const breadcrumbItems = [
@@ -37,25 +37,36 @@ const EditBook = props => {
     published_year: "",
   })
 
-  const [selectedFile, setSelectedFile] = useState(null) 
-  const [previewImage, setPreviewImage] = useState(null) 
+  const [selectedFile, setSelectedFile] = useState(null)
+  const [previewImage, setPreviewImage] = useState(null)
 
- 
+  function formatDateVNFromISOString(isoString) {
+    const date = new Date(isoString) // chuỗi ISO là UTC
+    // Cộng thêm 7 tiếng để chuyển sang giờ Việt Nam
+    date.setHours(date.getHours() + 7)
+
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, "0")
+    const day = String(date.getDate()).padStart(2, "0")
+
+    return `${year}-${month}-${day}`
+  }
+
   useEffect(() => {
     const fetchBook = async () => {
       try {
         const response = await authAPI().get(adminApis.getBookById(id))
-
+        console.log(response.data.book)
         setBook({
           title: response.data.book.title,
           author: response.data.book.author,
           description: response.data.book.description,
           image: response.data.book.image,
-          published_year: new Date(
+          published_year: formatDateVNFromISOString(
             response.data.book.published_year
-          ).toLocaleDateString("vi-VN"),
+          ),
         })
-        setPreviewImage(response.data.book.image) 
+        setPreviewImage(response.data.book.image)
       } catch (error) {
         console.error("Error fetching book data:", error)
       }
@@ -68,16 +79,14 @@ const EditBook = props => {
     setBook({ ...book, [e.target.name]: e.target.value })
   }
 
-  
   const handleFileChange = e => {
     const file = e.target.files[0]
     if (file) {
       setSelectedFile(file)
-      setPreviewImage(URL.createObjectURL(file)) 
+      setPreviewImage(URL.createObjectURL(file))
     }
   }
 
- 
   const handleSave = async e => {
     e.preventDefault()
 
@@ -89,17 +98,17 @@ const EditBook = props => {
       formData.append(
         "published_year",
         new Date(book.published_year).toLocaleDateString("vi-VN")
-      ) 
+      )
 
       if (selectedFile) {
-        formData.append("image", selectedFile) 
+        formData.append("image", selectedFile)
       }
 
       await authAPI().patch(adminApis.updateBook(id), formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
 
-      history.push("/book", 2000) 
+      history.push("/book", 2000)
     } catch (error) {
       console.error("Error updating book:", error)
     }
@@ -108,9 +117,7 @@ const EditBook = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>
-          Edit Book | ThePhamAI
-        </title>
+        <title>Edit Book | ThePhamAI</title>
       </MetaTags>
 
       <Row>
