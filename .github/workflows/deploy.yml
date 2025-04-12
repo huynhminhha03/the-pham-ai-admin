@@ -19,7 +19,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci # dùng `ci` nếu không chỉnh sửa package-lock.json
+        run: npm install --legacy-peer-deps
 
       - name: Build project
         run: npm run build
