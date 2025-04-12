@@ -32,3 +32,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "build/**"
           target: "/var/www/html"
+      
+      - name: Reload Apache
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            systemctl reload apache2
